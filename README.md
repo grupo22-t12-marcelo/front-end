@@ -13,7 +13,7 @@ yarn
 ## Exemplo de uso
 
 Anuncio criado pelo usuário
-<img src="https://user-images.githubusercontent.com/98761413/219540738-896e678c-51b4-4777-a520-1e5d6d0c76af.png"/>
+<img src="https://user-images.githubusercontent.com/98761413/219542086-1a100425-8028-4696-b964-94da9c137833.png"/>
 
 ## Configuração para Desenvolvimento
 
