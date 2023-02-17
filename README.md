@@ -28,7 +28,7 @@ yarn install
 * 0.0.1
     * Trabalho em andamento
 
-## Meta
+## Team
 
 * Guilherme Silva
 * Igor Gomes
