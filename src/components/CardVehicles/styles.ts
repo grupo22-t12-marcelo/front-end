@@ -19,6 +19,15 @@ export const Container = styled.div`
   width: 300px;
   height: 350px;
   cursor: pointer;
+
+  :hover {
+    .image {
+      border: 2px solid var(--brand1);
+    }
+    img {
+      transform: scale(1.3);
+    }
+  }
 `;
 
 export const ImageVehicle = styled.div`
@@ -30,11 +39,6 @@ export const ImageVehicle = styled.div`
   img {
     width: 250px;
     height: 150px;
-
-    &:hover {
-      border: 2px solid var(--brand1);
-      transform: scale(1.3);
-    }
   }
 `;
 

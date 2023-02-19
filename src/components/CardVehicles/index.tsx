@@ -8,11 +8,13 @@ import {
   UserContainer,
 } from "./styles";
 
+import car from "../../assets/car1.png";
+
 const CardVehicle = () => {
   return (
     <Container>
-      <ImageVehicle>
-        <img alt="Sample" src="https://picsum.photos/300/200" />
+      <ImageVehicle className="image">
+        <img alt="Sample" src={car} />
       </ImageVehicle>
 
       <CardTitle>
