@@ -18,51 +18,54 @@ const colors = [
 export const Container = styled.div`
   width: 300px;
   height: 350px;
+  cursor: pointer;
+`;
+
+export const ImageVehicle = styled.div`
+  width: 300px;
+  height: 150px;
+  background-color: var(--grey7);
+  overflow: hidden;
 
   img {
-    width: 300px;
-    height: 152px;
-    background-color: var(--grey7);
-    object-fit: contain;
-    mix-blend-mode: multiply;
+    width: 250px;
+    height: 150px;
 
     &:hover {
       border: 2px solid var(--brand1);
-      cursor: pointer;
+      transform: scale(1.3);
     }
   }
+`;
 
-  .infosDiv,
-  .infosDiv :where(div) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
+export const CardTitle = styled.h4`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--grey1);
+  margin: 15px 0;
 
-  .infosDiv {
-    justify-content: space-between;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 
-  .infosDiv div p {
-    background-color: var(--brand4);
-    border-radius: 4px;
-    padding: 4px 8px;
-    height: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--brand1);
+export const CardSubtitle = styled.p`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--grey2);
+  height: 48px;
 
-    margin-right: 5px;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
-  .infosDiv span {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--grey1);
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const UserContainer = styled.div`
@@ -96,5 +99,38 @@ export const UserContainer = styled.div`
       font-size: 14px;
       color: var(--white-fixed);
     }
+  }
+`;
+
+export const InfosVehicle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .infoDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .infoDiv p {
+    background-color: var(--brand4);
+    border-radius: 4px;
+    padding: 4px 8px;
+    height: 32px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--brand1);
+
+    margin-right: 5px;
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--grey1);
   }
 `;
