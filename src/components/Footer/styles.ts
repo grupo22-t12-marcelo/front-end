@@ -5,9 +5,9 @@ const DivFooter = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: #0B0D0D;
+    background-color: var(--grey0);
 
-    color: #FFFFFF;
+    color: var(--white-fixed);
     height: 300px;
     width: 100%;
     p{
@@ -16,7 +16,7 @@ const DivFooter = styled.div`
     .btn-footer{
         width: 53px;
         height: 50px;
-        background: #212529;
+        background: var(--grey1);
         border-radius: 4px;
         font-weight: 900;
         font-size: 16px;
