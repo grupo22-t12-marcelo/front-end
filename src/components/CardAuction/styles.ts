@@ -44,12 +44,12 @@ export const Container = styled.div`
     }
   }
 
-  @keyframes go-back {
+  @keyframes go-forwards {
     from {
-      transform: translateX(10px);
+      transform: translateX(0);
     }
     to {
-      transform: translateX(0);
+      transform: translateX(10px);
     }
   }
 
@@ -61,7 +61,7 @@ export const Container = styled.div`
       background-color: #36007d;
     }
     .arrowRight {
-      animation: go-back 1s infinite alternate;
+      animation: go-forwards 1s infinite alternate;
     }
   }
 `;

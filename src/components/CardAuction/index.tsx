@@ -14,13 +14,33 @@ import { FiClock } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { Card, CardImg, CardImgOverlay } from "reactstrap";
 
-const CardAuction = () => {
+interface ICardAuction {
+  image: string;
+  title: string;
+  subtitle: string;
+  abrevUser: string;
+  nameUser: string;
+  kmCar: number;
+  yearCar: number;
+  priceCar: number;
+}
+
+const CardAuction = ({
+  image,
+  title,
+  subtitle,
+  abrevUser,
+  nameUser,
+  kmCar,
+  yearCar,
+  priceCar,
+}: ICardAuction) => {
   const { count } = useProductContext();
 
   return (
     <Container>
       <Card inverte="true" className="card">
-        <CardImg src={car} style={{ height: 330 }} />
+        <CardImg src={image} style={{ height: 330 }} />
         <CardImgOverlay className="cardInfos">
           <TimerAuction>
             <FiClock color="blue" size={20} />
@@ -32,29 +52,24 @@ const CardAuction = () => {
           </TimerAuction>
 
           <Description>
-            <CardTitle>
-              Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200
-            </CardTitle>
+            <CardTitle>{title}</CardTitle>
 
-            <CardSubtitle>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem ipsum is the dummy
-            </CardSubtitle>
+            <CardSubtitle>{subtitle}</CardSubtitle>
           </Description>
 
           <UserContainer>
             <div className="abrevName">
-              <p>SL</p>
+              <p> {abrevUser} </p>
             </div>
-            <h5>Samuel Leão </h5>
+            <h5> {nameUser} </h5>
           </UserContainer>
 
           <InfosVehicle>
             <div className="infoDiv">
-              <p> 0 km </p>
-              <p> 2013 </p>
+              <p>{kmCar} km </p>
+              <p> {yearCar} </p>
             </div>
-            <span>R$ 100.000,00 </span>
+            <span>R$ {priceCar} </span>
           </InfosVehicle>
         </CardImgOverlay>
       </Card>
