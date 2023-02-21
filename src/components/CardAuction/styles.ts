@@ -16,9 +16,8 @@ const colors = [
 ];
 
 export const Container = styled.div`
-  .card card {
+  .card {
     background-color: var(--grey7);
-    border-radius: 4px 4px 0 0;
   }
 
   .cardInfos {
@@ -42,6 +41,27 @@ export const Container = styled.div`
       font-weight: 600;
       font-size: 16px;
       color: var(--white-fixed);
+    }
+  }
+
+  @keyframes go-back {
+    from {
+      transform: translateX(10px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  :hover {
+    .cardInfos {
+      background: linear-gradient(rgba(0, 0, 0, 0.6) 0%, black 100%);
+    }
+    .abrevName {
+      background-color: #36007d;
+    }
+    .arrowRight {
+      animation: go-back 1s infinite alternate;
     }
   }
 `;

@@ -43,7 +43,7 @@ const CardAuction = () => {
           </Description>
 
           <UserContainer>
-            <div>
+            <div className="abrevName">
               <p>SL</p>
             </div>
             <h5>Samuel Leão </h5>
@@ -61,7 +61,7 @@ const CardAuction = () => {
       <div className="divRedirectsToAuction">
         <p>Acessar página do leilão</p>
 
-        <BsArrowRight size={30} color="white" />
+        <BsArrowRight className="arrowRight" size={30} color="white" />
       </div>
     </Container>
   );
