@@ -19,12 +19,16 @@ const Home = () => {
     return( 
       <div className="home-div">
         <Header></Header>
-        <CardAuction image={Vehicle.image} title={Vehicle.title} subtitle={Vehicle.subtitle}
-            abrevUser={Vehicle.abrevName} nameUser={Vehicle.name} kmCar={Vehicle.kmCar} 
-            yearCar={Vehicle.yearCar} priceCar={Vehicle.priceCar}></CardAuction>
+        <div>
+          <CardAuction image={Vehicle.image} title={Vehicle.title} subtitle={Vehicle.subtitle}
+              abrevUser={Vehicle.abrevName} nameUser={Vehicle.name} kmCar={Vehicle.kmCar} 
+              yearCar={Vehicle.yearCar} priceCar={Vehicle.priceCar}></CardAuction>
+        </div>
+        <div>
         <CardVehicle image={Vehicle.image} title={Vehicle.title} subtitle={Vehicle.subtitle}
             abrevName={Vehicle.abrevName} name={Vehicle.name} kmCar={Vehicle.kmCar} 
             yearCar={Vehicle.yearCar} priceCar={Vehicle.priceCar}></CardVehicle>
+        </div>
         <Footer/>
       </div>
     );
