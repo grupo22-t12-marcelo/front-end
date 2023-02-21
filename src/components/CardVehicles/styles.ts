@@ -49,10 +49,8 @@ export const CardTitle = styled.h4`
   color: var(--grey1);
   margin: 15px 0;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-
+  white-space: nowrap;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
@@ -64,10 +62,8 @@ export const CardSubtitle = styled.p`
   color: var(--grey2);
   height: 48px;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
+  white-space: nowrap;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
