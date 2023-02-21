@@ -1,13 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { CardAuction } from "./components/CardAuction";
+import RoutesMain from "./routes/RoutesMain";
 import GlobalStyle from "./style/GlobalStyle";
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <CardAuction />
+      <RoutesMain/>
+
     </div>
   );
 }
