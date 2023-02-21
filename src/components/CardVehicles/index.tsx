@@ -8,37 +8,50 @@ import {
   UserContainer,
 } from "./styles";
 
-import car from "../../assets/car1.png";
+interface ICardVehicle {
+  image: string;
+  title: string;
+  subtitle: string;
+  abrevName: string;
+  name: string;
+  kmCar: number;
+  yearCar: number;
+  priceCar: number;
+}
 
-const CardVehicle = () => {
+const CardVehicle = ({
+  image,
+  title,
+  subtitle,
+  abrevName,
+  name,
+  kmCar,
+  yearCar,
+  priceCar,
+}: ICardVehicle) => {
   return (
     <Container>
       <ImageVehicle className="image">
-        <img alt="Sample" src={car} />
+        <img src={image} />
       </ImageVehicle>
 
-      <CardTitle>
-        Product title stays here - max 1 line and more things
-      </CardTitle>
+      <CardTitle>{title}</CardTitle>
 
-      <CardSubtitle>
-        Lorem ispum is simply dummy text of the printing and typesetting
-        industry. Lorem ispum is simply dummy
-      </CardSubtitle>
+      <CardSubtitle>{subtitle}</CardSubtitle>
 
       <UserContainer>
         <div>
-          <p>SL</p>
+          <p>{abrevName}</p>
         </div>
-        <h5>Samuel Leão</h5>
+        <h5> {name} </h5>
       </UserContainer>
 
       <InfosVehicle>
         <div className="infoDiv">
-          <p>0 km</p>
-          <p>2019</p>
+          <p> {kmCar} km </p>
+          <p> {yearCar} </p>
         </div>
-        <span>R$ 00.000,00</span>
+        <span>R$ {priceCar} </span>
       </InfosVehicle>
     </Container>
   );
