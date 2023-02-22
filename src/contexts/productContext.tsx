@@ -15,7 +15,7 @@ interface IProductProvider {
 export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
-  const [count, setCount] = useState("00:00:10");
+  const [count, setCount] = useState("02:00:00");
 
   return (
     <ProductContext.Provider value={{ count, setCount }}>

@@ -1,4 +1,5 @@
 import {} from "reactstrap";
+import { formatPrice } from "../../utils/formatPrice";
 import {
   CardSubtitle,
   CardTitle,
@@ -18,10 +19,6 @@ interface ICardVehicle {
   yearCar: number;
   priceCar: number;
 }
-
-const formatPrice = (price: number) => {
-  return price.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
-};
 
 const CardVehicle = ({
   image,
