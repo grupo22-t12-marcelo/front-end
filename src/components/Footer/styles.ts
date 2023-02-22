@@ -8,23 +8,27 @@ const DivFooter = styled.div`
     background-color: var(--grey0);
 
     color: var(--white-fixed);
-    height: 300px;
+    min-height: 300px;
     width: 100%;
     p{
         font-size: 14px;
     }
     .btn-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 53px;
         height: 50px;
         background: var(--grey1);
         border-radius: 4px;
         font-weight: 900;
         font-size: 16px;
+        color: var(--grey10);
     }
 
-    @media only screen and (min-width: 600px) {
+    @media only screen and (min-width: 756px) {
         flex-direction: row;
-        height: 140px;
+        min-height: 140px;
         
     }
 
