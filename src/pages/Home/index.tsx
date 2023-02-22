@@ -1,5 +1,4 @@
-import { CardAuction } from "../../components/CardAuction";
-import { CardVehicle } from "../../components/CardVehicles";
+import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import "./home.css";
@@ -16,19 +15,13 @@ const Home = () => {
   yearCar: 2020,
   priceCar: 200000
 }
+const carro:string = "Carros"
+const moto:string = "Motos"
     return( 
       <div className="home-div">
         <Header></Header>
-        <div>
-          <CardAuction image={Vehicle.image} title={Vehicle.title} subtitle={Vehicle.subtitle}
-              abrevUser={Vehicle.abrevName} nameUser={Vehicle.name} kmCar={Vehicle.kmCar} 
-              yearCar={Vehicle.yearCar} priceCar={Vehicle.priceCar}></CardAuction>
-        </div>
-        <div>
-        <CardVehicle image={Vehicle.image} title={Vehicle.title} subtitle={Vehicle.subtitle}
-            abrevName={Vehicle.abrevName} name={Vehicle.name} kmCar={Vehicle.kmCar} 
-            yearCar={Vehicle.yearCar} priceCar={Vehicle.priceCar}></CardVehicle>
-        </div>
+          <Carousel></Carousel>
+          <Carousel></Carousel>
         <Footer/>
       </div>
     );
