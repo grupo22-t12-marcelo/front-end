@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Input, Label } from "reactstrap";
+
 import "./App.css";
-import { ModaL } from "./components/Modal";
+import { Button } from "./components/Button";
+
 import RoutesMain from "./routes/RoutesMain";
 import GlobalStyle from "./style/GlobalStyle";
 
