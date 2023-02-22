@@ -17,7 +17,9 @@ export const BackgroundModal = styled.div`
 
 export const Modal = styled.section`
   width: 90%;
-  height: 50%;
+  height: max-content;
+  padding-bottom: 20px;
+  border-radius: 8px;
 
   background-color: var(--white-fixed);
 
@@ -33,55 +35,129 @@ export const Modal = styled.section`
     h3 {
       font-weight: var(--heading-1-700);
       font-size: 16px;
+      color: black;
     }
   }
 `;
 
 export const Form = styled.form`
-  .tipo-anuncio {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
 
-    h3 {
-      width: max-content;
-      margin: 0 0 0 20px;
-      font-size: 14px;
-      font-weight: var(--heading-2-600);
+export const TipoAnuncio = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    width: max-content;
+    margin: 0 0 0 16px;
+    font-size: 14px;
+    font-weight: var(--heading-2-600);
+    color: black;
+  }
+
+  div {
+    display: flex;
+    width: max-content;
+    margin: 0 auto;
+    gap: 7px;
+
+    input {
+      display: none;
     }
 
-    div {
+    span {
       display: flex;
-      width: max-content;
-      margin: 0 auto;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+    }
+
+    span {
+      width: 152.5px;
+      height: 48px;
+
+      color: var(--grey0);
+      font-weight: var(--heading-2-600);
+      border-radius: 4px;
+      border: 2px solid var(--grey4);
+      cursor: pointer;
+    }
+
+    input:checked + span {
+      color: var(--white-fixed);
+      border: 2px solid transparent;
+      background-color: var(--brand1);
+    }
+  }
+`;
+
+export const InformacoesVeiculo = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    width: max-content;
+    margin: 0 0 0 16px;
+    font-size: 14px;
+    font-weight: var(--heading-2-600);
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  .div-informacoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 90%;
+
+      span {
+        max-width: max-content;
+        font-weight: var(--heading-2-600);
+        font-size: 14px;
+        color: black;
+      }
 
       input {
-        display: none;
-      }
-
-      span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100px;
-      }
-
-      span {
-        width: 152.5px;
+        background-color: transparent;
         height: 48px;
-
-        color: var(--grey0);
-        font-weight: var(--heading-2-600);
         border-radius: 4px;
-        border: 2px solid var(--grey4);
-        cursor: pointer;
+        border: 2px solid var(--grey7);
+        padding-left: 15px;
+        color: black;
       }
-      
-      input:checked + span {
-        color: var(--white-fixed);
-        border: 2px solid transparent;
-        background-color: var(--brand1);
+
+      textarea {
+        height: 80px;
+        background-color: transparent;
+        border-radius: 4px;
+        border: 2px solid var(--grey7);
+        padding-left: 15px;
+        color: black;
+        resize: none;
+      }
+    }
+  }
+
+  .div-dados-veiculo {
+    display: flex;
+    width: 90%;
+
+    label {
+      input {
+        width: 140px;
       }
     }
   }
