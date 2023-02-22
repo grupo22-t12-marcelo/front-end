@@ -1,6 +1,7 @@
 import { CoverProduct } from "../CoverProduct";
 import { DescriptionProduct } from "../DescriptionProduct";
 import { InfoProduct } from "../InfoProduct";
+import { InfoUserSeeAllProducts } from "../InfoUserSeeAllProducts";
 import { PhotoGalery } from "../PhotoGalery";
 import { Section } from "./style";
 
@@ -33,6 +34,12 @@ const SectionProduct = () => {
         }
       />
       <PhotoGalery photos={photos} />
+      <InfoUserSeeAllProducts
+        title={"Samuel Leão"}
+        text={
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
+        }
+      />
     </Section>
   );
 };

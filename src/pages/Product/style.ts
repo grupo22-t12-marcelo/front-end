@@ -6,6 +6,7 @@ const Cover = styled.div`
   justify-content: center;
   background-color: var(--grey10);
   border-radius: 4px;
+  width: 100%;
 `;
 
 export { Cover };
