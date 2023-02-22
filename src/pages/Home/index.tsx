@@ -1,4 +1,5 @@
 import Carousel from "../../components/Carousel";
+import CarouselAuction from "../../components/CarouselAuction";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import "./home.css";
@@ -20,6 +21,7 @@ const moto:string = "Motos"
     return( 
       <div className="home-div">
         <Header></Header>
+          <CarouselAuction></CarouselAuction>
           <Carousel></Carousel>
           <Carousel></Carousel>
         <Footer/>

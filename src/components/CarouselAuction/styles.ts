@@ -28,8 +28,8 @@ export const DivCarousel = styled.div`
         overflow-x: scroll;
         scroll-snap-type: mandatory;
         .div-item-vei{
-            width: 312px;
-            height: 350px;
+            min-width: 200px;
+            height: 388px;
         }
     }
 
@@ -52,11 +52,13 @@ export const DivCarousel = styled.div`
     }
     .list-card-vehicles{
         scroll-behavior: smooth;
-    }
         .div-item-vei{
-            width: 312px;
-            height: 350px;
+            min-width: 720px;
+            height: 388px;
+            padding-left: 30px;
+            margin-bottom: 30px;
         }
+    }
     .list-card-vehicles::-webkit-scrollbar{
         width: 6px;
         height: 4px;
