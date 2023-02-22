@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
+import SubHeader from "../SubHeader";
 import { DivHeader } from "./styles";
 
 const Header = () => {
@@ -10,6 +11,8 @@ const Header = () => {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
     return (
+        <div id="container">
+
         <DivHeader>
             <div className="navbar-desktop">
                 <img src={ShopBranco}/>            
@@ -73,14 +76,10 @@ const Header = () => {
                     </Nav>
                     </Collapse>
                 </Navbar>
-                {/* <button className="btn-navbar btn-open">
-                    <img src={Bars} alt="" />
-                </button>
-                <button className="btn-navbar btn-close">
-                    <img src={Xmark} alt="" />
-                </button>*/}
             </div> 
         </DivHeader>
+        <SubHeader></SubHeader>
+        </div>
     );
 }
 

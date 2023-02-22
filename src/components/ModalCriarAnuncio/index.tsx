@@ -1,6 +1,5 @@
-import { BackgroundModal, Form, Modal } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
-import React from "react";
+import { BackgroundModal, Form, Modal } from "./styles";
 
 const CriarAnuncio = () => {
   return (
