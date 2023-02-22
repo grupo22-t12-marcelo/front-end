@@ -8,11 +8,12 @@ import {
   TimerAuction,
   UserContainer,
   CardTitle,
+  DivRedirectAuction,
+  CardContainer,
 } from "./styles";
-import car from "../../assets/car1.png";
 import { FiClock } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
-import { Card, CardImg, CardImgOverlay } from "reactstrap";
+import { CardImg, CardImgOverlay } from "reactstrap";
 
 interface ICardAuction {
   image: string;
@@ -39,7 +40,7 @@ const CardAuction = ({
 
   return (
     <Container>
-      <Card inverte="true" className="card">
+      <CardContainer>
         <CardImg src={image} style={{ height: 330 }} />
         <CardImgOverlay className="cardInfos">
           <TimerAuction>
@@ -72,12 +73,13 @@ const CardAuction = ({
             <span>R$ {priceCar} </span>
           </InfosVehicle>
         </CardImgOverlay>
-      </Card>
-      <div className="divRedirectsToAuction">
+      </CardContainer>
+
+      <DivRedirectAuction>
         <p>Acessar página do leilão</p>
 
         <BsArrowRight className="arrowRight" size={30} color="white" />
-      </div>
+      </DivRedirectAuction>
     </Container>
   );
 };

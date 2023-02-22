@@ -1,3 +1,4 @@
+import { Card } from "reactstrap";
 import styled from "styled-components";
 
 const colors = [
@@ -17,31 +18,11 @@ const colors = [
 
 export const Container = styled.div`
   .card {
-    background-color: var(--grey7);
   }
 
   .cardInfos {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, black 100%);
-  }
-
-  .divRedirectsToAuction {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: var(--brand1);
-    height: 60px;
-    padding: 24px 36px;
-    border-radius: 0 0 4px 4px;
-
-    cursor: pointer;
-
-    & > p {
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--white-fixed);
-    }
+    border-radius: 4px 4px 0 0;
   }
 
   @keyframes go-forwards {
@@ -64,6 +45,12 @@ export const Container = styled.div`
       animation: go-forwards 1s infinite alternate;
     }
   }
+`;
+
+export const CardContainer = styled(Card)`
+  background-color: var(--grey7);
+
+  border-radius: 4px 4px 4px;
 `;
 
 export const Description = styled.div`
@@ -191,6 +178,26 @@ export const InfosVehicle = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    color: var(--white-fixed);
+  }
+`;
+
+export const DivRedirectAuction = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--brand1);
+  height: 60px;
+  padding: 24px 36px;
+  border-radius: 0 0 4px 4px;
+
+  cursor: pointer;
+
+  & > p {
+    font-weight: 600;
+    font-size: 16px;
     color: var(--white-fixed);
   }
 `;
