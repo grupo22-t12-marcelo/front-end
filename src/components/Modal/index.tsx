@@ -17,9 +17,9 @@ const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
 
   return (
     <ModalDiv>
-      {/* <Button color="danger" onClick={toggle}>
+      <Button color="danger" onClick={toggle}>
         Click Me
-      </Button> */}
+      </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}> {titleModal} </ModalHeader>
         <ModalBody> {bodyModal} </ModalBody>
