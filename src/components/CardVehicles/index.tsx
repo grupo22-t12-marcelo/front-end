@@ -19,6 +19,10 @@ interface ICardVehicle {
   priceCar: number;
 }
 
+const formatPrice = (price: number) => {
+  return price.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
+};
+
 const CardVehicle = ({
   image,
   title,
@@ -51,7 +55,7 @@ const CardVehicle = ({
           <p> {kmCar} km </p>
           <p> {yearCar} </p>
         </div>
-        <span>R$ {priceCar} </span>
+        <span>{formatPrice(priceCar)} </span>
       </InfosVehicle>
     </Container>
   );
