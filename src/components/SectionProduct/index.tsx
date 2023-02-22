@@ -39,6 +39,7 @@ const SectionProduct = () => {
         text={
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
         }
+        nameUser={"Patrick Cordeiro"}
       />
     </Section>
   );

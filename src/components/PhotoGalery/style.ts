@@ -23,7 +23,7 @@ const Photo = styled.div`
     gap: 5px;
     width: 100%;
     div {
-      width: 100px;
+      width: 90px;
       height: 90px;
       display: flex;
       background-color: var(--grey7);
