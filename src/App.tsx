@@ -10,32 +10,6 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <RoutesMain />
-      <ModaL
-        titleModal="Cadastrar anuncios"
-        bodyModal={
-          <form>
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-            <Label>Alguma coisa</Label>
-            <Input />
-          </form>
-        }
-        footerModal={<Button>Cadastrar</Button>}
-      />
     </div>
   );
 }
