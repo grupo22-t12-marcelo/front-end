@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Collapse,
   Nav,
@@ -20,11 +21,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const toggleNavbar = () => setCollapsed(!collapsed);
   const [isLogged, setIsLogged] = useState(true);
 
+  const navigate = useNavigate();
+
   return (
     <div id="container">
       <DivHeader>
         <div className="navbar-desktop">
-          <img src={ShopBranco} />
+          <img src={ShopBranco} onClick={() => navigate("/home")} />
           <div className="navbar-list">
             <NavItem>
               <NavLink href="#">Carros</NavLink>
@@ -59,7 +62,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
         <div className="navbar-mobile">
           <Navbar color="faded" light>
             <NavbarBrand href="/" className="me-auto">
-              <img src={ShopBranco} />
+              <img src={ShopBranco} onClick={() => navigate("/home")} />
             </NavbarBrand>
             <NavbarToggler onClick={toggleNavbar} className="me-2" />
             <Collapse isOpen={!collapsed} navbar>
