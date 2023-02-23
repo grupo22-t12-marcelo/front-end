@@ -32,7 +32,7 @@ export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const toggle = (id: string) => {
     setIdPhoto(id);
     setModal(!modal);

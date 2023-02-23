@@ -19,8 +19,8 @@ const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
       {/* <Button color="danger" onClick={toggle}>
         Click Me
       </Button> */}
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}> {titleModal} </ModalHeader>
+      <Modal isOpen={modal} toggle={() => toggle("")}>
+        <ModalHeader toggle={() => toggle("")}> {titleModal} </ModalHeader>
         <ModalBody>
           {" "}
           <img src={bodyModal} alt="" />

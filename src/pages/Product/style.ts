@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const ProductPage = styled.div`
   width: 100%;
+
   main {
     width: 100%;
     height: 100%;
