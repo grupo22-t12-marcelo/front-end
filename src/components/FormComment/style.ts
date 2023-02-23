@@ -32,8 +32,16 @@ const Form = styled.form`
   #exampleText {
     border: 1.5px solid var(--grey7);
     border-radius: 4px;
-    width: 284px;
+    width: 250px;
     height: 128px;
+
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+
+    @media (min-width: 1440px) {
+      width: 500px;
+    }
   }
 
   #exampleText::placeholder {

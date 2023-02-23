@@ -15,7 +15,7 @@ const Photo = styled.div`
 
   @media (min-width: 1024px) {
     padding: 20px;
-    height: 280px;
+    /* height: 280px; */
     gap: 15px;
   }
   h3 {
@@ -32,12 +32,18 @@ const Photo = styled.div`
 
     gap: 5px;
     width: 100%;
+
     div {
       width: 90px;
       height: 90px;
       display: flex;
       background-color: var(--grey7);
       border-radius: 4px;
+
+      @media (min-width: 1440px) {
+        width: 120px;
+        height: 120px;
+      }
 
       img {
         width: 94px;
