@@ -7,10 +7,11 @@ const ProductPage = styled.div`
     height: 100%;
     background: linear-gradient(
       180deg,
-      #4529e6 12.25%,
-      #f1f3f5 12.26%,
+      #4529e6 38.25%,
+      #f1f3f5 38.26%,
       #f1f3f5 100%
     );
+    background-attachment: fixed;
     #aside {
       display: none;
     }
