@@ -1,3 +1,4 @@
+import { CommentsSection } from "../CommentsSection";
 import { CoverProduct } from "../CoverProduct";
 import { DescriptionProduct } from "../DescriptionProduct";
 import { InfoProduct } from "../InfoProduct";
@@ -14,6 +15,27 @@ const SectionProduct = () => {
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
+  ];
+
+  let comments = [
+    {
+      nameUser: "Júlia Lima",
+      dateComment: "há 3 dias",
+      commentText:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    },
+    {
+      nameUser: "Marcos Antônio",
+      dateComment: "há 7 dias",
+      commentText:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    },
+    {
+      nameUser: "Camila Silva",
+      dateComment: "há 1 mês",
+      commentText:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    },
   ];
 
   return (
@@ -41,6 +63,7 @@ const SectionProduct = () => {
         }
         nameUser={"Patrick Cordeiro"}
       />
+      <CommentsSection props={comments} />
     </Section>
   );
 };
