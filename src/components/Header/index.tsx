@@ -6,16 +6,19 @@ import {
   NavbarBrand,
   NavbarToggler,
   NavItem,
-  NavLink,
+  NavLink
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
+import { IProps } from "../../interfaces";
+import { UserContainer } from "../CardAuction/styles";
 import SubHeader from "../SubHeader";
 import { DivHeader } from "./styles";
 
-const Header = () => {
+const Header: React.FC<IProps> = ({children}:IProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+  const [isLogged, setIsLogged] = useState(true)
 
   return (
     <div id="container">
@@ -32,12 +35,26 @@ const Header = () => {
             <NavItem>
               <NavLink href="#">Leilão</NavLink>
             </NavItem>
-            <div className="cadastro-login">
-              <NavItem>
-                <NavLink href="#">Fazer login</NavLink>
-              </NavItem>
-              <button className="btn-cadastrar">Cadastrar</button>
+            {isLogged===true? 
+            (
+            <div className="logado-user">
+              <UserContainer>
+                <div className="abrevName">
+                  <p>JP</p>
+                </div>
+                <h5>João Paulo</h5>
+              </UserContainer>
             </div>
+            ):(
+            <>
+              <div className="cadastro-login">
+                <NavItem>
+                  <NavLink href="#">Fazer login</NavLink>
+                </NavItem>
+                <button className="btn-cadastrar">Cadastrar</button>
+              </div>
+            </>
+            )}
           </div>
         </div>
         <div className="navbar-mobile">
@@ -57,18 +74,32 @@ const Header = () => {
                 <NavItem>
                   <NavLink href="#">Leilão</NavLink>
                 </NavItem>
-                <div className="cadastro-login">
-                  <NavItem>
-                    <NavLink href="#">Fazer login</NavLink>
-                  </NavItem>
-                  <button className="btn-cadastrar">Cadastrar</button>
+                {isLogged===true? 
+                (
+                <div className="logado-user">
+                  <UserContainer>
+                    <div className="abrevName">
+                      <p>JP</p>
+                    </div>
+                    <h5>João Paulo</h5>
+                  </UserContainer>
                 </div>
+                ):(
+                <>
+                  <div className="cadastro-login">
+                    <NavItem>
+                      <NavLink href="#">Fazer login</NavLink>
+                    </NavItem>
+                    <button className="btn-cadastrar">Cadastrar</button>
+                  </div>
+                </>
+                )}
               </Nav>
             </Collapse>
           </Navbar>
         </div>
       </DivHeader>
-      <SubHeader></SubHeader>
+      <SubHeader children={children}></SubHeader>
     </div>
   );
 };

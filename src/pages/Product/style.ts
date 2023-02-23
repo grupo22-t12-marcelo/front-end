@@ -9,3 +9,4 @@ const Cover = styled.div`
 `;
 
 export { Cover };
+
