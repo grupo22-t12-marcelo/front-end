@@ -20,7 +20,6 @@ const AsideBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 34px;
-  /* width: 90%; */
   padding: 10px;
 
   @media (min-width: 1024px) {
