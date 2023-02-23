@@ -27,10 +27,6 @@ export const DivCarousel = styled.div`
     gap: 40px;
     overflow-x: scroll;
     scroll-snap-type: mandatory;
-    .div-item-vei {
-      width: 312px;
-      height: 350px;
-    }
   }
 
   @media only screen and (min-width: 756px) {
@@ -54,10 +50,6 @@ export const DivCarousel = styled.div`
       scroll-behavior: smooth;
       padding-left: 30px;
       padding-right: 30px;
-    }
-    .div-item-vei {
-      width: 312px;
-      height: 350px;
     }
     .list-card-vehicles::-webkit-scrollbar {
       width: 6px;
