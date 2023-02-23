@@ -5,6 +5,7 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { IAuthProvider } from "../interfaces";
 
 interface IProductProvider {
@@ -12,18 +13,23 @@ interface IProductProvider {
   setCount: Dispatch<SetStateAction<string>>;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
+  isLogged: boolean;
+  setIsLogged: (value: boolean) => void;
   userLogged: string;
   tagsCar: string[];
   photos: string[];
   comments: object[];
   accountType: string;
+  navigate: NavigateFunction;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
+  const navigate = useNavigate();
   const [count, setCount] = useState("00:00:10");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
+  const [isLogged, setIsLogged] = useState(true);
   let userLogged = "Samuel Leão";
   let accountType = "Anunciante";
   let tagsCar = ["2013", "0KM"];
@@ -69,6 +75,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         photos,
         comments,
         accountType,
+        isLogged,
+        setIsLogged,
+        navigate,
       }}
     >
       {children}

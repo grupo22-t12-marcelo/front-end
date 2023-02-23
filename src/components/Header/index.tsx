@@ -26,9 +26,8 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const { userLogged, accountType } = useProductContext();
-  const [isLogged, setIsLogged] = useState(true);
-  const navigate = useNavigate();
+  const { userLogged, accountType, isLogged, setIsLogged, navigate } =
+    useProductContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -71,7 +70,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     {accountType === "Anunciante" && (
                       <DropdownItem>Meus Anúncios</DropdownItem>
                     )}
-                    <DropdownItem>Sair</DropdownItem>
+                    <DropdownItem onClick={() => setIsLogged(false)}>
+                      Sair
+                    </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
