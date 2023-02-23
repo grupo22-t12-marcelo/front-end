@@ -2,12 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Collapse,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Nav,
   Navbar,
   NavbarBrand,
   NavbarToggler,
   NavItem,
   NavLink,
+  UncontrolledDropdown,
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
 import { useProductContext } from "../../contexts/productContext";
@@ -23,8 +28,10 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const toggleNavbar = () => setCollapsed(!collapsed);
   const { userLogged } = useProductContext();
   const [isLogged, setIsLogged] = useState(true);
-
   const navigate = useNavigate();
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   return (
     <div id="container">
@@ -43,14 +50,28 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             </NavItem>
             {isLogged === true && userLogged !== "" ? (
               <div className="logado-user">
-                <UserContainer>
-                  {/* <div className="abrevName">
+                <UncontrolledDropdown
+                  isOpen={dropdownOpen}
+                  onMouseOver={toggle}
+                  onMouseOut={toggle}
+                >
+                  <DropdownToggle caret>
+                    <UserContainer>
+                      {/* <div className="abrevName">
                     <p>JP</p>
                   </div>
                   <h5>João Paulo</h5> */}
-                  <CircleUser nameUser={userLogged} />
-                  <h5>{userLogged}</h5>
-                </UserContainer>
+                      <CircleUser nameUser={userLogged} />
+                      <h5>{userLogged}</h5>
+                    </UserContainer>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Editar Perfil</DropdownItem>
+                    <DropdownItem>Editar Endereço</DropdownItem>
+                    <DropdownItem>Meus Anúncios</DropdownItem>
+                    <DropdownItem>Sair</DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </div>
             ) : (
               <>

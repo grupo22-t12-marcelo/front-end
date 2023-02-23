@@ -43,6 +43,30 @@ const DivHeader = styled(Nav)`
       border-top: 2px solid var(--grey6);
       border-left: none;
 
+      button::after {
+        display: none;
+        --bs-btn-color: #fff;
+        --bs-btn-bg: transparent;
+        --bs-btn-border-color: transparent;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: transparent;
+        --bs-btn-hover-border-color: transparent;
+        --bs-btn-focus-shadow-rgb: 130, 138, 145;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: transparent;
+        --bs-btn-active-border-color: transparent;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: transparent;
+      }
+
+      .dropdown .dropdown-menu {
+        width: 200px;
+        height: 202px;
+        color: red;
+      }
+
       h5 {
         font-family: "Inter";
         font-style: normal;
@@ -75,6 +99,12 @@ const DivHeader = styled(Nav)`
       z-index: 5;
       position: fixed;
       background-color: var(--grey10);
+      width: 100%;
+      /* cursor: pointer; */
+
+      button {
+        /* width: 100%; */
+      }
 
       img {
         cursor: pointer;
@@ -83,6 +113,10 @@ const DivHeader = styled(Nav)`
       .navbar-list {
         display: flex;
         align-items: center;
+
+        .dropdown .dropdown-menu {
+          color: red;
+        }
       }
 
       .nav-item {
