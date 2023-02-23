@@ -14,6 +14,7 @@ import {
 import { FiClock } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { CardImg, CardImgOverlay } from "reactstrap";
+import { formatPrice } from "../../utils/formatPrice";
 
 interface ICardAuction {
   image: string;
@@ -70,7 +71,7 @@ const CardAuction = ({
               <p>{kmCar} km </p>
               <p> {yearCar} </p>
             </div>
-            <span>R$ {priceCar} </span>
+            <span> {formatPrice(priceCar)} </span>
           </InfosVehicle>
         </CardImgOverlay>
       </CardContainer>

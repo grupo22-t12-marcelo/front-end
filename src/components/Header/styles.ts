@@ -1,6 +1,7 @@
 import { Nav } from "reactstrap";
 import styled from "styled-components";
 
+
 const DivHeader = styled(Nav)`
     display: flex;
     flex-direction: row;
@@ -51,6 +52,9 @@ const DivHeader = styled(Nav)`
             justify-content: space-between;
             width: 100%;
             padding: 0 20px;
+            z-index: 5;
+            position: fixed;
+            background-color: var(--grey10);
             .navbar-list{
                 display: flex;
                 align-items: center;

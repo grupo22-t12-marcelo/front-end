@@ -20,6 +20,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [count, setCount] = useState("00:00:10");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
 
+
   return (
     <ProductContext.Provider value={{ count, setCount, isModalAnuncio, setIsModalAnuncio}}>
       {children}

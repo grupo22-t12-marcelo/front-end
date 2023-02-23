@@ -17,6 +17,7 @@ import { IAnuncio } from "../../interfaces";
 import { ProductContext } from "../../contexts/productContext";
 import { schemaAnuncio } from "../../validators/schemas";
 
+
 const CriarAnuncio = () => {
   const [isMoreImages, setIsMoreImages] = useState(false);
   const [tipo, setTipo] = useState("Venda");

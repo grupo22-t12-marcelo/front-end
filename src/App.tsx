@@ -1,5 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
+import { Button } from "./components/Button";
+
 import RoutesMain from "./routes/RoutesMain";
 import GlobalStyle from "./style/GlobalStyle";
 
