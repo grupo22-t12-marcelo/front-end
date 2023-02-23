@@ -4,8 +4,8 @@ import { DivCarousel } from "./styles";
 const CarouselAuction = () => {
   const Vehicle = {
     image: "https://img2.icarros.com/dbimg/imgadicionalnoticia/4/114039_1",
-    title: "Carro",
-    subtitle: "Veloz",
+    title: "Volkswagen Jetta",
+    subtitle: "Carro compacto",
     abrevUser: "JV",
     nameUser: "Joao Vitor",
     kmCar: 20000,
