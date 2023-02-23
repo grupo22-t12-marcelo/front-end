@@ -26,7 +26,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const { userLogged } = useProductContext();
+  const { userLogged, accountType } = useProductContext();
   const [isLogged, setIsLogged] = useState(true);
   const navigate = useNavigate();
 
@@ -68,7 +68,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   <DropdownMenu>
                     <DropdownItem>Editar Perfil</DropdownItem>
                     <DropdownItem>Editar Endereço</DropdownItem>
-                    <DropdownItem>Meus Anúncios</DropdownItem>
+                    {accountType === "Anunciante" && (
+                      <DropdownItem>Meus Anúncios</DropdownItem>
+                    )}
                     <DropdownItem>Sair</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -104,12 +106,29 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                 </NavItem>
                 {isLogged === true ? (
                   <div className="logado-user">
-                    <UserContainer>
-                      <div className="abrevName">
-                        <p>JP</p>
-                      </div>
-                      <h5>João Paulo</h5>
-                    </UserContainer>
+                    <UncontrolledDropdown
+                      isOpen={dropdownOpen}
+                      onClick={toggle}
+                    >
+                      <DropdownToggle caret>
+                        <UserContainer>
+                          {/* <div className="abrevName">
+                    <p>JP</p>
+                  </div>
+                  <h5>João Paulo</h5> */}
+                          <CircleUser nameUser={userLogged} />
+                          <h5>{userLogged}</h5>
+                        </UserContainer>
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem>Editar Perfil</DropdownItem>
+                        <DropdownItem>Editar Endereço</DropdownItem>
+                        {accountType === "Anunciante" && (
+                          <DropdownItem>Meus Anúncios</DropdownItem>
+                        )}
+                        <DropdownItem>Sair</DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
                   </div>
                 ) : (
                   <>

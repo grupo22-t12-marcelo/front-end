@@ -16,6 +16,7 @@ interface IProductProvider {
   tagsCar: string[];
   photos: string[];
   comments: object[];
+  accountType: string;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -24,6 +25,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [count, setCount] = useState("00:00:10");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
   let userLogged = "Samuel Leão";
+  let accountType = "Anunciante";
   let tagsCar = ["2013", "0KM"];
   let photos = [
     "/src/assets/Carro-CapaProduct.png",
@@ -66,6 +68,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         tagsCar,
         photos,
         comments,
+        accountType,
       }}
     >
       {children}

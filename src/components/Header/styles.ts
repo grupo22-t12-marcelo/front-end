@@ -18,6 +18,27 @@ const DivHeader = styled(Nav)`
     img {
       cursor: pointer;
     }
+    .btn-secondary {
+      /* width: 100%; */
+      --bs-btn-color: #fff;
+      --bs-btn-bg: transparent;
+      --bs-btn-border-color: transparent;
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: transparent;
+      --bs-btn-hover-border-color: transparent;
+      --bs-btn-focus-shadow-rgb: 130, 138, 145;
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: transparent;
+      --bs-btn-active-border-color: transparent;
+      --bs-btn-active-shadow: inset 0 3px 5px transparent;
+      --bs-btn-disabled-color: #fff;
+      --bs-btn-disabled-bg: transparent;
+      --bs-btn-disabled-border-color: transparent;
+    }
+
+    .btn-secondary::after {
+      display: none;
+    }
 
     .cadastro-login {
       display: flex;
@@ -42,30 +63,6 @@ const DivHeader = styled(Nav)`
       min-width: 100%;
       border-top: 2px solid var(--grey6);
       border-left: none;
-
-      button::after {
-        display: none;
-        --bs-btn-color: #fff;
-        --bs-btn-bg: transparent;
-        --bs-btn-border-color: transparent;
-        --bs-btn-hover-color: #fff;
-        --bs-btn-hover-bg: transparent;
-        --bs-btn-hover-border-color: transparent;
-        --bs-btn-focus-shadow-rgb: 130, 138, 145;
-        --bs-btn-active-color: #fff;
-        --bs-btn-active-bg: transparent;
-        --bs-btn-active-border-color: transparent;
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-        --bs-btn-disabled-color: #fff;
-        --bs-btn-disabled-bg: transparent;
-        --bs-btn-disabled-border-color: transparent;
-      }
-
-      .dropdown .dropdown-menu {
-        width: 200px;
-        height: 202px;
-        color: red;
-      }
 
       h5 {
         font-family: "Inter";
@@ -102,8 +99,26 @@ const DivHeader = styled(Nav)`
       width: 100%;
       /* cursor: pointer; */
 
-      button {
+      .btn-secondary {
         /* width: 100%; */
+        --bs-btn-color: #fff;
+        --bs-btn-bg: transparent;
+        --bs-btn-border-color: transparent;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: transparent;
+        --bs-btn-hover-border-color: transparent;
+        --bs-btn-focus-shadow-rgb: 130, 138, 145;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: transparent;
+        --bs-btn-active-border-color: transparent;
+        --bs-btn-active-shadow: inset 0 3px 5px transparent;
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: transparent;
+      }
+
+      .btn-secondary::after {
+        display: none;
       }
 
       img {
