@@ -4,10 +4,20 @@ const Photo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   background-color: var(--grey10);
   padding: 28px;
   gap: 24px;
+  border-radius: 4px;
+  /* width: 440px; */
+  /* height: 377px; */
+  max-height: 350px;
+
+  @media (min-width: 1024px) {
+    padding: 20px;
+    height: 280px;
+    gap: 15px;
+  }
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-5-600);
@@ -32,7 +42,7 @@ const Photo = styled.div`
       img {
         width: 94px;
         height: 54px;
-        object-fit: contain;
+        object-fit: cover;
       }
     }
   }

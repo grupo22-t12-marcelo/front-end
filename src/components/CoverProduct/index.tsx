@@ -1,4 +1,4 @@
-import { Cover } from "../../pages/Product/style";
+import { Cover } from "./style";
 
 const CoverProduct = ({ src, alt }: any) => {
   return (

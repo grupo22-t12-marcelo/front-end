@@ -8,6 +8,15 @@ const InfoUser = styled.div`
   background-color: var(--grey10);
   padding: 28px;
   gap: 28px;
+  border-radius: 4px;
+  /* width: 440px; */
+  height: 426px;
+
+  @media (min-width: 1024px) {
+    padding: 20px;
+    height: 300px;
+    gap: 15px;
+  }
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-5-600);

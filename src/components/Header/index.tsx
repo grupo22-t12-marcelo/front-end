@@ -68,7 +68,7 @@ const Header = () => {
           </Navbar>
         </div>
       </DivHeader>
-      <SubHeader></SubHeader>
+      {/* <SubHeader></SubHeader> */}
     </div>
   );
 };

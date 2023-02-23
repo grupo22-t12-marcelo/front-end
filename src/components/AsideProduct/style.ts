@@ -1,1 +1,40 @@
 import styled from "styled-components";
+
+const Aside = styled.aside`
+  position: fixed;
+  top: 120px;
+  right: 181px;
+  max-width: 440px;
+  @media (min-width: 1024px) {
+    top: 100px;
+    right: 50px;
+    width: 400px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-left: 120px;
+  }
+`;
+
+const AsideBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  /* width: 90%; */
+  padding: 10px;
+
+  @media (min-width: 1024px) {
+    gap: 20px;
+  }
+
+  .cyDJVF {
+    width: 440px;
+    height: 377px;
+  }
+  .kLmEfL {
+    width: 440px;
+    height: 426px;
+  }
+`;
+
+export { Aside, AsideBox };

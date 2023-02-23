@@ -4,7 +4,7 @@ import { CircleUser } from "../CircleUser";
 
 const InfoUserSeeAllProducts = (props: any) => {
   return (
-    <InfoUser>
+    <InfoUser id="info-user">
       <CircleUser nameUser={props.nameUser} />
       <h3>{props.title}</h3>
       <p id="text-user">{props.text}</p>

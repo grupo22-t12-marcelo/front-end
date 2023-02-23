@@ -3,7 +3,7 @@ import { Photo } from "./style";
 
 const PhotoGalery = (props: any) => {
   return (
-    <Photo>
+    <Photo id="photo">
       <h3>Fotos</h3>
       <div>
         {props.photos.map((photo: string) => {
