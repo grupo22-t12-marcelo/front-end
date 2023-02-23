@@ -1,17 +1,11 @@
-import {
-  useContext,
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useContext, createContext, useState } from "react";
 import { IAuthProvider } from "../interfaces";
 
 interface IProductProvider {
   count: string;
+  setCount: (value: string) => void;
   isModalAnuncio: boolean;
   modal: boolean;
-  setCount: Dispatch<SetStateAction<string>>;
   setIsModalAnuncio: (value: boolean) => void;
   toggle: () => void;
 }
@@ -19,7 +13,7 @@ interface IProductProvider {
 export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
-  const [count, setCount] = useState("00:00:10");
+  const [count, setCount] = useState("02:00:00");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
   const [modal, setModal] = useState(true);
 

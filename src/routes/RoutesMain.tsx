@@ -5,8 +5,8 @@ import { Product } from "../pages/Product";
 const RoutesMain = () => {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
-      <Route path="/product" element={<Product />} />
+      <Route path="*" element={<Home />} />
+      <Route path="/product/:productId" element={<Product />} />
     </Routes>
   );
 };
