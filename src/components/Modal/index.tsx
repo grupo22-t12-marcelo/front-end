@@ -1,31 +1,32 @@
-import { ReactNode, useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { ModalDiv } from "./styles";
+import { ReactNode, useContext, useState } from "react";
+import { Button, Modal } from "reactstrap";
+import { Footer, Header, Body } from "./styles";
+import { ProductContext } from "../../contexts/productContext";
 
 interface IModal {
   titleModal: string;
   bodyModal?: ReactNode;
   footerModal?: ReactNode;
+  styleModal?: Object;
 }
 
 const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
   //Colocar o useState e o toggle no context para depois conseguir reaproveitar em qualquer outro lugar do código
   //Deixei comentado o button para conseguirem usar desse mesmo modo em outras partes do código
-  const [modal, setModal] = useState(true);
 
-  const toggle = () => setModal(!modal);
+  const { modal, toggle } = useContext(ProductContext);
 
   return (
-    <ModalDiv>
+    <>
       {/* <Button color="danger" onClick={toggle}>
         Click Me
       </Button> */}
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}> {titleModal} </ModalHeader>
-        <ModalBody> {bodyModal} </ModalBody>
-        <ModalFooter>{footerModal}</ModalFooter>
+        <Header toggle={toggle}> {titleModal} </Header>
+        <Body> {bodyModal} </Body>
+        <Footer>{footerModal}</Footer>
       </Modal>
-    </ModalDiv>
+    </>
   );
 };
 
