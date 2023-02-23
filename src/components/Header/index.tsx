@@ -26,6 +26,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+
   const { userLogged, accountType, isLogged, setIsLogged, navigate } =
     useProductContext();
 
@@ -37,6 +38,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
       <DivHeader>
         <div className="navbar-desktop">
           <img src={ShopBranco} onClick={() => navigate("/home")} />
+
           <div className="navbar-list">
             <NavItem>
               <NavLink href="#">Carros</NavLink>

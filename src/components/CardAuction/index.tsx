@@ -15,6 +15,7 @@ import { FiClock } from "react-icons/fi";
 import { BsArrowRight } from "react-icons/bs";
 import { CardImg, CardImgOverlay } from "reactstrap";
 import { formatPrice } from "../../utils/formatPrice";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ICardAuction {
   image: string;
@@ -25,6 +26,7 @@ interface ICardAuction {
   kmCar: number;
   yearCar: number;
   priceCar: number;
+  idProduct: string;
 }
 
 const CardAuction = ({
@@ -36,8 +38,13 @@ const CardAuction = ({
   kmCar,
   yearCar,
   priceCar,
+  idProduct,
 }: ICardAuction) => {
-  const { count } = useProductContext();
+  let { productId } = useParams();
+
+  productId = idProduct;
+
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -46,11 +53,8 @@ const CardAuction = ({
         <CardImgOverlay className="cardInfos">
           <TimerAuction>
             <FiClock color="blue" size={20} />
-            {count === "00:00:00" ? (
-              <p>Timeout</p>
-            ) : (
-              <time>{countAuction()}</time>
-            )}
+
+            <time>{countAuction()}</time>
           </TimerAuction>
 
           <Description>
@@ -76,7 +80,7 @@ const CardAuction = ({
         </CardImgOverlay>
       </CardContainer>
 
-      <DivRedirectAuction>
+      <DivRedirectAuction onClick={() => navigate(`product/${productId}`)}>
         <p>Acessar página do leilão</p>
 
         <BsArrowRight className="arrowRight" size={30} color="white" />

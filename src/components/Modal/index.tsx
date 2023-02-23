@@ -1,7 +1,9 @@
-import { ReactNode, useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
-import { ModalDiv } from "./styles";
+
+import { ReactNode, useContext } from "react";
+
+import { Footer, Header, Body } from "./styles";
 
 interface IModal {
   titleModal: string;
@@ -12,13 +14,15 @@ interface IModal {
 const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
   //Colocar o useState e o toggle no context para depois conseguir reaproveitar em qualquer outro lugar do código
   //Deixei comentado o button para conseguirem usar desse mesmo modo em outras partes do código
+
   const { modal, setModal, toggle } = useProductContext();
 
   return (
-    <ModalDiv>
+    <>
       {/* <Button color="danger" onClick={toggle}>
         Click Me
       </Button> */}
+
       <Modal isOpen={modal} toggle={() => toggle("")}>
         <ModalHeader toggle={() => toggle("")}> {titleModal} </ModalHeader>
         <ModalBody>
@@ -27,7 +31,7 @@ const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
         </ModalBody>
         <ModalFooter>{footerModal}</ModalFooter>
       </Modal>
-    </ModalDiv>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import { IAuthProvider } from "../interfaces";
 
 interface IProductProvider {
   count: string;
-  setCount: Dispatch<SetStateAction<string>>;
+  setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
   isLogged: boolean;
@@ -37,7 +37,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     setIdPhoto(id);
     setModal(!modal);
   };
-  const [count, setCount] = useState("00:00:10");
+
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
   const [isLogged, setIsLogged] = useState(true);
   let [idPhoto, setIdPhoto] = useState("");
@@ -74,6 +74,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     },
   ];
+
+  const [count, setCount] = useState("02:00:00");
 
   return (
     <ProductContext.Provider

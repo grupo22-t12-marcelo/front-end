@@ -95,6 +95,7 @@ export const CardTitle = styled.h4`
   line-height: 20px;
   color: var(--grey10);
   margin: 15px 0;
+  height: 30px;
 
   white-space: nowrap;
   width: 100%;

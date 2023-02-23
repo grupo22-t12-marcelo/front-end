@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
 import { formatPrice } from "../../utils/formatPrice";
 import {
@@ -18,6 +19,7 @@ interface ICardVehicle {
   kmCar: number;
   yearCar: number;
   priceCar: number;
+  idProduct: string;
 }
 
 const CardVehicle = ({
@@ -29,9 +31,16 @@ const CardVehicle = ({
   kmCar,
   yearCar,
   priceCar,
+  idProduct,
 }: ICardVehicle) => {
+  let { productId } = useParams();
+
+  productId = idProduct;
+
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container onClick={() => navigate(`product/${productId}`)}>
       <ImageVehicle className="image">
         <img src={image} />
       </ImageVehicle>
