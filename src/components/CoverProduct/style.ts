@@ -7,6 +7,7 @@ const Cover = styled.div`
   background-color: var(--grey10);
   border-radius: 4px;
   width: 100%;
+  cursor: pointer;
 
   @media (min-width: 1100px) {
     height: 300px;

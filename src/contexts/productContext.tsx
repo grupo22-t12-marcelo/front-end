@@ -18,19 +18,31 @@ interface IProductProvider {
   userLogged: string;
   tagsCar: string[];
   photos: string[];
+  idPhoto: string;
+  setIdPhoto: (value: string) => void;
   comments: object[];
   accountType: string;
   navigate: NavigateFunction;
+  modal: boolean;
+  setModal: (value: boolean) => void;
+  toggle: (id: string) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
+  const [modal, setModal] = useState(true);
+  const toggle = (id: string) => {
+    setIdPhoto(id);
+    setModal(!modal);
+  };
   const [count, setCount] = useState("00:00:10");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
   const [isLogged, setIsLogged] = useState(true);
+  let [idPhoto, setIdPhoto] = useState("");
   let userLogged = "Samuel Leão";
+
   let accountType = "Anunciante";
   let tagsCar = ["2013", "0KM"];
   let photos = [
@@ -78,6 +90,11 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isLogged,
         setIsLogged,
         navigate,
+        modal,
+        setModal,
+        toggle,
+        idPhoto,
+        setIdPhoto,
       }}
     >
       {children}
