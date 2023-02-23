@@ -3,7 +3,9 @@ import { ReactNode } from "react";
 export interface IAuthProvider {
   children: ReactNode;
 }
-
+export interface IProps{
+  children?: JSX.Element
+}
 
 export interface IAnuncio {
   tipo: String

@@ -41,6 +41,7 @@ export const DivCarousel = styled.div`
     align-items: flex-start;
     background-color: var(--grey7);
     padding: 50px 0;
+
     .title-carousel{
         font-family: var(--heading-font-family);
         font-weight: var(--heading-2-600);
