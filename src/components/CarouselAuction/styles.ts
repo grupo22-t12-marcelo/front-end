@@ -47,7 +47,7 @@ export const DivCarousel = styled.div`
         font-size: 24px;
         line-height: 30px;
         color: var(--grey0);
-        margin-left: 50px;
+        padding-left: 50px;
         margin-bottom: 50px;
     }
     .list-card-vehicles{

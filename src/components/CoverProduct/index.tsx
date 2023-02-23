@@ -1,6 +1,6 @@
 import { Cover } from "./style";
 
-const CoverProduct = ({ src, alt }: any) => {
+const CoverProduct = ({ src, alt }:any) => {
   return (
     <Cover>
       <img src={src} alt={alt} />
@@ -9,3 +9,4 @@ const CoverProduct = ({ src, alt }: any) => {
 };
 
 export { CoverProduct };
+

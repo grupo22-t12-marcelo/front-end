@@ -1,4 +1,5 @@
 import {} from "reactstrap";
+import { formatPrice } from "../../utils/formatPrice";
 import {
   CardSubtitle,
   CardTitle,
@@ -51,7 +52,7 @@ const CardVehicle = ({
           <p> {kmCar} km </p>
           <p> {yearCar} </p>
         </div>
-        <span>R$ {priceCar} </span>
+        <span>{formatPrice(priceCar)} </span>
       </InfosVehicle>
     </Container>
   );

@@ -11,7 +11,7 @@ interface IModal {
 const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
   //Colocar o useState e o toggle no context para depois conseguir reaproveitar em qualquer outro lugar do código
   //Deixei comentado o button para conseguirem usar desse mesmo modo em outras partes do código
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
 
   const toggle = () => setModal(!modal);
 
