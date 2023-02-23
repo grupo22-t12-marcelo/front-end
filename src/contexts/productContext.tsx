@@ -9,9 +9,11 @@ import { IAuthProvider } from "../interfaces";
 
 interface IProductProvider {
   count: string;
-  setCount: Dispatch<SetStateAction<string>>;
   isModalAnuncio: boolean;
+  modal: boolean;
+  setCount: Dispatch<SetStateAction<string>>;
   setIsModalAnuncio: (value: boolean) => void;
+  toggle: () => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -19,10 +21,21 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const [count, setCount] = useState("00:00:10");
   const [isModalAnuncio, setIsModalAnuncio] = useState(true);
+  const [modal, setModal] = useState(true);
 
+  const toggle = () => setModal(!modal);
 
   return (
-    <ProductContext.Provider value={{ count, setCount, isModalAnuncio, setIsModalAnuncio}}>
+    <ProductContext.Provider
+      value={{
+        count,
+        setCount,
+        isModalAnuncio,
+        setIsModalAnuncio,
+        toggle,
+        modal,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
