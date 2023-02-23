@@ -10,15 +10,18 @@ import {
   NavLink,
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
+import { useProductContext } from "../../contexts/productContext";
 import { IProps } from "../../interfaces";
 import { UserContainer } from "../CardAuction/styles";
 import SubHeader from "../SubHeader";
 import { DivHeader } from "./styles";
+import { CircleUser } from "../CircleUser";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+  const { userLogged } = useProductContext();
   const [isLogged, setIsLogged] = useState(true);
 
   const navigate = useNavigate();
@@ -38,13 +41,15 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             <NavItem>
               <NavLink href="#">Leilão</NavLink>
             </NavItem>
-            {isLogged === true ? (
+            {isLogged === true && userLogged !== "" ? (
               <div className="logado-user">
                 <UserContainer>
-                  <div className="abrevName">
+                  {/* <div className="abrevName">
                     <p>JP</p>
                   </div>
-                  <h5>João Paulo</h5>
+                  <h5>João Paulo</h5> */}
+                  <CircleUser nameUser={userLogged} />
+                  <h5>{userLogged}</h5>
                 </UserContainer>
               </div>
             ) : (
