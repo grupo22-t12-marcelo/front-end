@@ -3,10 +3,12 @@ import { CoverProduct } from "../CoverProduct";
 import { DescriptionProduct } from "../DescriptionProduct";
 import { InfoProduct } from "../InfoProduct";
 import { InfoUserSeeAllProducts } from "../InfoUserSeeAllProducts";
+import { FormComment } from "../FormComment";
 import { PhotoGalery } from "../PhotoGalery";
 import { Section } from "./style";
 
 const SectionProduct = () => {
+  let userLogged = "Samuel Leão";
   let tagsCar = ["2013", "0KM"];
   let photos = [
     "/src/assets/Carro-CapaProduct.png",
@@ -61,9 +63,10 @@ const SectionProduct = () => {
         text={
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
         }
-        nameUser={"Patrick Cordeiro"}
+        nameUser={userLogged}
       />
       <CommentsSection props={comments} />
+      <FormComment nameUser={userLogged} />
     </Section>
   );
 };

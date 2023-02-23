@@ -15,7 +15,7 @@ const InfoUser = styled.div`
     font-size: 20px;
     text-align: left;
   }
-  p {
+  #text-user {
     font-family: var(--body-font-family);
     font-weight: var(--body-1-400);
     color: var(--grey2);

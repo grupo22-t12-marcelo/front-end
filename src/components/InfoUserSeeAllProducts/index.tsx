@@ -7,7 +7,7 @@ const InfoUserSeeAllProducts = (props: any) => {
     <InfoUser>
       <CircleUser nameUser={props.nameUser} />
       <h3>{props.title}</h3>
-      <p>{props.text}</p>
+      <p id="text-user">{props.text}</p>
       <Button>Ver todos os anúncios</Button>
     </InfoUser>
   );
