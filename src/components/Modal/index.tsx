@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useContext } from "react";
 import { Button, Modal } from "reactstrap";
 import { Footer, Header, Body } from "./styles";
 import { ProductContext } from "../../contexts/productContext";
@@ -7,7 +7,6 @@ interface IModal {
   titleModal: string;
   bodyModal?: ReactNode;
   footerModal?: ReactNode;
-  styleModal?: Object;
 }
 
 const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {

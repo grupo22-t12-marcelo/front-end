@@ -2,11 +2,8 @@ import { useContext } from "react";
 import { Button } from "reactstrap";
 import { ProductContext } from "../../contexts/productContext";
 import { ModaL } from "../Modal";
-import { BackgroundModalExcluir } from "./styles";
+import { BackgroundModalExcluir, DivContentExcluir, Buttons } from "./styles";
 
-const styledModal = {
-  "margin-top": "1000px",
-};
 
 const ExcluirAnuncio = () => {
   const { toggle } = useContext(ProductContext);
@@ -15,24 +12,23 @@ const ExcluirAnuncio = () => {
     <BackgroundModalExcluir>
       <div className="modal">
         <ModaL
-          styleModal={styledModal}
           titleModal="Excluir Anúncio"
           bodyModal={
-            <div className="content-modal-excluir">
+            <DivContentExcluir>
               <span>Tem certeza que deseja remover este anúncio?</span>
               <p>
                 Essa ação não pode ser desfeita. Isso excluirá permanentemente
                 sua conta e removerá seus dados de nossos servidores.
               </p>
-            </div>
+            </DivContentExcluir>
           }
           footerModal={
-            <div className="buttons">
+            <Buttons>
               <Button className="cancelar" onClick={() => toggle()}>
                 Cancelar
               </Button>
               <Button className="excluir-anuncio">Sim, excluir anúncio</Button>
-            </div>
+            </Buttons>
           }
         />
       </div>
