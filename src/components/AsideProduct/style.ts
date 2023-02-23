@@ -12,7 +12,13 @@ const Aside = styled.aside`
   }
 
   @media (min-width: 1440px) {
-    margin-left: 120px;
+    width: 500px;
+    right: 100px;
+  }
+
+  @media (min-width: 1780px) {
+    width: 500px;
+    right: 200px;
   }
 `;
 

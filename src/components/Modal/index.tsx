@@ -1,30 +1,35 @@
-import { ReactNode, useContext, useState } from "react";
-import { Button, Modal } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useProductContext } from "../../contexts/productContext";
+
+import { ReactNode, useContext } from "react";
+
 import { Footer, Header, Body } from "./styles";
-import { ProductContext } from "../../contexts/productContext";
 
 interface IModal {
   titleModal: string;
-  bodyModal?: ReactNode;
+  bodyModal?: string;
   footerModal?: ReactNode;
-  styleModal?: Object;
 }
 
 const ModaL = ({ titleModal, bodyModal, footerModal }: IModal) => {
   //Colocar o useState e o toggle no context para depois conseguir reaproveitar em qualquer outro lugar do código
   //Deixei comentado o button para conseguirem usar desse mesmo modo em outras partes do código
 
-  const { modal, toggle } = useContext(ProductContext);
+  const { modal, setModal, toggle } = useProductContext();
 
   return (
     <>
       {/* <Button color="danger" onClick={toggle}>
         Click Me
       </Button> */}
-      <Modal isOpen={modal} toggle={toggle}>
-        <Header toggle={toggle}> {titleModal} </Header>
-        <Body> {bodyModal} </Body>
-        <Footer>{footerModal}</Footer>
+
+      <Modal isOpen={modal} toggle={() => toggle("")}>
+        <ModalHeader toggle={() => toggle("")}> {titleModal} </ModalHeader>
+        <ModalBody>
+          {" "}
+          <img src={bodyModal} alt="" />
+        </ModalBody>
+        <ModalFooter>{footerModal}</ModalFooter>
       </Modal>
     </>
   );

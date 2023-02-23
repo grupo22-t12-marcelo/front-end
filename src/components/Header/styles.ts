@@ -15,6 +15,31 @@ const DivHeader = styled(Nav)`
   .navbar-mobile {
     width: 100%;
 
+    img {
+      cursor: pointer;
+    }
+    .btn-secondary {
+      /* width: 100%; */
+      --bs-btn-color: #fff;
+      --bs-btn-bg: transparent;
+      --bs-btn-border-color: transparent;
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: transparent;
+      --bs-btn-hover-border-color: transparent;
+      --bs-btn-focus-shadow-rgb: 130, 138, 145;
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: transparent;
+      --bs-btn-active-border-color: transparent;
+      --bs-btn-active-shadow: inset 0 3px 5px transparent;
+      --bs-btn-disabled-color: #fff;
+      --bs-btn-disabled-bg: transparent;
+      --bs-btn-disabled-border-color: transparent;
+    }
+
+    .btn-secondary::after {
+      display: none;
+    }
+
     .cadastro-login {
       display: flex;
       flex-direction: column;
@@ -54,10 +79,6 @@ const DivHeader = styled(Nav)`
     display: none;
   }
 
-  .navbar-desktop img {
-    cursor: pointer;
-  }
-
   @media only screen and (min-width: 768px) {
     width: auto;
 
@@ -75,9 +96,42 @@ const DivHeader = styled(Nav)`
       z-index: 5;
       position: fixed;
       background-color: var(--grey10);
+      width: 100%;
+      /* cursor: pointer; */
+
+      .btn-secondary {
+        /* width: 100%; */
+        --bs-btn-color: #fff;
+        --bs-btn-bg: transparent;
+        --bs-btn-border-color: transparent;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: transparent;
+        --bs-btn-hover-border-color: transparent;
+        --bs-btn-focus-shadow-rgb: 130, 138, 145;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: transparent;
+        --bs-btn-active-border-color: transparent;
+        --bs-btn-active-shadow: inset 0 3px 5px transparent;
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: transparent;
+        --bs-btn-disabled-border-color: transparent;
+      }
+
+      .btn-secondary::after {
+        display: none;
+      }
+
+      img {
+        cursor: pointer;
+      }
+
       .navbar-list {
         display: flex;
         align-items: center;
+
+        .dropdown .dropdown-menu {
+          color: red;
+        }
       }
 
       .nav-item {

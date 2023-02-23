@@ -13,6 +13,7 @@ const Section = styled.section`
 
   @media (min-width: 1100px) {
     padding: 30px 10px 40px;
+    margin-left: 50px;
     width: 600px;
 
     #photo,
@@ -22,7 +23,13 @@ const Section = styled.section`
   }
 
   @media (min-width: 1440px) {
-    margin-left: 120px;
+    margin-left: 150px;
+    width: 700px;
+  }
+
+  @media (min-width: 1700px) {
+    margin-left: 300px;
+    width: 800px;
   }
 `;
 
