@@ -17,12 +17,23 @@ const InfoUser = styled.div`
     height: 300px;
     gap: 15px;
   }
+
+  @media only screen and (max-height: 756px) {
+    height: 230px;
+    gap: 8px;
+    justify-content: initial;
+  }
+
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-5-600);
     color: var(--heading-color);
     font-size: 20px;
     text-align: left;
+
+    @media only screen and (max-height: 756px) {
+      font-size: 15px;
+    }
   }
   #text-user {
     font-family: var(--body-font-family);
@@ -30,11 +41,19 @@ const InfoUser = styled.div`
     color: var(--grey2);
     font-size: 16px;
     text-align: center;
+
+    @media only screen and (max-height: 756px) {
+      font-size: 14px;
+    }
   }
   button {
     background-color: var(--grey0);
     border-radius: 4px;
     color: var(--white-fixed);
+
+    @media only screen and (max-height: 756px) {
+      font-size: 14px;
+    }
   }
 `;
 

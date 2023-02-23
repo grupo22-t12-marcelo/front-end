@@ -18,6 +18,10 @@ const Photo = styled.div`
     /* height: 280px; */
     gap: 15px;
   }
+
+  @media only screen and (max-height: 756px) {
+    height: 220px;
+  }
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-5-600);
@@ -33,6 +37,13 @@ const Photo = styled.div`
     gap: 5px;
     width: 100%;
 
+    @media only screen and (max-height: 756px) {
+      width: 70%;
+      /* margin-right: 25px; */
+      align-self: center;
+      margin-right: 10px;
+    }
+
     div {
       width: 90px;
       height: 90px;
@@ -43,6 +54,11 @@ const Photo = styled.div`
       @media (min-width: 1440px) {
         width: 120px;
         height: 120px;
+      }
+      @media only screen and (max-height: 756px) {
+        height: 70px;
+        width: 70px;
+        /* margin-right: 25px; */
       }
 
       img {
