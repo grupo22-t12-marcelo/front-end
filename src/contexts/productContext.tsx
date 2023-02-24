@@ -33,19 +33,19 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(true);
+  const [isLogged, setIsLogged] = useState(true);
+
   const toggle = (id: string) => {
     setIdPhoto(id);
     setModal(!modal);
   };
 
-  const [isModalAnuncio, setIsModalAnuncio] = useState(true);
-  const [isLogged, setIsLogged] = useState(true);
-  let [idPhoto, setIdPhoto] = useState("");
-  let userLogged = "Samuel Leão";
-
-  let accountType = "Anunciante";
-  let tagsCar = ["2013", "0KM"];
-  let photos = [
+  const [idPhoto, setIdPhoto] = useState("");
+  const userLogged = "Samuel Leão";
+  const accountType = "Anunciante";
+  const tagsCar = ["2013", "0KM"];
+  const photos = [
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
@@ -54,7 +54,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     "/src/assets/Carro-CapaProduct.png",
   ];
 
-  let comments = [
+  const comments = [
     {
       nameUser: "Júlia Lima",
       dateComment: "há 3 dias",

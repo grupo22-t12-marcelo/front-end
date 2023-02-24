@@ -21,6 +21,7 @@ const Form = styled.form`
       height: 32px;
       color: var(--white-fixed);
     }
+
     h5 {
       font-family: var(--body-font-family);
       font-weight: var(--body-2-500);

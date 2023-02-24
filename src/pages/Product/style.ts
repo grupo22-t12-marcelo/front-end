@@ -13,6 +13,7 @@ const ProductPage = styled.div`
       #f1f3f5 100%
     );
     background-attachment: fixed;
+
     #aside {
       display: none;
     }

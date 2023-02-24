@@ -1,11 +1,14 @@
+import { useProductContext } from "../../contexts/productContext";
 import { Circle } from "./style";
 
-const CircleUser = ({ nameUser }: any) => {
+const CircleUser = () => {
+  const { userLogged } = useProductContext();
+
   let initials = "";
 
-  if (nameUser.length > 0) {
+  if (userLogged.length > 0) {
     initials =
-      nameUser.split(" ")[0].charAt(0) + nameUser.split(" ")[1].charAt(0);
+      userLogged.split(" ")[0].charAt(0) + userLogged.split(" ")[1].charAt(0);
   }
 
   return (

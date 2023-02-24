@@ -32,6 +32,11 @@ const AsideBox = styled.div`
     gap: 20px;
   }
 
+  @media only screen and (max-height: 756px) {
+    gap: 5px;
+    justify-content: initial;
+  }
+
   .cyDJVF {
     width: 440px;
     height: 377px;

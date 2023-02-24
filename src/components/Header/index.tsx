@@ -62,7 +62,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     <p>JP</p>
                   </div>
                   <h5>João Paulo</h5> */}
-                      <CircleUser nameUser={userLogged} />
+                      <CircleUser />
                       <h5>{userLogged}</h5>
                     </UserContainer>
                   </DropdownToggle>
@@ -119,7 +119,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     <p>JP</p>
                   </div>
                   <h5>João Paulo</h5> */}
-                          <CircleUser nameUser={userLogged} />
+                          <CircleUser />
                           <h5>{userLogged}</h5>
                         </UserContainer>
                       </DropdownToggle>
