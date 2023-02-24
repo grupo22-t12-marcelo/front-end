@@ -1,7 +1,8 @@
 .home-div{
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
+    background-color: var(--grey10);
 }
