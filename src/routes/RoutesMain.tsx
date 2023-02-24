@@ -6,10 +6,9 @@ import { UserAnnouncement } from "../pages/UserAnnouncement";
 const RoutesMain = () => {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
       <Route path="*" element={<Home />} />
       <Route path="/product/:productId" element={<Product />} />
-      <Route path="users" element={<UserAnnouncement />} />
+      <Route path="/users/:userId" element={<UserAnnouncement />} />
     </Routes>
   );
 };
