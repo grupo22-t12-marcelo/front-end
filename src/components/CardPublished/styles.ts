@@ -70,6 +70,7 @@ export const ImageVehicle = styled.div`
   img {
     width: 250px;
     height: 150px;
+    object-fit: cover;
   }
 `;
 

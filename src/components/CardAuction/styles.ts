@@ -51,6 +51,10 @@ export const CardContainer = styled(Card)`
   background-color: var(--grey7);
 
   border-radius: 4px 4px 4px;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const Description = styled.div`

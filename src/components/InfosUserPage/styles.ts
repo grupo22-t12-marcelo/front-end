@@ -69,4 +69,5 @@ export const DescriptionUser = styled.p`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
 `;
