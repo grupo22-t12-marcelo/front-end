@@ -52,7 +52,7 @@ export const SubHeaderDiv = styled.div`
 
   @media only screen and (min-width: 768px) {
     width: 100%;
-    height: 400px;
+    height: 450px;
 
     .info-sem-logar {
       width: 748px;
@@ -78,14 +78,13 @@ export const SubHeaderDiv = styled.div`
   }
 `;
 
-
 export const Container = styled.div`
-    background: linear-gradient(
-      180deg,
-      #4529e6 38.25%,
-      #f1f3f5 38.26%,
-      #f1f3f5 100%
-    );
+  background: linear-gradient(
+    180deg,
+    #4529e6 38.25%,
+    #f1f3f5 38.26%,
+    #f1f3f5 100%
+  );
   .divBlue {
     height: 280px;
     background-color: var(--brand1);
@@ -94,4 +93,4 @@ export const Container = styled.div`
       height: 251px;
     }
   }
-  `
+`;
