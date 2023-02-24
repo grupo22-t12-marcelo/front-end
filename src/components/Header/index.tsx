@@ -37,7 +37,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
     <div id="container">
       <DivHeader>
         <div className="navbar-desktop">
-          <img src={ShopBranco} onClick={() => navigate("/home")} />
+          <img src={ShopBranco} onClick={() => navigate("/")} />
 
           <div className="navbar-list">
             <NavItem>

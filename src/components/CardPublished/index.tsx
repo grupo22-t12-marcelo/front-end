@@ -19,7 +19,6 @@ interface ICardVehicle {
   kmCar: number;
   yearCar: number;
   priceCar: number;
-  idProduct: string;
   is_published: boolean;
 }
 
@@ -32,19 +31,10 @@ const CardPublished = ({
   kmCar,
   yearCar,
   priceCar,
-  idProduct,
   is_published,
 }: ICardVehicle) => {
-  let { productId } = useParams();
-
-  productId = idProduct;
-
-  console.log(is_published);
-
-  const navigate = useNavigate();
-
   return (
-    <Container onClick={() => navigate(`product/${productId}`)}>
+    <Container>
       <div>
         {is_published ? (
           <p className="active">Ativo</p>
