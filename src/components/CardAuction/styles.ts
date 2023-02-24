@@ -188,21 +188,38 @@ export const InfosVehicle = styled.div`
 `;
 
 export const DivRedirectAuction = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
   background-color: var(--brand1);
   height: 60px;
-  padding: 24px 36px;
   border-radius: 0 0 4px 4px;
 
-  cursor: pointer;
+  .divRedirect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
-  & > p {
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--white-fixed);
+    height: 60px;
+    padding: 24px 36px;
+
+    cursor: pointer;
+
+    & > p {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--white-fixed);
+    }
+  }
+
+  .divButtonEdit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 60px;
+    padding: 0 15px;
+
+    cursor: pointer;
+
+    gap: 15px;
   }
 `;

@@ -127,7 +127,7 @@ export const TipoAnuncio = styled.div`
     }
 
     span {
-      width: 152.5px;
+      width: 230px;
       height: 48px;
 
       color: var(--grey0);
@@ -224,7 +224,7 @@ export const InformacoesVeiculo = styled.div`
     label {
       width: 100%;
     }
-    
+
     @media screen and (min-width: 578px) {
       justify-content: center;
       flex-direction: row;
@@ -272,7 +272,7 @@ export const TipoVeiculo = styled.div`
     }
 
     span {
-      width: 152.5px;
+      width: 230px;
       height: 48px;
 
       color: var(--grey0);

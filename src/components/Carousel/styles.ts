@@ -23,7 +23,7 @@ export const DivCarousel = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    width: 100%;
+    width: 95%;
     gap: 40px;
     overflow-x: scroll;
     scroll-snap-type: mandatory;

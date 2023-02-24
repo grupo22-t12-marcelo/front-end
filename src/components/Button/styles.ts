@@ -6,6 +6,7 @@ interface Props {
   color: string;
   width: number;
   height: number;
+  borderColor?: string;
 }
 
 export const Container = styled.button<Props>`
@@ -13,6 +14,7 @@ export const Container = styled.button<Props>`
   height: ${(props) => props.height}px;
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.color};
+  border-color: 1px solid ${(props) => props.borderColor};
 
   border-radius: 4px;
   gap: 10px;
