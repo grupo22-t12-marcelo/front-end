@@ -5,7 +5,7 @@ const Comment = ({ nameUser, dateComment, commentText }: any) => {
   return (
     <CommentDiv>
       <div>
-        <CircleUser nameUser={nameUser} />
+        <CircleUser />
         <h5>{nameUser}</h5>
         <span>
           <img src="src/assets/pointComment.png" alt="" id="point" />

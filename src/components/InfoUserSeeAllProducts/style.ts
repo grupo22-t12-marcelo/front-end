@@ -9,7 +9,6 @@ const InfoUser = styled.div`
   padding: 28px;
   gap: 28px;
   border-radius: 4px;
-  /* width: 440px; */
   height: 426px;
 
   @media (min-width: 1024px) {
@@ -18,7 +17,7 @@ const InfoUser = styled.div`
     gap: 15px;
   }
 
-  @media only screen and (max-height: 756px) {
+  @media (max-height: 756px) {
     height: 230px;
     gap: 8px;
     justify-content: initial;
@@ -35,6 +34,7 @@ const InfoUser = styled.div`
       font-size: 15px;
     }
   }
+
   #text-user {
     font-family: var(--body-font-family);
     font-weight: var(--body-1-400);
@@ -46,6 +46,7 @@ const InfoUser = styled.div`
       font-size: 14px;
     }
   }
+
   button {
     background-color: var(--grey0);
     border-radius: 4px;

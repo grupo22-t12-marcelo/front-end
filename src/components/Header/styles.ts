@@ -6,10 +6,8 @@ const DivHeader = styled(Nav)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   min-height: 80px;
-
   background: var(--grey10);
 
   .navbar-mobile {
@@ -18,8 +16,8 @@ const DivHeader = styled(Nav)`
     img {
       cursor: pointer;
     }
+
     .btn-secondary {
-      /* width: 100%; */
       --bs-btn-color: #fff;
       --bs-btn-bg: transparent;
       --bs-btn-border-color: transparent;
@@ -45,16 +43,15 @@ const DivHeader = styled(Nav)`
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-
       padding-top: 10px;
       gap: 10px;
-
       max-width: 100%;
       min-width: 100%;
       height: 120px;
       border-top: 2px solid var(--grey6);
       border-left: none;
     }
+
     .logado-user {
       display: flex;
       flex-direction: column;

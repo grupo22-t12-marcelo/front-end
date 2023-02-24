@@ -1,16 +1,16 @@
 import { CircleUser } from "../CircleUser";
 import { Badges, Form } from "./style";
-import { Input, FormGroup, Label, Button, Badge } from "reactstrap";
+import { Input, FormGroup, Button, Badge } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 
-const FormComment = ({ nameUser }: any) => {
-  const { isLogged, navigate } = useProductContext();
+const FormComment = () => {
+  const { isLogged, userLogged, navigate } = useProductContext();
 
   return (
     <Form>
       <div>
-        <CircleUser nameUser={nameUser} />
-        <h5>{nameUser}</h5>
+        <CircleUser />
+        <h5>{userLogged}</h5>
       </div>
       <FormGroup>
         <Input

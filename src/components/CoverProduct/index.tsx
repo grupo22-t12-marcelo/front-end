@@ -1,12 +1,13 @@
 import { useProductContext } from "../../contexts/productContext";
+import { ICoverProduct } from "../../interfaces";
 import { Cover } from "./style";
 
-const CoverProduct = ({ src, alt, id }: any) => {
+const CoverProduct: React.FC<ICoverProduct> = ({ src, id }: ICoverProduct) => {
   const { toggle } = useProductContext();
 
   return (
     <Cover onClick={() => toggle(id)} id={id}>
-      <img src={src} alt={alt} />
+      <img src={src} alt={"Carro Capa"} />
     </Cover>
   );
 };

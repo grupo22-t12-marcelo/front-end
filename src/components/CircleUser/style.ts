@@ -13,6 +13,7 @@ const Circle = styled.div`
     height: 55px;
     width: 55px;
   }
+
   p {
     color: var(--white-fixed);
     text-transform: uppercase;

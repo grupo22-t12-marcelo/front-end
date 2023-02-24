@@ -4,24 +4,21 @@ const Photo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* justify-content: space-between; */
   background-color: var(--grey10);
   padding: 28px;
   gap: 24px;
   border-radius: 4px;
-  /* width: 440px; */
-  /* height: 377px; */
   max-height: 350px;
 
   @media (min-width: 1024px) {
     padding: 20px;
-    /* height: 280px; */
     gap: 15px;
   }
 
-  @media only screen and (max-height: 756px) {
+  @media (max-height: 756px) {
     height: 220px;
   }
+
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-5-600);
@@ -29,6 +26,7 @@ const Photo = styled.div`
     font-size: 20px;
     text-align: left;
   }
+
   div {
     display: flex;
     align-items: center;
@@ -37,9 +35,8 @@ const Photo = styled.div`
     gap: 5px;
     width: 100%;
 
-    @media only screen and (max-height: 756px) {
+    @media (max-height: 756px) {
       width: 70%;
-      /* margin-right: 25px; */
       align-self: center;
       margin-right: 10px;
     }
@@ -55,10 +52,10 @@ const Photo = styled.div`
         width: 120px;
         height: 120px;
       }
+
       @media only screen and (max-height: 756px) {
         height: 70px;
         width: 70px;
-        /* margin-right: 25px; */
       }
 
       img {
