@@ -28,6 +28,15 @@ export const Container = styled.div`
       transform: scale(1.3);
     }
   }
+
+  .divButtonEdit {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    cursor: pointer;
+
+    gap: 15px;
+  }
 `;
 
 export const ImageVehicle = styled.div`

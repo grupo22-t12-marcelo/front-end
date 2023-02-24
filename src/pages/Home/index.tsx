@@ -3,13 +3,18 @@ import Carousel from "../../components/Carousel";
 import CarouselAuction from "../../components/CarouselAuction";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import SubHeader from "../../components/SubHeader";
+import { useProductContext } from "../../contexts/productContext";
 import { Vehicle } from "../../utils/data";
 import "./index.css";
 
 const Home = () => {
+  const { isModalAnuncio } = useProductContext();
+
   return (
     <div className="home-div">
+      {isModalAnuncio && <CriarAnuncio />}
       <Header></Header>
       <SubHeader></SubHeader>
       <CarouselAuction></CarouselAuction>

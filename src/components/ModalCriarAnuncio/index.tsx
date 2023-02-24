@@ -17,12 +17,11 @@ import { IAnuncio } from "../../interfaces";
 import { ProductContext } from "../../contexts/productContext";
 import { schemaAnuncio } from "../../validators/schemas";
 
-
 const CriarAnuncio = () => {
   const [isMoreImages, setIsMoreImages] = useState(false);
   const [tipo, setTipo] = useState("Venda");
-  const [ano, setAno] = useState('')
-  const [preco, setPreco] = useState<String>('')
+  const [ano, setAno] = useState("");
+  const [preco, setPreco] = useState<String>("");
 
   const { setIsModalAnuncio, isModalAnuncio } = useContext(ProductContext);
 
@@ -34,8 +33,8 @@ const CriarAnuncio = () => {
     const newObj = {
       ...data,
       ano,
-      preco
-    }
+      preco,
+    };
     console.log(newObj);
   };
 
@@ -107,7 +106,7 @@ const CriarAnuncio = () => {
                         <IMaskInput
                           mask="0000"
                           onAccept={(value: any) => {
-                            setAno(value)
+                            setAno(value);
                           }}
                         />
                       </label>
@@ -125,11 +124,11 @@ const CriarAnuncio = () => {
                         {tipo === "Venda" ? "Preço" : "Lance inícial"}
                       </span>
                       <IMaskInput
-                          mask="R$ 0000000"
-                          onAccept={(value: any) => {
-                            setPreco(value)
-                          }}
-                        />
+                        mask="R$ 0000000"
+                        onAccept={(value: any) => {
+                          setPreco(value);
+                        }}
+                      />
                     </label>
                   </div>
 

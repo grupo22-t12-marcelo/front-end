@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   width: 90%;
-  height: 320px;
+  height: 340px;
 
   background: var(--grey10);
   border-radius: 4px;
 
   padding: 36px 44px;
   margin: -210px auto 0 auto;
+  text-align: left;
 
   .abrevName {
     width: 104px;
