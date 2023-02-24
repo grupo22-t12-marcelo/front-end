@@ -87,7 +87,7 @@ const CardAuction = ({
         </CardImgOverlay>
       </CardContainer>
 
-      <DivRedirectAuction onClick={() => navigate(`product/${productId}`)}>
+      <DivRedirectAuction>
         {isLogged ? (
           <div className="divButtonEdit">
             <Button
@@ -109,7 +109,10 @@ const CardAuction = ({
             />
           </div>
         ) : (
-          <div className="divRedirect">
+          <div
+            className="divRedirect"
+            onClick={() => navigate(`product/${productId}`)}
+          >
             <p>Acessar página do leilão</p>
 
             <BsArrowRight className="arrowRight" size={30} color="white" />
