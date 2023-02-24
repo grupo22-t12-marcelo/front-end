@@ -106,6 +106,7 @@ const CardAuction = ({
               color="var(--grey10)"
               height={40}
               width={120}
+              onClick={() => navigate(`product/${productId}`)}
             />
           </div>
         ) : (
