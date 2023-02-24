@@ -43,8 +43,24 @@ const CardVehicle = ({
 
   const { isLogged } = useProductContext();
 
+  const EnableClick = () => {
+    navigate(`product/${productId}`);
+  };
+
+  const DisableClick = () => {
+    return;
+  };
+
+  const onClick = () => {
+    if (isLogged) {
+      DisableClick();
+    } else {
+      EnableClick();
+    }
+  };
+
   return (
-    <Container onClick={() => navigate(`product/${productId}`)}>
+    <Container onClick={onClick}>
       <ImageVehicle className="image">
         <img src={image} />
       </ImageVehicle>
