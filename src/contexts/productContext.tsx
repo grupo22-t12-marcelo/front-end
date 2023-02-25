@@ -1,10 +1,4 @@
-import {
-  useContext,
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useContext, createContext, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { IAuthProvider } from "../interfaces";
 
@@ -75,7 +69,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     },
   ];
 
-  const [count, setCount] = useState("02:00:00");
+  const [count, setCount] = useState("");
 
   return (
     <ProductContext.Provider

@@ -1,3 +1,4 @@
+import { CardAuction } from "../../components/CardAuction";
 import { CardVehicle } from "../../components/CardVehicles";
 import Carousel from "../../components/Carousel";
 import CarouselAuction from "../../components/CarouselAuction";
@@ -6,7 +7,7 @@ import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
-import { Vehicle } from "../../utils/data";
+import { Vehicle, VehicleAuction } from "../../utils/data";
 import "./index.css";
 
 const Home = () => {
@@ -17,7 +18,29 @@ const Home = () => {
       {isModalAnuncio && <CriarAnuncio />}
       <Header></Header>
       <SubHeader></SubHeader>
-      <CarouselAuction></CarouselAuction>
+
+      <CarouselAuction
+        children={
+          <>
+            {VehicleAuction.map((vehicle, key) => (
+              <li className="div-item-vei" key={key}>
+                <CardAuction
+                  title={vehicle.title}
+                  subtitle={vehicle.subtitle}
+                  kmCar={vehicle.kmCar}
+                  image={vehicle.image}
+                  abrevUser={vehicle.abrevUser}
+                  yearCar={vehicle.yearCar}
+                  nameUser={vehicle.nameUser}
+                  priceCar={vehicle.priceCar}
+                  idProduct={vehicle.idProduct}
+                  createdAtCount={vehicle.createdAt}
+                ></CardAuction>
+              </li>
+            ))}
+          </>
+        }
+      ></CarouselAuction>
 
       <Carousel
         type="Carro"

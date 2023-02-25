@@ -1,39 +1,48 @@
 import { useState, useEffect } from "react";
-import { useProductContext } from "../contexts/productContext";
 
-const countAuction = () => {
-  const { count, setCount } = useProductContext();
+const countAuction = (time: string) => {
+  const [countdownResult, setCountdownResult] = useState("");
+
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
 
   useEffect(() => {
     let interval = setInterval(() => {
-      let timeArr = count.split(":");
-      let seconds =
-        parseInt(timeArr[0]) * 3600 +
-        parseInt(timeArr[1]) * 60 +
-        parseInt(timeArr[2]);
-      seconds--;
+      let counst = new Date(time);
 
-      if (seconds < 0) {
+      let count_down = counst.setHours(counst.getHours() + 72);
+
+      let now = new Date(Date.now()).getTime();
+      let diff = count_down - now;
+
+      if (diff < 0) {
         clearInterval(interval);
-        setCount("00:00:00");
+        setCountdownResult("00:00:00");
       } else {
-        let hours = Math.floor(seconds / 3600);
-        let minutes = Math.floor((seconds % 3600) / 60);
-        let remainingSeconds = seconds % 60;
+        const days = Math.floor(diff / day);
+        const hours = Math.floor((diff % day) / hour);
+        const minutes = Math.floor((diff % hour) / minute);
+        const seconds = Math.floor((diff % minute) / second);
 
-        let displayHours = hours < 10 ? "0" + hours : hours;
+        const daysInHours = days * 24;
+        const days_hours = daysInHours + hours;
+
+        let displayHours = days_hours < 10 ? "0" + days_hours : days_hours;
         let displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-        let displaySeconds =
-          remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+        let displaySeconds = seconds < 10 ? "0" + seconds : seconds;
 
-        setCount(`${displayHours}:${displayMinutes}:${displaySeconds}`);
+        setCountdownResult(
+          `${displayHours}:${displayMinutes}:${displaySeconds}`
+        );
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [count]);
+  }, [countdownResult]);
 
-  return count;
+  return countdownResult;
 };
 
 export { countAuction };

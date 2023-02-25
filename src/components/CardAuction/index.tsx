@@ -28,6 +28,7 @@ interface ICardAuction {
   yearCar: number;
   priceCar: number;
   idProduct: string;
+  createdAtCount: string;
 }
 
 const CardAuction = ({
@@ -40,6 +41,7 @@ const CardAuction = ({
   yearCar,
   priceCar,
   idProduct,
+  createdAtCount,
 }: ICardAuction) => {
   let { productId } = useParams();
 
@@ -57,7 +59,7 @@ const CardAuction = ({
           <TimerAuction>
             <FiClock color="blue" size={20} />
 
-            <time>{countAuction()}</time>
+            <time>{countAuction(createdAtCount)}</time>
           </TimerAuction>
 
           <Description>
