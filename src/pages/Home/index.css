@@ -1,8 +1,12 @@
-.home-div{
-    display: flex;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--grey10);
+.home-div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--grey10);
+}
+
+.div-item-vei {
+  margin-bottom: 20px;
 }
