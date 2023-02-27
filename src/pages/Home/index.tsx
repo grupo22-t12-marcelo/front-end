@@ -19,7 +19,6 @@ const Home = () => {
       {isModalAnuncio && <CriarAnuncio />}
       <Header></Header>
       <SubHeader></SubHeader>
-      <ToastSucessoAnuncio/>
       <CarouselAuction
         children={
           <>

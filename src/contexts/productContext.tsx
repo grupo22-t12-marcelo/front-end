@@ -31,7 +31,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(true);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
-  const [isModalSucess, setIsModalSucess] = useState(true);
+  const [isModalSucess, setIsModalSucess] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
 
   const closeSucess = () => {
