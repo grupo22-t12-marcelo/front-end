@@ -12,7 +12,10 @@ const Product = () => {
   return (
     <ProductPage>
       <Header />
-      <ModaL titleModal={"Foto veículo"} bodyModal={photos[Number(idPhoto)]} />
+      <ModaL
+        titleModal={"Foto veículo"}
+        bodyModal={<img src={photos[Number(idPhoto)]}></img>}
+      />
       <main>
         <SectionProduct />
         <AsideProduct />
