@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackgroundModal = styled.div`
   width: 100vw;
-  height: 1300px;
+  height: 100vh;
 
   top: 0;
   left: 0;
@@ -14,7 +14,8 @@ export const BackgroundModal = styled.div`
   align-items: center;
 
   background: rgba(0, 0, 0, 0.5);
-  z-index: 5;
+  z-index: 6;
+  padding: 100px 0;
 `;
 
 export const Modal = styled.section`
