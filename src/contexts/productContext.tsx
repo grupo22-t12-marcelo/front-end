@@ -20,15 +20,23 @@ interface IProductProvider {
   modal: boolean;
   setModal: (value: boolean) => void;
   toggle: (id: string) => void;
+  closeSucess: () => void;
+  setIsModalSucess: (value: boolean) => void;
+  isModalSucess: boolean;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
+  const [isModalSucess, setIsModalSucess] = useState(true);
   const [isLogged, setIsLogged] = useState(true);
+
+  const closeSucess = () => {
+    setIsModalSucess(!isModalSucess);
+  };
 
   const toggle = (id: string) => {
     setIdPhoto(id);
@@ -91,6 +99,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         toggle,
         idPhoto,
         setIdPhoto,
+        closeSucess,
+        setIsModalSucess,
+        isModalSucess,
       }}
     >
       {children}

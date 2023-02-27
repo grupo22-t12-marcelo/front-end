@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import SubHeader from "../../components/SubHeader";
+import ToastSucessoAnuncio from "../../components/ToastSucessoAnuncio";
 import { useProductContext } from "../../contexts/productContext";
 import { Vehicle, VehicleAuction } from "../../utils/data";
 import "./index.css";
@@ -18,7 +19,7 @@ const Home = () => {
       {isModalAnuncio && <CriarAnuncio />}
       <Header></Header>
       <SubHeader></SubHeader>
-
+      <ToastSucessoAnuncio/>
       <CarouselAuction
         children={
           <>

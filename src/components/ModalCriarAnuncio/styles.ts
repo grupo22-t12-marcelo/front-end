@@ -8,7 +8,7 @@ export const BackgroundModal = styled.div`
   left: 0;
   overflow-y: scroll;
 
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
