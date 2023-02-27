@@ -1,16 +1,19 @@
 import { Badge, Button } from "reactstrap";
+import { useProductContext } from "../../contexts/productContext";
 import { Info } from "./style";
 
-const InfoProduct = (props: any) => {
+const InfoProduct = () => {
+  const { tagsCar } = useProductContext();
+
   return (
     <Info>
-      <h3>{props.title}</h3>
+      <h3>{"Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 "}</h3>
       <div>
-        {props.tags.map((tag: string) => {
+        {tagsCar.map((tag: string) => {
           return <Badge color="primary">{tag}</Badge>;
         })}
       </div>
-      <span>{props.price}</span>
+      <span>{"R$ 00.000,00"}</span>
       <Button>Comprar</Button>
     </Info>
   );

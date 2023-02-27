@@ -1,12 +1,13 @@
+import { useProductContext } from "../../contexts/productContext";
 import { Comment } from "../Comment";
 import { Comments } from "./style";
 
-const CommentsSection = ({ props }: any) => {
-  console.log(props);
+const CommentsSection = () => {
+  const { comments } = useProductContext();
 
   return (
     <Comments>
-      {props.map((comment: any) => {
+      {comments.map((comment: any) => {
         return (
           <Comment
             nameUser={comment.nameUser}

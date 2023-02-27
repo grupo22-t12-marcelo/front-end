@@ -21,6 +21,7 @@ const Form = styled.form`
       height: 32px;
       color: var(--white-fixed);
     }
+
     h5 {
       font-family: var(--body-font-family);
       font-weight: var(--body-2-500);
@@ -32,8 +33,16 @@ const Form = styled.form`
   #exampleText {
     border: 1.5px solid var(--grey7);
     border-radius: 4px;
-    width: 284px;
+    width: 250px;
     height: 128px;
+
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+
+    @media (min-width: 1440px) {
+      width: 500px;
+    }
   }
 
   #exampleText::placeholder {

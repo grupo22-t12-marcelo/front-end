@@ -1,13 +1,16 @@
 import { CircleUser } from "../CircleUser";
 import { Badges, Form } from "./style";
-import { Input, FormGroup, Label, Button, Badge } from "reactstrap";
+import { Input, FormGroup, Button, Badge } from "reactstrap";
+import { useProductContext } from "../../contexts/productContext";
 
-const FormComment = ({ nameUser }: any) => {
+const FormComment = () => {
+  const { isLogged, userLogged, navigate } = useProductContext();
+
   return (
     <Form>
       <div>
-        <CircleUser nameUser={nameUser} />
-        <h5>{nameUser}</h5>
+        <CircleUser />
+        <h5>{userLogged}</h5>
       </div>
       <FormGroup>
         <Input
@@ -19,7 +22,13 @@ const FormComment = ({ nameUser }: any) => {
           size={128}
         />
       </FormGroup>
-      <Button>Comentar</Button>
+      {!isLogged ? (
+        <Button color={"secondary"} onClick={() => navigate("/login")}>
+          Comentar
+        </Button>
+      ) : (
+        <Button>Comentar</Button>
+      )}
       <Badges>
         <Badge pill>Gostei Muito!</Badge>
         <Badge pill>Incrível</Badge>

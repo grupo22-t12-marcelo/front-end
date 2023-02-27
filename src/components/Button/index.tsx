@@ -7,6 +7,8 @@ interface ButtonProps {
   color: string;
   type?: "button" | "reset" | "submit" | undefined;
   nameButton: string;
+  borderColor: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 const Button = ({
   width,
@@ -15,14 +17,18 @@ const Button = ({
   backgroundColor,
   color,
   type,
+  borderColor,
+  onClick,
 }: ButtonProps) => {
   return (
     <Container
+      onClick={onClick}
       width={width}
       height={height}
       backgroundColor={backgroundColor}
       color={color}
       type={type}
+      borderColor={borderColor}
     >
       {nameButton}
     </Container>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const ProductPage = styled.div`
   width: 100%;
+
   main {
     width: 100%;
     height: 100%;
@@ -12,6 +13,7 @@ const ProductPage = styled.div`
       #f1f3f5 100%
     );
     background-attachment: fixed;
+
     #aside {
       display: none;
     }

@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
+import { useProductContext } from "../../contexts/productContext";
 import { formatPrice } from "../../utils/formatPrice";
+import { Button } from "../Button";
 import {
   CardSubtitle,
   CardTitle,
@@ -39,8 +41,26 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
+  const { isLogged } = useProductContext();
+
+  const EnableClick = () => {
+    navigate(`product/${productId}`);
+  };
+
+  const DisableClick = () => {
+    return;
+  };
+
+  const onClick = () => {
+    if (isLogged) {
+      DisableClick();
+    } else {
+      EnableClick();
+    }
+  };
+
   return (
-    <Container onClick={() => navigate(`product/${productId}`)}>
+    <Container onClick={onClick}>
       <ImageVehicle className="image">
         <img src={image} />
       </ImageVehicle>
@@ -49,12 +69,16 @@ const CardVehicle = ({
 
       <CardSubtitle>{subtitle}</CardSubtitle>
 
-      <UserContainer>
-        <div>
-          <p>{abrevName}</p>
-        </div>
-        <h5> {name} </h5>
-      </UserContainer>
+      {isLogged ? (
+        <></>
+      ) : (
+        <UserContainer>
+          <div>
+            <p>{abrevName}</p>
+          </div>
+          <h5> {name} </h5>
+        </UserContainer>
+      )}
 
       <InfosVehicle>
         <div className="infoDiv">
@@ -63,6 +87,30 @@ const CardVehicle = ({
         </div>
         <span>{formatPrice(priceCar)} </span>
       </InfosVehicle>
+      {isLogged ? (
+        <div className="divButtonEdit">
+          <Button
+            nameButton="Editar"
+            backgroundColor="var(--grey8)"
+            borderColor="var(--grey1)"
+            color="var(--grey1)"
+            height={40}
+            width={80}
+          />
+
+          <Button
+            nameButton="Ver como"
+            backgroundColor="var(--grey8)"
+            borderColor="var(--grey1)"
+            color="var(--grey1)"
+            height={40}
+            width={120}
+            onClick={() => navigate(`product/${productId}`)}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

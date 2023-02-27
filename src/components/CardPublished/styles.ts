@@ -20,6 +20,37 @@ export const Container = styled.div`
   height: 350px;
   cursor: pointer;
 
+  .active,
+  .deactive {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--white-fixed);
+
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    margin-bottom: -32px;
+  }
+
+  .active {
+    width: 51px;
+    height: 24px;
+    padding: 0px 8px;
+    background-color: var(--brand1);
+  }
+
+  .deactive {
+    width: 61px;
+    height: 24px;
+    padding: 0px 8px;
+    background-color: var(--grey4);
+  }
+
   :hover {
     .image {
       border: 2px solid var(--brand1);
@@ -27,15 +58,6 @@ export const Container = styled.div`
     img {
       transform: scale(1.3);
     }
-  }
-
-  .divButtonEdit {
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-    cursor: pointer;
-
-    gap: 15px;
   }
 `;
 

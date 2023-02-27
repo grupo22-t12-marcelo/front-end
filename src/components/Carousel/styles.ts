@@ -23,14 +23,11 @@ export const DivCarousel = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    width: 100vw;
-    gap: 40px;
+    width: 94%;
+    margin-left: 30px;
+    gap: 30px;
     overflow-x: scroll;
     scroll-snap-type: mandatory;
-    .div-item-vei {
-      width: 312px;
-      height: 350px;
-    }
   }
 
   @media only screen and (min-width: 756px) {
@@ -52,12 +49,6 @@ export const DivCarousel = styled.div`
     }
     .list-card-vehicles {
       scroll-behavior: smooth;
-      padding-left: 30px;
-      padding-right: 30px;
-    }
-    .div-item-vei {
-      width: 312px;
-      height: 350px;
     }
     .list-card-vehicles::-webkit-scrollbar {
       width: 6px;

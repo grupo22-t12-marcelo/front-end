@@ -16,6 +16,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { CardImg, CardImgOverlay } from "reactstrap";
 import { formatPrice } from "../../utils/formatPrice";
 import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "../Button";
 
 interface ICardAuction {
   image: string;
@@ -27,6 +28,7 @@ interface ICardAuction {
   yearCar: number;
   priceCar: number;
   idProduct: string;
+  createdAtCount: string;
 }
 
 const CardAuction = ({
@@ -39,12 +41,15 @@ const CardAuction = ({
   yearCar,
   priceCar,
   idProduct,
+  createdAtCount,
 }: ICardAuction) => {
   let { productId } = useParams();
 
   productId = idProduct;
 
   const navigate = useNavigate();
+
+  const { isLogged } = useProductContext();
 
   return (
     <Container>
@@ -54,7 +59,7 @@ const CardAuction = ({
           <TimerAuction>
             <FiClock color="blue" size={20} />
 
-            <time>{countAuction()}</time>
+            <time>{countAuction(createdAtCount)}</time>
           </TimerAuction>
 
           <Description>
@@ -63,12 +68,16 @@ const CardAuction = ({
             <CardSubtitle>{subtitle}</CardSubtitle>
           </Description>
 
-          <UserContainer>
-            <div className="abrevName">
-              <p> {abrevUser} </p>
-            </div>
-            <h5> {nameUser} </h5>
-          </UserContainer>
+          {isLogged ? (
+            <div style={{ margin: 62 }}></div>
+          ) : (
+            <UserContainer>
+              <div className="abrevName">
+                <p> {abrevUser} </p>
+              </div>
+              <h5> {nameUser} </h5>
+            </UserContainer>
+          )}
 
           <InfosVehicle>
             <div className="infoDiv">
@@ -80,10 +89,38 @@ const CardAuction = ({
         </CardImgOverlay>
       </CardContainer>
 
-      <DivRedirectAuction onClick={() => navigate(`product/${productId}`)}>
-        <p>Acessar página do leilão</p>
+      <DivRedirectAuction>
+        {isLogged ? (
+          <div className="divButtonEdit">
+            <Button
+              nameButton="Editar"
+              backgroundColor="var(--brand1)"
+              borderColor="var(--grey10)"
+              color="var(--grey10)"
+              height={40}
+              width={80}
+            />
 
-        <BsArrowRight className="arrowRight" size={30} color="white" />
+            <Button
+              nameButton="Ver como"
+              backgroundColor="var(--brand1)"
+              borderColor="var(--grey10)"
+              color="var(--grey10)"
+              height={40}
+              width={120}
+              onClick={() => navigate(`product/${productId}`)}
+            />
+          </div>
+        ) : (
+          <div
+            className="divRedirect"
+            onClick={() => navigate(`product/${productId}`)}
+          >
+            <p>Acessar página do leilão</p>
+
+            <BsArrowRight className="arrowRight" size={30} color="white" />
+          </div>
+        )}
       </DivRedirectAuction>
     </Container>
   );

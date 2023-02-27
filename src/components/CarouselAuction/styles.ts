@@ -23,7 +23,7 @@ export const DivCarousel = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    width: 100vw;
+    width: 94%;
     overflow-x: scroll;
     scroll-snap-type: mandatory;
     .div-item-vei {
@@ -51,10 +51,12 @@ export const DivCarousel = styled.div`
     }
     .list-card-vehicles {
       scroll-behavior: smooth;
+      margin-left: 30px;
+      margin-right: 30px;
       .div-item-vei {
         min-width: 720px;
         height: 388px;
-        padding-left: 30px;
+
         padding-right: 30px;
         margin-bottom: 30px;
       }

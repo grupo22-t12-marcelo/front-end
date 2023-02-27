@@ -12,7 +12,13 @@ const Aside = styled.aside`
   }
 
   @media (min-width: 1440px) {
-    margin-left: 120px;
+    width: 500px;
+    right: 100px;
+  }
+
+  @media (min-width: 1780px) {
+    width: 500px;
+    right: 200px;
   }
 `;
 
@@ -24,6 +30,11 @@ const AsideBox = styled.div`
 
   @media (min-width: 1024px) {
     gap: 20px;
+  }
+
+  @media only screen and (max-height: 756px) {
+    gap: 5px;
+    justify-content: initial;
   }
 
   .cyDJVF {
