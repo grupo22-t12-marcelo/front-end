@@ -32,7 +32,7 @@ const DivFooter = styled.div`
   }
   @media only screen and (max-height: 756px) {
     height: 100px;
-    min-height: 0;
+    /* min-height: 0; */
   }
 `;
 export { DivFooter };

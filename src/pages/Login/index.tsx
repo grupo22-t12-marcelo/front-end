@@ -1,11 +1,15 @@
 import Footer from "../../components/Footer";
+import { FormLogin } from "../../components/FormLogin";
 import Header from "../../components/Header";
+import { Main } from "./style";
 
 const Login = () => {
   return (
     <>
       <Header />
-      <main>modal</main>
+      <Main>
+        <FormLogin />
+      </Main>
       <Footer />
     </>
   );
