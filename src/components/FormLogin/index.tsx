@@ -1,35 +1,51 @@
 import { Button, FormGroup, Input, Label } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 import { Form } from "./style";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { schemaLogin } from "../../validators/schemas";
+import { ILogin } from "../../interfaces";
 
 const FormLogin = () => {
   const { navigate } = useProductContext();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILogin>({
+    resolver: yupResolver(schemaLogin),
+  });
+
+  const login = (data: ILogin) => {
+    console.log(data);
+    // const newObj = {
+    //   ...data,
+    // };
+    // console.log(newObj);
+  };
+
   return (
-    <Form>
-      <h3>Login</h3>
-      <FormGroup>
-        <Label for="exampleEmail">Usuário</Label>
-        <Input
-          id="exampleEmail"
-          name="email"
-          placeholder="Digitar usuário"
-          type="text"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="examplePassword">Senha</Label>
-        <Input
-          id="examplePassword"
-          name="password"
-          placeholder="Digitar senha"
-          type="password"
-        />
-      </FormGroup>
-      <span>Esqueci minha senha</span>
-      <Button>Entrar</Button>
-      <span>Ainda não possui conta?</span>
-      <Button onClick={() => navigate("/register")}>Cadastrar</Button>
-    </Form>
+    <>
+      <Form onSubmit={handleSubmit(login)}>
+        <h3>Login</h3>
+        <FormGroup>
+          <Label>Usuário</Label>
+          <input placeholder="Digitar usuário" {...register("user")} />
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Senha</Label>
+          <input placeholder="Digitar senha" {...register("password")} />
+        </FormGroup>
+        <span>Esqueci minha senha</span>
+        <Button type="submit">Entrar</Button>
+        <span>Ainda não possui conta?</span>
+        <Button type="button" onClick={() => navigate("/register")}>
+          Cadastrar
+        </Button>
+      </Form>
+    </>
   );
 };
 

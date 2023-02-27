@@ -6,8 +6,9 @@ const Form = styled.form`
   align-items: flex-start;
   justify-content: space-between;
   background-color: var(--grey10);
-  padding: 28px;
+  padding: 40px;
   gap: 5px;
+  width: 412px;
 
   h3 {
     font-family: var(--heading-font-family);
@@ -21,6 +22,7 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
 
     label {
       font-family: var(--body-font-family);
@@ -30,8 +32,22 @@ const Form = styled.form`
     }
 
     input {
-      border: 1.5px solid var(--grey7);
       border-radius: 4px;
+      width: 100%;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0.375rem;
     }
 
     input::placeholder {
@@ -39,6 +55,12 @@ const Form = styled.form`
       font-weight: var(--body-2-400);
       font-size: 16px;
       color: var(--grey3);
+    }
+
+    input:focus {
+      border: 1.5px solid var(--brand2) !important;
+      border-radius: 4px;
+      outline: none;
     }
   }
 
@@ -48,6 +70,7 @@ const Form = styled.form`
     font-size: 14px;
     color: var(--grey2);
     align-self: flex-end;
+    cursor: pointer;
   }
 
   button:first-of-type {
@@ -57,6 +80,12 @@ const Form = styled.form`
     width: 100%;
     margin: 20px 0;
     color: var(--white-fixed);
+  }
+
+  button:first-of-type:hover {
+    color: var(--white-fixed);
+    background-color: var(--brand2);
+    border-color: var(--brand2);
   }
 
   span {
@@ -77,6 +106,12 @@ const Form = styled.form`
     font-weight: var(--body-1-600);
     font-size: var(--button-big-text);
     color: var(--grey0);
+  }
+
+  button:hover {
+    color: var(--white-fixed);
+    background-color: var(--grey1);
+    border-color: var(--grey1);
   }
 `;
 

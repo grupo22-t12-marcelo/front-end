@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
-const Main = styled.main`
-  background-color: var(--grey8);
+const LoginDiv = styled.div`
   width: 100%;
-  /* height: 100%; */
+  height: 100vh;
+  background-color: var(--grey8);
   display: flex;
-  /* align-items: center; */
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Main = styled.main`
+  width: 100%;
+  display: flex;
   justify-content: center;
-  /* align-self: center; */
-  /* justify-self: center; */
-  /* padding: 30px; */
   padding: 52px 16px 71px 16px;
 `;
 
-export { Main };
+export { LoginDiv, Main };
