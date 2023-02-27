@@ -29,7 +29,7 @@ export const ProductContext = createContext({} as IProductProvider);
 
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isLogged, setIsLogged] = useState(true);

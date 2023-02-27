@@ -7,7 +7,7 @@ import { Footer, Header, Body } from "./styles";
 
 interface IModal {
   titleModal: string;
-  bodyModal?: string;
+  bodyModal?: ReactNode;
   footerModal?: ReactNode;
 }
 
