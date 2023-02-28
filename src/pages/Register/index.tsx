@@ -174,7 +174,7 @@ const Register = () => {
             <div className="divButton">
               <Button
                 height={50}
-                width={320}
+                width={340}
                 backgroundColor="var(--brand1)"
                 nameButton="Finalizar cadastro"
                 type="submit"
