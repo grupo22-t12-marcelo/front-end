@@ -73,6 +73,10 @@ const Form = styled.form`
     cursor: pointer;
   }
 
+  span:first-of-type:hover {
+    color: var(--brand1);
+  }
+
   button:first-of-type {
     background-color: var(--brand1);
     border: 1.5px solid var(--brand1);

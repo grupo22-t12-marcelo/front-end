@@ -38,7 +38,9 @@ const FormLogin = () => {
           <Label>Senha</Label>
           <input placeholder="Digitar senha" {...register("password")} />
         </FormGroup>
-        <span>Esqueci minha senha</span>
+        <span onClick={() => navigate("/forgot-password")}>
+          Esqueci minha senha
+        </span>
         <Button type="submit">Entrar</Button>
         <span>Ainda não possui conta?</span>
         <Button type="button" onClick={() => navigate("/register")}>
