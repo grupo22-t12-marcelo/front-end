@@ -84,7 +84,12 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   <NavItem>
                     <NavLink href="#">Fazer login</NavLink>
                   </NavItem>
-                  <button className="btn-cadastrar">Cadastrar</button>
+                  <button
+                    className="btn-cadastrar"
+                    onClick={() => navigate("/register")}
+                  >
+                    Cadastrar
+                  </button>
                 </div>
               </>
             )}
