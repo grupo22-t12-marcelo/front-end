@@ -7,8 +7,13 @@ import { Button } from "../Button";
 import { Input } from "../input";
 import { Container, DivRadio } from "./styles";
 import { TextArea } from "../TextArea";
+import { ModalSucessRegister } from "../ModalSucessRegister";
+import { useProductContext } from "../../contexts/productContext";
+import api from "../../services/api";
+import { AxiosResponse } from "axios";
 
 const FormRegister = () => {
+  const { setModal } = useProductContext();
   const [tipo, setTipo] = useState("");
 
   const {
@@ -24,21 +29,32 @@ const FormRegister = () => {
     delete data.confirmPassword;
 
     const address = {
-      cep: data.cep,
+      zipCode: data.zipCode,
       state: data.state,
       city: data.city,
-      street: data.street,
+      road: data.road,
       number: data.number,
       complement: data.complement,
     };
 
     data.address = address;
 
-    console.log(data);
+    const { zipCode, state, city, road, number, complement, ...newObj } = data;
+
+    api
+      .post("/users", newObj)
+      .then((response: AxiosResponse) => {
+        console.log(response.data);
+        setModal(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <Container onSubmit={handleSubmit(registro)}>
+      <ModalSucessRegister />
       <h5>Informações pessoais</h5>
       <Input
         label="Nome"
@@ -79,8 +95,8 @@ const FormRegister = () => {
       <Input
         label="CEP"
         placeholder="00000.000"
-        {...register("cep")}
-        error={errors.cep}
+        {...register("zipCode")}
+        error={errors.zipCode}
       />
       <div className="divInput">
         <Input
@@ -99,8 +115,8 @@ const FormRegister = () => {
       <Input
         label="Rua"
         placeholder="Nome da rua"
-        {...register("street")}
-        error={errors.street}
+        {...register("road")}
+        error={errors.road}
       />
       <div className="divInput">
         <Input
