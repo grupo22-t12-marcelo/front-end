@@ -24,6 +24,19 @@ const Register = () => {
   });
 
   const registro = (data: IRegister) => {
+    delete data.confirmPassword;
+
+    const address = {
+      cep: data.cep,
+      state: data.state,
+      city: data.city,
+      street: data.street,
+      number: data.number,
+      complement: data.complement,
+    };
+
+    data.address = address;
+
     console.log(data);
   };
 
@@ -154,6 +167,7 @@ const Register = () => {
               label="Confirmar senha"
               placeholder="Digitar senha"
               type="password"
+              {...register("confirmPassword")}
               error={errors.confirmPassword}
             />
 

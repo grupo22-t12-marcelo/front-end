@@ -34,6 +34,7 @@ export interface IRegister {
   phone: string;
   birthdate: string;
   description: string;
+  address: {};
   cep: string;
   state: string;
   city: string;
@@ -42,7 +43,7 @@ export interface IRegister {
   complement: string;
   type_account: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
 
 export interface ILogin {
