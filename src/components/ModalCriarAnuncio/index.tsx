@@ -221,6 +221,16 @@ const CriarAnuncio = () => {
                         {...register("imagem4")}
                       />
                     </label>
+
+                    <label>
+                      <span>5° Imagem da galeria</span>
+                      <input type="text" placeholder="https://image.com" />
+                    </label>
+
+                    <label>
+                      <span>6° Imagem da galeria</span>
+                      <input type="text" placeholder="https://image.com" />
+                    </label>
                   </>
                 )}
               </DivImages>
@@ -229,10 +239,12 @@ const CriarAnuncio = () => {
                 className="adicionar-input"
                 onClick={(e) => {
                   e.preventDefault();
-                  setIsMoreImages(true);
+                  setIsMoreImages(!isMoreImages);
                 }}
               >
-                Adicionar campo para imagem da galeria
+                {isMoreImages
+                  ? "Remover campos"
+                  : "Adicionar campo para imagem da galeria"}
               </Button>
 
               <div className="buttons">
