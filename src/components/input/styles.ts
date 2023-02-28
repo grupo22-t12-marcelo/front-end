@@ -9,7 +9,9 @@ interface Props {
 }
 
 export const Container = styled.div`
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   label {
     margin-bottom: 15px;
@@ -58,6 +60,10 @@ export const Container = styled.div`
   }
 
   span {
+    font-size: 12px;
+    line-height: 0px;
+    margin-top: 10px;
+    margin-bottom: 15px;
     color: var(--alert1);
   }
 `;

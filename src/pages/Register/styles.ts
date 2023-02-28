@@ -86,6 +86,10 @@ export const DivRadio = styled.div`
   }
 
   p {
+    margin-top: -10px;
+    line-height: 0px;
+    margin-bottom: 15px;
+    font-size: 12px;
     color: var(--alert1);
   }
 `;

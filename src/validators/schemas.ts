@@ -28,7 +28,7 @@ export const schemaRegisterUser = yup.object().shape({
   street: yup.string().required("Campo obrigatório"),
   number: yup.string().required("Campo obrigatório"),
   complement: yup.string().required("Campo obrigatório"),
-  type_account: yup.string().required(),
+  type_account: yup.string().required("Campo obrigatório"),
   password: yup
     .string()
     .required("Campo obrigatório")

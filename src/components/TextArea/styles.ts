@@ -53,6 +53,9 @@ const Container = styled.div`
   }
 
   span {
+    font-size: 12px;
+    line-height: 0px;
+    margin-top: -15px;
     color: var(--alert1);
   }
 `;
