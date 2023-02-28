@@ -5,6 +5,7 @@ import CarouselAuction from "../../components/CarouselAuction";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
+import EditarAnuncio from "../../components/ModalEditarAnuncio";
 import SubHeader from "../../components/SubHeader";
 import ToastSucessoAnuncio from "../../components/ToastSucessoAnuncio";
 import { useProductContext } from "../../contexts/productContext";
@@ -17,6 +18,7 @@ const Home = () => {
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
+      <EditarAnuncio/>
       <Header></Header>
       <SubHeader></SubHeader>
       <CarouselAuction
