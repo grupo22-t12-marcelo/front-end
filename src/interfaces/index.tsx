@@ -26,3 +26,8 @@ export interface IAnuncio {
   imagem3?: String;
   imagem4?: String;
 }
+
+export interface ILogin {
+  user: string;
+  password: string;
+}

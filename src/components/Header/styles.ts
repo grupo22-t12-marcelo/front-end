@@ -138,6 +138,7 @@ const DivHeader = styled(Nav)`
         font-size: 16px;
         line-height: 28px;
         --bs-nav-link-color: var(--grey2);
+        cursor: pointer;
       }
     }
   }
