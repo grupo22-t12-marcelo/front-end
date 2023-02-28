@@ -44,3 +44,8 @@ export interface IRegister {
   password: string;
   confirmPassword: string;
 }
+
+export interface ILogin {
+  user: string;
+  password: string;
+}

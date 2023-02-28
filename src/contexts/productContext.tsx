@@ -23,6 +23,8 @@ interface IProductProvider {
   closeSucess: () => void;
   setIsModalSucess: (value: boolean) => void;
   isModalSucess: boolean;
+  setIsModalEditAnuncio: (value: boolean) => void;
+  isModalEditAnuncio: boolean;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -32,6 +34,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [modal, setModal] = useState(false);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
+  const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
 
   const closeSucess = () => {
@@ -102,6 +105,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         closeSucess,
         setIsModalSucess,
         isModalSucess,
+        isModalEditAnuncio,
+        setIsModalEditAnuncio,
       }}
     >
       {children}

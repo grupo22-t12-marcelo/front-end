@@ -42,3 +42,8 @@ export const schemaRegisterUser = yup.object().shape({
     .required("Campo obrigatório")
     .oneOf([yup.ref("password")], "Senhas não são iguais"),
 });
+
+export const schemaLogin = yup.object().shape({
+  user: yup.string().required("Campo obrigatório"),
+  password: yup.string().required("Campo obrigatório"),
+});
