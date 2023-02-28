@@ -9,7 +9,7 @@ export const Container = styled.main`
   section {
     background-color: var(--grey10);
     border-radius: 4px;
-    width: 400px;
+    width: 412px;
 
     margin-top: 50px;
     margin-bottom: 50px;
@@ -70,7 +70,7 @@ export const DivRadio = styled.div`
     width: 100px;
   }
   span {
-    width: 154px;
+    width: 164px;
     height: 50px;
     margin-bottom: 20px;
     color: var(--grey0);

@@ -10,6 +10,9 @@ const Form = styled.form`
   gap: 5px;
   width: 412px;
 
+  margin-top: 50px;
+  margin-bottom: 50px;
+
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-3-500);
