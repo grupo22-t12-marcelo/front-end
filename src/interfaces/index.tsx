@@ -31,3 +31,7 @@ export interface ILogin {
   user: string;
   password: string;
 }
+
+export interface IForgotLogin {
+  email: string;
+}
