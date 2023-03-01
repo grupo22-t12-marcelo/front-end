@@ -8,12 +8,12 @@ import { Input } from "../input";
 import { Container, DivRadio } from "./styles";
 import { TextArea } from "../TextArea";
 import { ModalSucessRegister } from "../ModalSucessRegister";
-import { useProductContext } from "../../contexts/productContext";
 import api from "../../services/api";
 import { AxiosResponse } from "axios";
+import { useRegisterContext } from "../../contexts/registerContext";
 
 const FormRegister = () => {
-  const { setModal } = useProductContext();
+  const { registro } = useRegisterContext();
   const [tipo, setTipo] = useState("");
 
   const {
@@ -24,33 +24,6 @@ const FormRegister = () => {
   } = useForm<IRegister>({
     resolver: yupResolver(schemaRegisterUser),
   });
-
-  const registro = (data: IRegister) => {
-    delete data.confirmPassword;
-
-    const address = {
-      zipCode: data.zipCode,
-      state: data.state,
-      city: data.city,
-      road: data.road,
-      number: data.number,
-      complement: data.complement,
-    };
-
-    data.address = address;
-
-    const { zipCode, state, city, road, number, complement, ...newObj } = data;
-
-    api
-      .post("/users", newObj)
-      .then((response: AxiosResponse) => {
-        console.log(response.data);
-        setModal(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   return (
     <Container onSubmit={handleSubmit(registro)}>
