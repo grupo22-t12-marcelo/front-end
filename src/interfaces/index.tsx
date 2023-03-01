@@ -27,6 +27,25 @@ export interface IAnuncio {
   imagem4?: String;
 }
 
+export interface IRegister {
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  birthdate: string;
+  description: string;
+  address?: {};
+  zipCode?: string;
+  state?: string;
+  city?: string;
+  road?: string;
+  number?: string;
+  complement?: string;
+  type_account: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 export interface ILogin {
   user: string;
   password: string;

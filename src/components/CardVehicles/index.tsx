@@ -41,7 +41,7 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { isLogged } = useProductContext();
+  const { isLogged, setIsModalEditAnuncio} = useProductContext();
 
   const EnableClick = () => {
     navigate(`product/${productId}`);
@@ -90,6 +90,7 @@ const CardVehicle = ({
       {isLogged ? (
         <div className="divButtonEdit">
           <Button
+          onClick={() => setIsModalEditAnuncio(true)}
             nameButton="Editar"
             backgroundColor="var(--grey8)"
             borderColor="var(--grey1)"

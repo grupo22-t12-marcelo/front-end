@@ -3,6 +3,7 @@ import { ForgotPassword } from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Product } from "../pages/Product";
+import { Register } from "../pages/Register";
 import { UserAnnouncement } from "../pages/UserAnnouncement";
 
 const RoutesMain = () => {
@@ -13,6 +14,7 @@ const RoutesMain = () => {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/users/:userId" element={<UserAnnouncement />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 };

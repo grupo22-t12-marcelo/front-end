@@ -1,0 +1,195 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { IRegister } from "../../interfaces";
+import { schemaRegisterUser } from "../../validators/schemas";
+import { Button } from "../Button";
+import { Input } from "../input";
+import { Container, DivRadio } from "./styles";
+import { TextArea } from "../TextArea";
+import { ModalSucessRegister } from "../ModalSucessRegister";
+import { useProductContext } from "../../contexts/productContext";
+import api from "../../services/api";
+import { AxiosResponse } from "axios";
+
+const FormRegister = () => {
+  const { setModal } = useProductContext();
+  const [tipo, setTipo] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    unregister,
+    formState: { errors },
+  } = useForm<IRegister>({
+    resolver: yupResolver(schemaRegisterUser),
+  });
+
+  const registro = (data: IRegister) => {
+    delete data.confirmPassword;
+
+    const address = {
+      zipCode: data.zipCode,
+      state: data.state,
+      city: data.city,
+      road: data.road,
+      number: data.number,
+      complement: data.complement,
+    };
+
+    data.address = address;
+
+    const { zipCode, state, city, road, number, complement, ...newObj } = data;
+
+    api
+      .post("/users", newObj)
+      .then((response: AxiosResponse) => {
+        console.log(response.data);
+        setModal(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  return (
+    <Container onSubmit={handleSubmit(registro)}>
+      <ModalSucessRegister />
+      <h5>Informações pessoais</h5>
+      <Input
+        label="Nome"
+        placeholder="Ex: Samuel Leão"
+        {...register("name")}
+        error={errors.name}
+      />
+      <Input
+        label="Email"
+        placeholder="Ex: samuel@kenzie.com.br"
+        {...register("email")}
+        error={errors.email}
+      />
+      <Input
+        label="CPF"
+        placeholder="000.000.000-00"
+        {...register("cpf")}
+        error={errors.cpf}
+      />
+      <Input
+        label="Celular"
+        placeholder="(DDD) 90000-0000"
+        {...register("phone")}
+        error={errors.phone}
+      />
+      <Input
+        label="Data de nascimento"
+        placeholder="00/00/00"
+        {...register("birthdate")}
+        error={errors.birthdate}
+      />
+      <TextArea
+        placeholder="Digitar descrição"
+        {...register("description")}
+        error={errors.description}
+      />
+      <h5>Informações de endereço</h5>
+      <Input
+        label="CEP"
+        placeholder="00000.000"
+        {...register("zipCode")}
+        error={errors.zipCode}
+      />
+      <div className="divInput">
+        <Input
+          label="Estado"
+          placeholder="Digitar Estado"
+          {...register("state")}
+          error={errors.state}
+        />
+        <Input
+          label="Cidade"
+          placeholder="Digitar cidade"
+          {...register("city")}
+          error={errors.city}
+        />
+      </div>
+      <Input
+        label="Rua"
+        placeholder="Nome da rua"
+        {...register("road")}
+        error={errors.road}
+      />
+      <div className="divInput">
+        <Input
+          label="Número"
+          placeholder="Digitar número"
+          {...register("number")}
+          error={errors.number}
+        />
+        <Input
+          label="Complemento"
+          placeholder="Ex: apart 307"
+          {...register("complement")}
+          error={errors.complement}
+        />
+      </div>
+      <h5>Tipo de conta</h5>
+      <DivRadio>
+        <div className="divInput">
+          <label>
+            <input
+              type="radio"
+              value="Comprador"
+              name="radio"
+              onClick={(e) => {
+                setTipo("Comprador");
+                unregister("type_account", {});
+                register("type_account", { value: "Comprador" });
+              }}
+            />
+            <span>Comprador</span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Anunciante"
+              name="radio"
+              onClick={(e) => {
+                setTipo("Anunciante");
+                unregister("type_account", {});
+                register("type_account", { value: "Anunciante" });
+              }}
+            />
+            <span>Anunciante</span>
+          </label>
+        </div>
+        <p>{errors.type_account?.message}</p>
+      </DivRadio>
+      <Input
+        label="Senha"
+        placeholder="Digitar senha"
+        type="password"
+        {...register("password")}
+        error={errors.password}
+      />
+      <Input
+        label="Confirmar senha"
+        placeholder="Digitar senha"
+        type="password"
+        {...register("confirmPassword")}
+        error={errors.confirmPassword}
+      />
+
+      <div className="divButton">
+        <Button
+          height={50}
+          width={340}
+          backgroundColor="var(--brand1)"
+          nameButton="Finalizar cadastro"
+          type="submit"
+        />
+      </div>
+    </Container>
+  );
+};
+
+export { FormRegister };

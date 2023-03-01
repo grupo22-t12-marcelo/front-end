@@ -17,6 +17,7 @@ import { CardImg, CardImgOverlay } from "reactstrap";
 import { formatPrice } from "../../utils/formatPrice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
+import EditarAnuncio from "../ModalEditarAnuncio";
 
 interface ICardAuction {
   image: string;
@@ -49,7 +50,7 @@ const CardAuction = ({
 
   const navigate = useNavigate();
 
-  const { isLogged } = useProductContext();
+  const { isLogged, setIsModalEditAnuncio } = useProductContext();
 
   return (
     <Container>
@@ -93,6 +94,7 @@ const CardAuction = ({
         {isLogged ? (
           <div className="divButtonEdit">
             <Button
+              onClick={() => setIsModalEditAnuncio(true)}
               nameButton="Editar"
               backgroundColor="var(--brand1)"
               borderColor="var(--grey10)"

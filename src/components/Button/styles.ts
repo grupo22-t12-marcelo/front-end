@@ -2,10 +2,10 @@ import { Button } from "reactstrap";
 import styled from "styled-components";
 
 interface Props {
-  backgroundColor: string;
-  color: string;
-  width: number;
-  height: number;
+  backgroundColor?: string;
+  color?: string;
+  width?: number;
+  height?: number;
   borderColor?: string;
 }
 
