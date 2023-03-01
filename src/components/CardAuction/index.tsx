@@ -18,6 +18,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import EditarAnuncio from "../ModalEditarAnuncio";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 interface ICardAuction {
   image: string;
@@ -50,7 +51,8 @@ const CardAuction = ({
 
   const navigate = useNavigate();
 
-  const { isLogged, setIsModalEditAnuncio } = useProductContext();
+  const { setIsModalEditAnuncio } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Container>

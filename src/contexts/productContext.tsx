@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { IAuthProvider } from "../interfaces";
 
@@ -7,8 +7,6 @@ interface IProductProvider {
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  isLogged: boolean;
-  setIsLogged: (value: boolean) => void;
   userLogged: string;
   tagsCar: string[];
   photos: string[];
@@ -35,7 +33,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -94,8 +91,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         photos,
         comments,
         accountType,
-        isLogged,
-        setIsLogged,
+
         navigate,
         modal,
         setModal,

@@ -15,20 +15,21 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
-import { useProductContext } from "../../contexts/productContext";
 import { IProps } from "../../interfaces";
 import { UserContainer } from "../CardAuction/styles";
 import SubHeader from "../SubHeader";
 import { DivHeader } from "./styles";
 import { CircleUser } from "../CircleUser";
+import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
+  const { isLogged, setIsLogged } = useSessionContext();
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { userLogged, accountType, isLogged, setIsLogged, navigate } =
-    useProductContext();
+  const { userLogged, accountType, navigate } = useProductContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -72,7 +73,12 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     {accountType === "Anunciante" && (
                       <DropdownItem>Meus Anúncios</DropdownItem>
                     )}
-                    <DropdownItem onClick={() => setIsLogged(false)}>
+                    <DropdownItem
+                      onClick={() => {
+                        localStorage.clear();
+                        setIsLogged(false);
+                      }}
+                    >
                       Sair
                     </DropdownItem>
                   </DropdownMenu>
