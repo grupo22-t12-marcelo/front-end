@@ -5,9 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { schemaLogin } from "../../validators/schemas";
 import { ILogin } from "../../interfaces";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const FormLogin = () => {
   const { navigate } = useProductContext();
+  const { login } = useSessionContext();
 
   const {
     register,
@@ -16,14 +18,6 @@ const FormLogin = () => {
   } = useForm<ILogin>({
     resolver: yupResolver(schemaLogin),
   });
-
-  const login = (data: ILogin) => {
-    console.log(data);
-    // const newObj = {
-    //   ...data,
-    // };
-    // console.log(newObj);
-  };
 
   return (
     <>

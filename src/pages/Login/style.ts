@@ -10,6 +10,7 @@ const LoginDiv = styled.div`
 
 const Main = styled.main`
   width: 100%;
+  height: 100%;
   background-color: var(--grey8);
   display: flex;
   justify-content: center;

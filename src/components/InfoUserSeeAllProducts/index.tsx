@@ -15,7 +15,7 @@ const InfoUserSeeAllProducts = () => {
 
   return (
     <InfoUser id="info-user">
-      <CircleUser nameUser={userLogged} />
+      <CircleUser />
       <h3>{userLogged}</h3>
       <p id="text-user">
         {

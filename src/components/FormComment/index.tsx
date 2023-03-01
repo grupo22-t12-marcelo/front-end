@@ -2,9 +2,11 @@ import { CircleUser } from "../CircleUser";
 import { Badges, Form } from "./style";
 import { Input, FormGroup, Button, Badge } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const FormComment = () => {
-  const { isLogged, userLogged, navigate } = useProductContext();
+  const { userLogged, navigate } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Form>
