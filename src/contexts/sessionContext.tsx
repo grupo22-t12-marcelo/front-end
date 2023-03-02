@@ -24,7 +24,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const login = (data: ILogin) => {
     api
       .post("/login", {
-        username: data.user,
+        email: data.email,
         password: data.password,
       })
       .then((response: AxiosResponse) => {
