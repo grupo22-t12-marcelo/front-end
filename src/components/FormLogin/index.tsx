@@ -24,13 +24,13 @@ const FormLogin = () => {
       <Form onSubmit={handleSubmit(login)}>
         <h3>Login</h3>
         <FormGroup>
-          <Label>Usuário</Label>
-          <input placeholder="Digitar usuário" {...register("user")} />
+          <Label>Email</Label>
+          <input placeholder="Digite seu email" {...register("email")} />
         </FormGroup>
 
         <FormGroup>
           <Label>Senha</Label>
-          <input placeholder="Digitar senha" {...register("password")} />
+          <input placeholder="Digite sua senha" {...register("password")} />
         </FormGroup>
         <span onClick={() => navigate("/forgot-password")}>
           Esqueci minha senha
