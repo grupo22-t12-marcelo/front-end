@@ -44,7 +44,7 @@ export const schemaRegisterUser = yup.object().shape({
 });
 
 export const schemaLogin = yup.object().shape({
-  user: yup.string().required("Campo obrigatório"),
+  email: yup.string().email().required("Campo obrigatório"),
   password: yup.string().required("Campo obrigatório"),
 });
 
