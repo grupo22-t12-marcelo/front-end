@@ -2,45 +2,54 @@ import { CardAuction } from "../../components/CardAuction";
 import { CardVehicle } from "../../components/CardVehicles";
 import Carousel from "../../components/Carousel";
 import CarouselAuction from "../../components/CarouselAuction";
+import { EmptyVehicles } from "../../components/EmptyVehicles";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import EditarAnuncio from "../../components/ModalEditarAnuncio";
 import SubHeader from "../../components/SubHeader";
-import ToastSucessoAnuncio from "../../components/ToastSucessoAnuncio";
 import { useProductContext } from "../../contexts/productContext";
-import { Vehicle, VehicleAuction } from "../../utils/data";
 import "./index.css";
 
 const Home = () => {
-  const { isModalAnuncio, isModalEditAnuncio } = useProductContext();
+  const {
+    isModalAnuncio,
+    isModalEditAnuncio,
+    auctionVehicles,
+    carsVehicle,
+    motorbikeVehicle,
+  } = useProductContext();
 
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
-      {isModalEditAnuncio && <EditarAnuncio/>}
+      {isModalEditAnuncio && <EditarAnuncio />}
 
       <Header></Header>
       <SubHeader></SubHeader>
       <CarouselAuction
         children={
           <>
-            {VehicleAuction.map((vehicle, key) => (
-              <li className="div-item-vei" key={key}>
-                <CardAuction
-                  title={vehicle.title}
-                  subtitle={vehicle.subtitle}
-                  kmCar={vehicle.kmCar}
-                  image={vehicle.image}
-                  abrevUser={vehicle.abrevUser}
-                  yearCar={vehicle.yearCar}
-                  nameUser={vehicle.nameUser}
-                  priceCar={vehicle.priceCar}
-                  idProduct={vehicle.idProduct}
-                  createdAtCount={vehicle.createdAt}
-                ></CardAuction>
-              </li>
-            ))}
+            {auctionVehicles.length > 0 ? (
+              auctionVehicles.map((vehicle) => (
+                <li className="div-item-vei" key={vehicle.id}>
+                  <CardAuction
+                    title={vehicle.title}
+                    subtitle={vehicle.description}
+                    kmCar={vehicle.kilometers}
+                    image={vehicle.image}
+                    abrevUser={vehicle.user.name}
+                    yearCar={vehicle.year}
+                    nameUser={vehicle.user.name}
+                    priceCar={vehicle.price}
+                    idProduct={vehicle.id}
+                    createdAtCount={vehicle.createdAt}
+                  ></CardAuction>
+                </li>
+              ))
+            ) : (
+              <EmptyVehicles message="Não há leilões no momento" />
+            )}
           </>
         }
       ></CarouselAuction>
@@ -49,21 +58,25 @@ const Home = () => {
         type="Carro"
         children={
           <>
-            {Vehicle.map((vehicle, key) => (
-              <li className="div-item-vei" key={key}>
-                <CardVehicle
-                  image={vehicle.image}
-                  title={vehicle.title}
-                  subtitle={vehicle.subtitle}
-                  abrevName={vehicle.abrevName}
-                  name={vehicle.name}
-                  kmCar={vehicle.kmCar}
-                  yearCar={vehicle.yearCar}
-                  priceCar={vehicle.priceCar}
-                  idProduct={vehicle.idProduct}
-                />
-              </li>
-            ))}
+            {carsVehicle.length > 0 ? (
+              carsVehicle.map((vehicle) => (
+                <li className="div-item-vei" key={vehicle.id}>
+                  <CardVehicle
+                    image={vehicle.image}
+                    title={vehicle.title}
+                    subtitle={vehicle.description}
+                    abrevName={vehicle.user.name}
+                    name={vehicle.user.name}
+                    kmCar={vehicle.kilometers}
+                    yearCar={vehicle.year}
+                    priceCar={vehicle.price}
+                    idProduct={vehicle.id}
+                  />
+                </li>
+              ))
+            ) : (
+              <EmptyVehicles message="Não há carros para venda no momento" />
+            )}
           </>
         }
       />
@@ -72,21 +85,25 @@ const Home = () => {
         type="Moto"
         children={
           <>
-            {Vehicle.map((vehicle, key) => (
-              <li className="div-item-vei" key={key}>
-                <CardVehicle
-                  image={vehicle.image}
-                  title={vehicle.title}
-                  subtitle={vehicle.subtitle}
-                  abrevName={vehicle.abrevName}
-                  name={vehicle.name}
-                  kmCar={vehicle.kmCar}
-                  yearCar={vehicle.yearCar}
-                  priceCar={vehicle.priceCar}
-                  idProduct={vehicle.idProduct}
-                />
-              </li>
-            ))}
+            {motorbikeVehicle.length > 0 ? (
+              motorbikeVehicle.map((vehicle) => (
+                <li className="div-item-vei" key={vehicle.id}>
+                  <CardVehicle
+                    image={vehicle.image}
+                    title={vehicle.title}
+                    subtitle={vehicle.description}
+                    abrevName={vehicle.user.name}
+                    name={vehicle.user.name}
+                    kmCar={vehicle.kilometers}
+                    yearCar={vehicle.year}
+                    priceCar={vehicle.price}
+                    idProduct={vehicle.id}
+                  />
+                </li>
+              ))
+            ) : (
+              <EmptyVehicles message="Não há motos para venda no momento" />
+            )}
           </>
         }
       />

@@ -1,6 +1,9 @@
+import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAuthProvider } from "../interfaces";
+import { IAuthProvider, IVehicle } from "../interfaces";
+import api from "../services/api";
+import { dateHour } from "../utils/date";
 
 interface IProductProvider {
   count: string;
@@ -23,6 +26,9 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
+  auctionVehicles: IVehicle[];
+  carsVehicle: IVehicle[];
+  motorbikeVehicle: IVehicle[];
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -33,6 +39,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
+  const [count, setCount] = useState("");
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -77,7 +85,34 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     },
   ];
 
-  const [count, setCount] = useState("");
+  const auctionVehicles = vehicles.filter(
+    (vehicle) => vehicle.type_announcement === "Leilão"
+  );
+
+  const carsVehicle = vehicles.filter(
+    (vehicle) =>
+      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Carro"
+  );
+
+  const motorbikeVehicle = vehicles.filter(
+    (vehicle) =>
+      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Moto"
+  );
+
+  const getVehicles = () => {
+    api
+      .get("/products")
+      .then((response: AxiosResponse) => {
+        setVehicles(response.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getVehicles();
+  }, []);
 
   return (
     <ProductContext.Provider
@@ -91,7 +126,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         photos,
         comments,
         accountType,
-
         navigate,
         modal,
         setModal,
@@ -103,6 +137,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalSucess,
         isModalEditAnuncio,
         setIsModalEditAnuncio,
+        auctionVehicles,
+        carsVehicle,
+        motorbikeVehicle,
       }}
     >
       {children}
