@@ -76,7 +76,18 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                <p> {abrevUser} </p>
+                {abrevUser.split(" ").length > 0 ? (
+                  <>
+                    <p>{abrevUser.split(" ")[0].charAt(0)}</p>
+                    <p>
+                      {abrevUser
+                        .split(" ")
+                        [Number(abrevUser.split(" ").length - 1)].charAt(0)}
+                    </p>
+                  </>
+                ) : (
+                  <p> {abrevUser[0]} </p>
+                )}
               </div>
               <h5> {nameUser} </h5>
             </UserContainer>
