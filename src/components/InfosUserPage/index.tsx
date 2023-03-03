@@ -16,7 +16,7 @@ const InfosUserPage = ({ children }: InfosUser) => {
 
   let abrevName = "";
 
-  if (userData.name!.length > 0) {
+  if (userData.name && userData.name.length > 0) {
     abrevName =
       userData.name!.split(" ")[0].charAt(0) +
       userData
@@ -31,10 +31,13 @@ const InfosUserPage = ({ children }: InfosUser) => {
       </div>
 
       <div className="name">
-        <h3> {userData.name} </h3>
+        <h3> {userData.name ? userData.name : name} </h3>
         <p>Anunciante</p>
       </div>
-      <DescriptionUser> {userData.description} </DescriptionUser>
+      <DescriptionUser>
+        {" "}
+        {userData.description ? userData.description : description}{" "}
+      </DescriptionUser>
       {children}
     </Container>
   );

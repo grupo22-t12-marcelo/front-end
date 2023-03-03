@@ -46,6 +46,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
     } else {
       setIsLogged(false);
     }
+
     // dataUserLogin();
   }, []);
 
