@@ -54,8 +54,6 @@ const CardAuction = ({
   const { setIsModalEditAnuncio } = useProductContext();
   const { isLogged, userData } = useSessionContext();
 
-  console.log(userData);
-
   let name = abrevUser;
 
   if (userData.name) {

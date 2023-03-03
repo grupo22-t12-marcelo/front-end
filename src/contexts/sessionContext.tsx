@@ -73,7 +73,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           const { token } = response.data;
 
           localStorage.setItem("@TOKEN", token);
-          // setIsLogged(true);
+          setIsLogged(true);
           // dataUserLogin();
 
           navigate("/");
