@@ -44,7 +44,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
-  const [isModalEditAddress, setIsModalEditAddress] = useState(true)
+  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -150,7 +150,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         carsVehicle,
         motorbikeVehicle,
         isModalEditAddress,
-        setIsModalEditAddress
+        setIsModalEditAddress,
       }}
     >
       {children}

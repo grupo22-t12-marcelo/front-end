@@ -9,14 +9,17 @@ interface InfosUser {
 const InfosUserPage = ({ children }: InfosUser) => {
   const { userData } = useSessionContext();
 
+  let name = "Samuel Leão";
+
+  let description =
+    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur animi id minima suscipit quas assumenda itaque commodi quia dolor magnam distinctio magni harum, enim aliquam, laboriosam beatae voluptatem architecto Aut";
+
   let abrevName = "";
 
-  if (userData.name!.length > 0) {
+  if (name!.length > 0) {
     abrevName =
-      userData.name!.split(" ")[0].charAt(0) +
-      userData
-        .name!.split(" ")
-        [Number(userData.name!.split(" ").length - 1)].charAt(0);
+      name!.split(" ")[0].charAt(0) +
+      name!.split(" ")[Number(name!.split(" ").length - 1)].charAt(0);
   }
 
   return (
@@ -26,10 +29,10 @@ const InfosUserPage = ({ children }: InfosUser) => {
       </div>
 
       <div className="name">
-        <h3> {userData.name} </h3>
+        <h3> {name} </h3>
         <p>Anunciante</p>
       </div>
-      <DescriptionUser> {userData.description} </DescriptionUser>
+      <DescriptionUser> {description} </DescriptionUser>
       {children}
     </Container>
   );
