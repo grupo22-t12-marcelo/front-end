@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
-  Collapse,
-  Dropdown,
-  DropdownItem,
+  Collapse, DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
@@ -12,16 +9,15 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
+  UncontrolledDropdown
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
-import { IProps } from "../../interfaces";
-import { UserContainer } from "../CardAuction/styles";
-import SubHeader from "../SubHeader";
-import { DivHeader } from "./styles";
-import { CircleUser } from "../CircleUser";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { IProps } from "../../interfaces";
+import { UserContainer } from "../CardAuction/styles";
+import { CircleUser } from "../CircleUser";
+import { DivHeader } from "./styles";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
   const { isLogged, setIsLogged } = useSessionContext();
@@ -42,13 +38,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
           <div className="navbar-list">
             <NavItem>
-              <NavLink href="#">Carros</NavLink>
+              <NavLink href="#Carro">Carros</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Motos</NavLink>
+              <NavLink href="#Moto">Motos</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Leilão</NavLink>
+              <NavLink href="#Leilão">Leilão</NavLink>
             </NavItem>
             {isLogged === true && userLogged !== "" ? (
               <div className="logado-user">
