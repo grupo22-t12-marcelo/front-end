@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import EditarAnuncio from "../../components/ModalEditarAnuncio";
+import EditarPerfil from "../../components/ModalEditarPerfil";
 import SubHeader from "../../components/SubHeader";
 import ToastSucessoAnuncio from "../../components/ToastSucessoAnuncio";
 import { useProductContext } from "../../contexts/productContext";
@@ -13,12 +14,13 @@ import { Vehicle, VehicleAuction } from "../../utils/data";
 import "./index.css";
 
 const Home = () => {
-  const { isModalAnuncio, isModalEditAnuncio } = useProductContext();
+  const { isModalAnuncio, isModalEditAnuncio, isModalEditPerfil } = useProductContext();
 
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
       {isModalEditAnuncio && <EditarAnuncio/>}
+      {isModalEditPerfil && <EditarPerfil/>}
 
       <Header></Header>
       <SubHeader></SubHeader>

@@ -27,7 +27,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { userLogged, accountType, isLogged, setIsLogged, navigate } =
+  const { userLogged, accountType, isLogged, setIsLogged, navigate, setIsModalEditPerfil} =
     useProductContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -67,7 +67,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     </UserContainer>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>Editar Perfil</DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>Editar Perfil</DropdownItem>
                     <DropdownItem>Editar Endereço</DropdownItem>
                     {accountType === "Anunciante" && (
                       <DropdownItem>Meus Anúncios</DropdownItem>
