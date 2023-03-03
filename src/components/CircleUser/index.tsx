@@ -1,14 +1,18 @@
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { Circle } from "./style";
 
 const CircleUser = () => {
-  const { userLogged } = useProductContext();
+  const { userData } = useSessionContext();
 
   let initials = "";
 
-  if (userLogged.length > 0) {
+  if (userData.name!.length > 0) {
     initials =
-      userLogged.split(" ")[0].charAt(0) + userLogged.split(" ")[1].charAt(0);
+      userData.name!.split(" ")[0].charAt(0) +
+      userData
+        .name!.split(" ")
+        [Number(userData.name!.split(" ").length - 1)].charAt(0);
   }
 
   return (

@@ -1,19 +1,24 @@
 import { ReactNode } from "react";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { Container, DescriptionUser } from "./styles";
 
 interface InfosUser {
-  abrevName: string;
-  name: string;
-  description: string;
   children?: ReactNode;
 }
 
-const InfosUserPage = ({
-  abrevName,
-  name,
-  description,
-  children,
-}: InfosUser) => {
+const InfosUserPage = ({ children }: InfosUser) => {
+  const { userData } = useSessionContext();
+
+  let abrevName = "";
+
+  if (userData.name!.length > 0) {
+    abrevName =
+      userData.name!.split(" ")[0].charAt(0) +
+      userData
+        .name!.split(" ")
+        [Number(userData.name!.split(" ").length - 1)].charAt(0);
+  }
+
   return (
     <Container>
       <div className="abrevName">
@@ -21,10 +26,10 @@ const InfosUserPage = ({
       </div>
 
       <div className="name">
-        <h3> {name} </h3>
+        <h3> {userData.name} </h3>
         <p>Anunciante</p>
       </div>
-      <DescriptionUser> {description} </DescriptionUser>
+      <DescriptionUser> {userData.description} </DescriptionUser>
       {children}
     </Container>
   );
