@@ -37,6 +37,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
+  console.log(isLogged);
+  console.log(userData);
+
   let name = "Undefined Undefined";
 
   if (userData.name) {
@@ -59,7 +62,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             <NavItem>
               <NavLink href="#">Leilão</NavLink>
             </NavItem>
-            {isLogged === true && userData.name !== "" ? (
+            {isLogged === true && userData.name ? (
               <div className="logado-user">
                 <UncontrolledDropdown
                   isOpen={dropdownOpen}
