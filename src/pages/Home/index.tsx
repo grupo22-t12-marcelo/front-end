@@ -7,12 +7,15 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import EditarAnuncio from "../../components/ModalEditarAnuncio";
+import EditarPerfil from "../../components/ModalEditarPerfil";
 import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
 import "./index.css";
 
 const Home = () => {
+
   const {
+    isModalEditPerfil,
     isModalAnuncio,
     isModalEditAnuncio,
     auctionVehicles,
@@ -23,6 +26,8 @@ const Home = () => {
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
+      {isModalEditAnuncio && <EditarAnuncio/>}
+      {isModalEditPerfil && <EditarPerfil/>}
       {isModalEditAnuncio && <EditarAnuncio />}
 
       <Header></Header>
