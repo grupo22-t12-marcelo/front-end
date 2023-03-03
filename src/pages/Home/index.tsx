@@ -6,6 +6,7 @@ import { EmptyVehicles } from "../../components/EmptyVehicles";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
+import EditarAddress from "../../components/ModalEditarAddress";
 import EditarAnuncio from "../../components/ModalEditarAnuncio";
 import EditarPerfil from "../../components/ModalEditarPerfil";
 import SubHeader from "../../components/SubHeader";
@@ -21,6 +22,7 @@ const Home = () => {
     auctionVehicles,
     carsVehicle,
     motorbikeVehicle,
+    isModalEditAddress
   } = useProductContext();
 
   return (
@@ -29,6 +31,7 @@ const Home = () => {
       {isModalEditAnuncio && <EditarAnuncio/>}
       {isModalEditPerfil && <EditarPerfil/>}
       {isModalEditAnuncio && <EditarAnuncio />}
+      {isModalEditAddress && <EditarAddress/>}
 
       <Header></Header>
       <SubHeader></SubHeader>
