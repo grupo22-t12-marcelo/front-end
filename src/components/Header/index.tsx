@@ -29,9 +29,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { userLogged, accountType, navigate, setIsModalEditPerfil} =
-    useProductContext();
-
+  const {
+    userLogged,
+    accountType,
+    navigate,
+    setIsModalEditPerfil,
+    setIsModalEditAddress,
+  } = useProductContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -70,7 +74,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     </UserContainer>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>Editar Perfil</DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>
+                      Editar Perfil
+                    </DropdownItem>
                     <DropdownItem>Editar Endereço</DropdownItem>
                     {accountType === "Anunciante" && (
                       <DropdownItem>Meus Anúncios</DropdownItem>
@@ -140,7 +146,11 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem>Editar Perfil</DropdownItem>
-                        <DropdownItem>Editar Endereço</DropdownItem>
+                        <DropdownItem
+                          onClick={() => setIsModalEditAddress(true)}
+                        >
+                          Editar Endereço
+                        </DropdownItem>
                         {accountType === "Anunciante" && (
                           <DropdownItem>Meus Anúncios</DropdownItem>
                         )}
