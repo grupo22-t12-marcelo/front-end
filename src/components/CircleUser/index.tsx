@@ -5,7 +5,11 @@ import { Circle } from "./style";
 const CircleUser = () => {
   const { userData } = useSessionContext();
 
-  let name = "samuel leao";
+  let name = "Undefined Undefined";
+
+  if (userData.name) {
+    name = userData.name;
+  }
 
   let initials = "";
 

@@ -52,7 +52,7 @@ const CardAuction = ({
   const navigate = useNavigate();
 
   const { setIsModalEditAnuncio } = useProductContext();
-  const { isLogged } = useSessionContext();
+  const { isLogged, userData } = useSessionContext();
 
   return (
     <Container>
@@ -76,20 +76,22 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                {abrevUser.split(" ").length > 0 ? (
+                {userData.name!.split(" ").length > 0 ? (
                   <>
-                    <p>{abrevUser.split(" ")[0].charAt(0)}</p>
+                    <p>{userData.name!.split(" ")[0].charAt(0)}</p>
                     <p>
-                      {abrevUser
-                        .split(" ")
-                        [Number(abrevUser.split(" ").length - 1)].charAt(0)}
+                      {userData
+                        .name!.split(" ")
+                        [Number(userData.name!.split(" ").length - 1)].charAt(
+                          0
+                        )}
                     </p>
                   </>
                 ) : (
-                  <p> {abrevUser[0]} </p>
+                  <p> {userData.name![0]} </p>
                 )}
               </div>
-              <h5> {nameUser} </h5>
+              <h5> {userData.name} </h5>
             </UserContainer>
           )}
 

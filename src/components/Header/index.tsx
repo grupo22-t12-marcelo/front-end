@@ -37,7 +37,11 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  let name = "Samuel Leão";
+  let name = "Undefined Undefined";
+
+  if (userData.name) {
+    name = userData.name;
+  }
 
   return (
     <div id="container">
@@ -76,9 +80,15 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                     <DropdownItem onClick={() => setIsModalEditPerfil(true)}>
                       Editar Perfil
                     </DropdownItem>
-                    <DropdownItem>Editar Endereço</DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditAddress(true)}>
+                      Editar Endereço
+                    </DropdownItem>
                     {userData.type_account === "Anunciante" && (
-                      <DropdownItem>Meus Anúncios</DropdownItem>
+                      <DropdownItem
+                        onClick={() => navigate(`/users/${userData.id}`)}
+                      >
+                        Meus Anúncios
+                      </DropdownItem>
                     )}
                     <DropdownItem
                       onClick={() => {
@@ -140,7 +150,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   </div>
                   <h5>João Paulo</h5> */}
                           <CircleUser />
-                          <h5>{userData.name}</h5>
+                          <h5>{name}</h5>
                         </UserContainer>
                       </DropdownToggle>
                       <DropdownMenu>
@@ -152,7 +162,11 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                           Editar Endereço
                         </DropdownItem>
                         {userData.type_account === "Anunciante" && (
-                          <DropdownItem>Meus Anúncios</DropdownItem>
+                          <DropdownItem
+                            onClick={() => navigate(`/users/${userData.id}`)}
+                          >
+                            Meus Anúncios
+                          </DropdownItem>
                         )}
                         <DropdownItem>Sair</DropdownItem>
                       </DropdownMenu>

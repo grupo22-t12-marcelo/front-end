@@ -91,6 +91,7 @@ export const Form = styled.form`
       border-radius: 4px;
       padding-left: 10px;
       background-color: transparent;
+      color: black;
     }
 
     textarea {

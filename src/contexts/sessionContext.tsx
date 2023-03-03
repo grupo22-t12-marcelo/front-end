@@ -8,7 +8,7 @@ import {
   Dispatch,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { IAuthProvider, ILogin, IRegister } from "../interfaces";
+import { IAuthProvider, ILogin, IRegister, IUser } from "../interfaces";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
 
@@ -16,7 +16,7 @@ interface ISessionProvider {
   isLogged: boolean;
   setIsLogged: (value: boolean) => void;
   login: (data: ILogin) => void;
-  userData: Partial<IRegister>;
+  userData: Partial<IUser>;
   setUserData: Dispatch<SetStateAction<() => void>>;
 }
 
@@ -27,9 +27,26 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isLogged, setIsLogged] = useState(false);
   const [userData, setUserData] = useState({});
 
+  console.log(userData);
+
+  let user = {};
+
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
-    token ? setIsLogged(true) : setIsLogged(false);
+
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        console.log(response.data);
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+    // dataUserLogin();
   }, []);
 
   // useEffect(() => {
@@ -40,16 +57,9 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   //   }
   // }, [isLogged]);
 
-  const dataUserLogin = () => {
-    const token = localStorage.getItem("@TOKEN");
-    api.defaults.headers.common.authorization = `Bearer ${token}`;
-    api.get("/users").then((response: AxiosResponse) => {
-      console.log(response.data);
-      setUserData({
-        ...response.data,
-      });
-    });
-  };
+  // const dataUserLogin = () => {
+  //   const token = localStorage.getItem("@TOKEN");
+  // };
 
   const login = (data: ILogin) => {
     api
@@ -62,8 +72,9 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           const { token } = response.data;
 
           localStorage.setItem("@TOKEN", token);
-          dataUserLogin();
-          setIsLogged(true);
+          // setIsLogged(true);
+          // dataUserLogin();
+
           navigate("/");
         }
       })
