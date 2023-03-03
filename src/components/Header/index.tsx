@@ -29,12 +29,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-<<<<<<< HEAD
-  const { userLogged, accountType, isLogged, setIsLogged, navigate, setIsModalEditPerfil} =
+  const { userLogged, accountType, navigate, setIsModalEditPerfil} =
     useProductContext();
-=======
-  const { userLogged, accountType, navigate } = useProductContext();
->>>>>>> a88fce5a85212076d4bbcdafa7af35609b14978a
+
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);

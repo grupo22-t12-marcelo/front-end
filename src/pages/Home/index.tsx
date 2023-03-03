@@ -13,27 +13,22 @@ import { useProductContext } from "../../contexts/productContext";
 import "./index.css";
 
 const Home = () => {
-<<<<<<< HEAD
-  const { isModalAnuncio, isModalEditAnuncio, isModalEditPerfil } = useProductContext();
-=======
+
   const {
+    isModalEditPerfil,
     isModalAnuncio,
     isModalEditAnuncio,
     auctionVehicles,
     carsVehicle,
     motorbikeVehicle,
   } = useProductContext();
->>>>>>> a88fce5a85212076d4bbcdafa7af35609b14978a
 
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
-<<<<<<< HEAD
       {isModalEditAnuncio && <EditarAnuncio/>}
       {isModalEditPerfil && <EditarPerfil/>}
-=======
       {isModalEditAnuncio && <EditarAnuncio />}
->>>>>>> a88fce5a85212076d4bbcdafa7af35609b14978a
 
       <Header></Header>
       <SubHeader></SubHeader>
