@@ -5,14 +5,14 @@ import { Circle } from "./style";
 const CircleUser = () => {
   const { userData } = useSessionContext();
 
+  let name = "samuel leao";
+
   let initials = "";
 
-  if (userData.name!.length > 0) {
+  if (name!.length > 0) {
     initials =
-      userData.name!.split(" ")[0].charAt(0) +
-      userData
-        .name!.split(" ")
-        [Number(userData.name!.split(" ").length - 1)].charAt(0);
+      name!.split(" ")[0].charAt(0) +
+      name!.split(" ")[Number(name!.split(" ").length - 1)].charAt(0);
   }
 
   return (

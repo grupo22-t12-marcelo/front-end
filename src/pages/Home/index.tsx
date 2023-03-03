@@ -11,10 +11,11 @@ import EditarAnuncio from "../../components/ModalEditarAnuncio";
 import EditarPerfil from "../../components/ModalEditarPerfil";
 import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { dateHour } from "../../utils/date";
 import "./index.css";
 
 const Home = () => {
-
   const {
     isModalEditPerfil,
     isModalAnuncio,
@@ -22,16 +23,18 @@ const Home = () => {
     auctionVehicles,
     carsVehicle,
     motorbikeVehicle,
-    isModalEditAddress
+    isModalEditAddress,
   } = useProductContext();
+
+  console.log(dateHour("2023-03-03T14:58:43.267Z"));
 
   return (
     <div className="home-div">
       {isModalAnuncio && <CriarAnuncio />}
-      {isModalEditAnuncio && <EditarAnuncio/>}
-      {isModalEditPerfil && <EditarPerfil/>}
       {isModalEditAnuncio && <EditarAnuncio />}
-      {isModalEditAddress && <EditarAddress/>}
+      {isModalEditPerfil && <EditarPerfil />}
+      {isModalEditAnuncio && <EditarAnuncio />}
+      {isModalEditAddress && <EditarAddress />}
 
       <Header></Header>
       <SubHeader></SubHeader>

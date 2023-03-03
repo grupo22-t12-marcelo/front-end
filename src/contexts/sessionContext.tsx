@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { IAuthProvider, ILogin, IRegister } from "../interfaces";
 import api from "../services/api";
+import { dateHour } from "../utils/date";
 
 interface ISessionProvider {
   isLogged: boolean;
@@ -31,17 +32,19 @@ const SessionProvider = ({ children }: IAuthProvider) => {
     token ? setIsLogged(true) : setIsLogged(false);
   }, []);
 
-  useEffect(() => {
-    if (isLogged) {
-      dataUserLogin();
-      console.log(userData);
-    }
-  }, [isLogged]);
+  // useEffect(() => {
+  //   console.log(userData);
+  //   console.log(isLogged);
+  //   if (isLogged) {
+  //     dataUserLogin();
+  //   }
+  // }, [isLogged]);
 
   const dataUserLogin = () => {
     const token = localStorage.getItem("@TOKEN");
     api.defaults.headers.common.authorization = `Bearer ${token}`;
     api.get("/users").then((response: AxiosResponse) => {
+      console.log(response.data);
       setUserData({
         ...response.data,
       });
@@ -59,6 +62,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           const { token } = response.data;
 
           localStorage.setItem("@TOKEN", token);
+          dataUserLogin();
           setIsLogged(true);
           navigate("/");
         }
