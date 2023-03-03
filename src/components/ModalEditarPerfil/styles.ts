@@ -90,6 +90,7 @@ export const Form = styled.form`
       height: 48px;
       border-radius: 4px;
       padding-left: 10px;
+      background-color: transparent;
     }
 
     textarea {
@@ -97,6 +98,7 @@ export const Form = styled.form`
       height: 80px;
       border-radius: 4px;
       padding: 10px;
+      background-color: transparent;
     }
   }
 

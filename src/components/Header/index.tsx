@@ -29,9 +29,9 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { userLogged, accountType, navigate, setIsModalEditPerfil} =
-    useProductContext();
+  const { navigate, setIsModalEditPerfil } = useProductContext();
 
+  const { userData } = useSessionContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -52,7 +52,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             <NavItem>
               <NavLink href="#">Leilão</NavLink>
             </NavItem>
-            {isLogged === true && userLogged !== "" ? (
+            {isLogged === true && userData.name !== "" ? (
               <div className="logado-user">
                 <UncontrolledDropdown
                   isOpen={dropdownOpen}
@@ -66,13 +66,15 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   </div>
                   <h5>João Paulo</h5> */}
                       <CircleUser />
-                      <h5>{userLogged}</h5>
+                      <h5>{userData.name}</h5>
                     </UserContainer>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>Editar Perfil</DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>
+                      Editar Perfil
+                    </DropdownItem>
                     <DropdownItem>Editar Endereço</DropdownItem>
-                    {accountType === "Anunciante" && (
+                    {userData.type_account === "Anunciante" && (
                       <DropdownItem>Meus Anúncios</DropdownItem>
                     )}
                     <DropdownItem
@@ -135,13 +137,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   </div>
                   <h5>João Paulo</h5> */}
                           <CircleUser />
-                          <h5>{userLogged}</h5>
+                          <h5>{userData.name}</h5>
                         </UserContainer>
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem>Editar Perfil</DropdownItem>
                         <DropdownItem>Editar Endereço</DropdownItem>
-                        {accountType === "Anunciante" && (
+                        {userData.type_account === "Anunciante" && (
                           <DropdownItem>Meus Anúncios</DropdownItem>
                         )}
                         <DropdownItem>Sair</DropdownItem>

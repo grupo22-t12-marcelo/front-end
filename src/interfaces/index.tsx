@@ -47,6 +47,8 @@ export interface IRegister {
   confirmPassword?: string;
 }
 
+export interface IUserDataNull extends IRegister {}
+
 export interface ILogin {
   email: string;
   password: string;

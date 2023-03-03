@@ -16,9 +16,6 @@ const SubHeader: React.FC<IProps> = () => {
           <div className="divBlue"></div>
           <div>
             <InfosUserPage
-              abrevName="SL"
-              name="Samuel Leão"
-              description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
               children={
                 <Button
                   onClick={() => setIsModalAnuncio(true)}
