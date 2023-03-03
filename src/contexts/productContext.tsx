@@ -31,6 +31,8 @@ interface IProductProvider {
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  isModalEditAddress: boolean;
+  setIsModalEditAddress: (value: boolean) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -42,6 +44,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
+  const [isModalEditAddress, setIsModalEditAddress] = useState(true)
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -146,6 +149,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
+        isModalEditAddress,
+        setIsModalEditAddress
       }}
     >
       {children}
