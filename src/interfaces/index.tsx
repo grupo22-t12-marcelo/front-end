@@ -47,8 +47,6 @@ export interface IRegister {
   confirmPassword?: string;
 }
 
-export interface IUserDataNull extends IRegister {}
-
 export interface ILogin {
   email: string;
   password: string;
@@ -78,4 +76,53 @@ export interface IVehicle {
   type_vehicle: string;
   createdAt: string;
   user: IUserVehicle;
+}
+
+export interface IProduct {
+  createdAt: string;
+  description: string;
+  id: string;
+  image: string;
+  is_published: boolean;
+  kilometers: number;
+  price: number;
+  title: string;
+  type_announcement: string;
+  type_vehicle: string;
+  updatedAt: string;
+  year: number;
+  comments?: IComment[];
+}
+
+export interface IAddress {
+  city: string;
+  complement: string;
+  id: string;
+  number: string;
+  road: string;
+  state: string;
+  zipCode: string;
+}
+
+export interface IComment {
+  comment: string;
+  createdAt: string;
+  id: string;
+  updatedAt: string;
+}
+
+export interface IUser {
+  address?: IAddress;
+  birthdate: string;
+  comments?: IComment[];
+  cpf: string;
+  createdAt: string;
+  description: string;
+  email: string;
+  id: string;
+  name: string;
+  phone: string;
+  products?: IProduct[];
+  type_account: string;
+  updatedAt: string;
 }

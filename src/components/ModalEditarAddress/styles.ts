@@ -90,19 +90,20 @@ export const Form = styled.form`
       height: 48px;
       border-radius: 4px;
       padding-left: 10px;
+      background-color: transparent;
+      color: black;
     }
   }
 
   .div-content {
     display: flex;
     justify-content: space-between;
-    
+
     label {
       width: 47%;
       margin: 0;
     }
   }
-
 
   .buttons {
     width: 100%;

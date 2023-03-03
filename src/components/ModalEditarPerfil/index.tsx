@@ -8,10 +8,11 @@ import {
   useProductContext,
 } from "./../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import IMask, { MaskElement } from "imask";
 
 const EditarPerfil = () => {
   const { setIsModalEditPerfil } = useContext(ProductContext);
-  const { userData } = useSessionContext();
+  const { userData, setUserData } = useSessionContext();
 
   return (
     <Background>
@@ -39,20 +40,31 @@ const EditarPerfil = () => {
 
             <label>
               <span>CPF</span>
-              <IMaskInput mask="000.000.000-00" />
+              <IMaskInput
+                mask="000.000.000-00"
+                placeholderChar="0"
+                autofix={true}
+                lazy={false}
+              />
             </label>
 
             <label>
               <span>Celular</span>
-              <IMaskInput mask="(00) 00000-0000" />
+              <IMaskInput
+                mask="(00) 00000-0000"
+                placeholderChar="0"
+                autofix={true}
+                lazy={false}
+              />
             </label>
 
             <label>
               <span>Data de nascimento</span>
               <IMaskInput
                 mask="00/00/0000"
-                // placeholderChar={userData.cpf}
-                // unmask={true}
+                placeholderChar="0"
+                lazy={false}
+                autofix={true}
               />
             </label>
 
