@@ -3,7 +3,7 @@ import { CoverProduct } from "../CoverProduct/index";
 import { Photo } from "./style";
 
 const PhotoGalery = () => {
-  const { userLogged, photos } = useProductContext();
+  const { photos } = useProductContext();
 
   return (
     <Photo id="photo">

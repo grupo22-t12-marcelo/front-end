@@ -18,6 +18,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import EditarAnuncio from "../ModalEditarAnuncio";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 interface ICardAuction {
   image: string;
@@ -50,7 +51,8 @@ const CardAuction = ({
 
   const navigate = useNavigate();
 
-  const { isLogged, setIsModalEditAnuncio } = useProductContext();
+  const { setIsModalEditAnuncio } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Container>
@@ -74,7 +76,18 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                <p> {abrevUser} </p>
+                {abrevUser.split(" ").length > 0 ? (
+                  <>
+                    <p>{abrevUser.split(" ")[0].charAt(0)}</p>
+                    <p>
+                      {abrevUser
+                        .split(" ")
+                        [Number(abrevUser.split(" ").length - 1)].charAt(0)}
+                    </p>
+                  </>
+                ) : (
+                  <p> {abrevUser[0]} </p>
+                )}
               </div>
               <h5> {nameUser} </h5>
             </UserContainer>

@@ -1,14 +1,15 @@
-import { useContext, createContext, useState } from "react";
+import { AxiosError, AxiosResponse } from "axios";
+import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAuthProvider } from "../interfaces";
+import { IAuthProvider, IVehicle } from "../interfaces";
+import api from "../services/api";
+import { dateHour } from "../utils/date";
 
 interface IProductProvider {
   count: string;
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  isLogged: boolean;
-  setIsLogged: (value: boolean) => void;
   userLogged: string;
   tagsCar: string[];
   photos: string[];
@@ -27,6 +28,9 @@ interface IProductProvider {
   isModalEditAnuncio: boolean;
   isModalEditPerfil: boolean;
   setIsModalEditPerfil: (value: boolean) => void;
+  auctionVehicles: IVehicle[];
+  carsVehicle: IVehicle[];
+  motorbikeVehicle: IVehicle[];
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -38,7 +42,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
-  const [isModalEditPerfil, setIsModalEditPerfil] = useState(false)
+  const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
+  const [count, setCount] = useState("");
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -83,7 +89,34 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     },
   ];
 
-  const [count, setCount] = useState("");
+  const auctionVehicles = vehicles.filter(
+    (vehicle) => vehicle.type_announcement === "Leilão"
+  );
+
+  const carsVehicle = vehicles.filter(
+    (vehicle) =>
+      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Carro"
+  );
+
+  const motorbikeVehicle = vehicles.filter(
+    (vehicle) =>
+      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Moto"
+  );
+
+  const getVehicles = () => {
+    api
+      .get("/products")
+      .then((response: AxiosResponse) => {
+        setVehicles(response.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getVehicles();
+  }, []);
 
   return (
     <ProductContext.Provider
@@ -97,8 +130,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         photos,
         comments,
         accountType,
-        isLogged,
-        setIsLogged,
         navigate,
         modal,
         setModal,
@@ -111,7 +142,10 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalEditAnuncio,
         setIsModalEditAnuncio,
         isModalEditPerfil,
-        setIsModalEditPerfil
+        setIsModalEditPerfil,
+        auctionVehicles,
+        carsVehicle,
+        motorbikeVehicle,
       }}
     >
       {children}

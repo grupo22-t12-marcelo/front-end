@@ -1,3 +1,4 @@
+import { type } from "os";
 import { ReactNode } from "react";
 
 export interface IAuthProvider {
@@ -47,6 +48,32 @@ export interface IRegister {
 }
 
 export interface ILogin {
-  user: string;
+  email: string;
   password: string;
+}
+
+export interface IForgotLogin {
+  email: string;
+}
+
+export interface IUserVehicle {
+  id: string;
+  name: string;
+  description: string;
+  type_account: string;
+}
+
+export interface IVehicle {
+  id: string;
+  description: string;
+  image: string;
+  is_published: boolean;
+  kilometers: number;
+  price: number;
+  year: number;
+  title: string;
+  type_announcement: string;
+  type_vehicle: string;
+  createdAt: string;
+  user: IUserVehicle;
 }

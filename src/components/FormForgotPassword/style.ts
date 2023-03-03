@@ -10,9 +10,6 @@ const Form = styled.form`
   gap: 5px;
   width: 412px;
 
-  margin-top: 50px;
-  margin-bottom: 50px;
-
   h3 {
     font-family: var(--heading-font-family);
     font-weight: var(--heading-3-500);
@@ -72,7 +69,7 @@ const Form = styled.form`
     font-weight: var(--body-2-500);
     font-size: 14px;
     color: var(--grey2);
-    align-self: flex-end;
+    align-self: flex-start;
     cursor: pointer;
   }
 

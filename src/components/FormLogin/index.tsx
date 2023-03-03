@@ -5,9 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { schemaLogin } from "../../validators/schemas";
 import { ILogin } from "../../interfaces";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const FormLogin = () => {
   const { navigate } = useProductContext();
+  const { login } = useSessionContext();
 
   const {
     register,
@@ -17,28 +19,22 @@ const FormLogin = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const login = (data: ILogin) => {
-    console.log(data);
-    // const newObj = {
-    //   ...data,
-    // };
-    // console.log(newObj);
-  };
-
   return (
     <>
       <Form onSubmit={handleSubmit(login)}>
         <h3>Login</h3>
         <FormGroup>
-          <Label>Usuário</Label>
-          <input placeholder="Digitar usuário" {...register("user")} />
+          <Label>Email</Label>
+          <input placeholder="Digite seu email" {...register("email")} />
         </FormGroup>
 
         <FormGroup>
           <Label>Senha</Label>
-          <input placeholder="Digitar senha" {...register("password")} />
+          <input placeholder="Digite sua senha" {...register("password")} />
         </FormGroup>
-        <span>Esqueci minha senha</span>
+        <span onClick={() => navigate("/forgot-password")}>
+          Esqueci minha senha
+        </span>
         <Button type="submit">Entrar</Button>
         <span>Ainda não possui conta?</span>
         <Button type="button" onClick={() => navigate("/register")}>
