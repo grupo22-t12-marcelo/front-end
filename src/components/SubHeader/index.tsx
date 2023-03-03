@@ -41,8 +41,12 @@ const SubHeader: React.FC<IProps> = () => {
               Um ambiente feito para você explorar o seu melhor
             </p>
             <div className="div-buttons-sub-header">
-              <button className="button-sub-header">Carros</button>
-              <button className="button-sub-header">Motos</button>
+              <a href="#Carro">
+                <button className="button-sub-header">Carros</button>
+              </a>
+              <a href="#Moto">
+                <button className="button-sub-header">Motos</button>
+              </a>
             </div>
           </div>
         </SubHeaderDiv>

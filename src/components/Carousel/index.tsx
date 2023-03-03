@@ -11,7 +11,7 @@ interface ICarousel {
 
 const Carousel = ({ type, children }: ICarousel) => {
   return (
-    <DivCarousel>
+    <DivCarousel id={type}>
       <h1 className="title-carousel">{type} </h1>
       <ul className="list-card-vehicles">{children}</ul>
     </DivCarousel>

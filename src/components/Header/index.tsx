@@ -54,13 +54,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
           <div className="navbar-list">
             <NavItem>
-              <NavLink href="#">Carros</NavLink>
+              <NavLink href="#Carro">Carros</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Motos</NavLink>
+              <NavLink href="#Moto">Motos</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Leilão</NavLink>
+              <NavLink href="#Leilão">Leilão</NavLink>
             </NavItem>
             {isLogged === true && userData.name ? (
               <div className="logado-user">
@@ -132,13 +132,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             <Collapse isOpen={!collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="#">Carros</NavLink>
+                  <NavLink href="#Carro">Carros</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Motos</NavLink>
+                  <NavLink href="#Moto">Motos</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Leilão</NavLink>
+                  <NavLink href="#Leilão">Leilão</NavLink>
                 </NavItem>
                 {isLogged === true ? (
                   <div className="logado-user">
