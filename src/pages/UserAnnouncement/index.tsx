@@ -1,14 +1,20 @@
+import { useParams } from "react-router-dom";
 import { CardPublished } from "../../components/CardPublished";
 import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { InfosUserPage } from "../../components/InfosUserPage";
+import { useUserProductsContext } from "../../contexts/productsUser.context";
 import { useSessionContext } from "../../contexts/sessionContext";
 import { Vehicle } from "../../utils/data";
 import { Container } from "./style";
 
 const UserAnnouncement = () => {
   const { userData } = useSessionContext();
+  const { setUserId } = useUserProductsContext();
+  const { userId } = useParams();
+
+  setUserId(userId);
 
   return (
     <Container>

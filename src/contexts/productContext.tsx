@@ -19,7 +19,6 @@ interface IProductProvider {
   photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
-  comments: object[];
   accountType: string;
   navigate: NavigateFunction;
   modal: boolean;
@@ -79,27 +78,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     "/src/assets/Carro-CapaProduct.png",
   ];
 
-  const comments = [
-    {
-      nameUser: "Júlia Lima",
-      dateComment: "há 3 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Marcos Antônio",
-      dateComment: "há 7 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Camila Silva",
-      dateComment: "há 1 mês",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-  ];
-
   const auctionVehicles = vehicles.filter(
     (vehicle) => vehicle.type_announcement === "Leilão"
   );
@@ -149,7 +127,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setIsModalAnuncio,
         userLogged,
         photos,
-        comments,
         accountType,
         navigate,
         modal,
