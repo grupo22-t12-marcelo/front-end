@@ -34,6 +34,8 @@ const CommentProvider = ({ children }: IAuthProvider) => {
   );
 };
 
+// AVISO
+
 export function useCommentContext() {
   const context = useContext(CommentsContext);
 
