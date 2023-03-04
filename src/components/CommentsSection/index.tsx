@@ -12,8 +12,9 @@ const CommentsSection = () => {
       {comments.map((comment) => {
         return (
           <Comment
+            abrevName={comment.user.name}
             key={comment.id}
-            nameUser={"User"}
+            nameUser={comment.user.name}
             dateComment={dateHour(comment?.createdAt)}
             commentText={comment.comment}
           />

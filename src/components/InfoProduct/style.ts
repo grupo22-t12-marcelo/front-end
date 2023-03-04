@@ -54,7 +54,7 @@ const Info = styled.div`
     background-color: var(--brand4);
     border-radius: 4px;
     padding: 0 8px;
-    height: 32px;
+    height: 28px;
 
     font-weight: 500;
     font-size: 14px;

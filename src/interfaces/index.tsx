@@ -142,4 +142,5 @@ export interface IComments {
   id: string;
   comment: string;
   createdAt: string;
+  user: IUserVehicle;
 }
