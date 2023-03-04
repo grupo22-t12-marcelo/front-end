@@ -1,3 +1,4 @@
+import CommentProvider from "../contexts/commentsContext";
 import ProductProvider from "../contexts/productContext";
 import RegisterProvider from "../contexts/registerContext";
 import SessionProvider from "../contexts/sessionContext";
@@ -7,7 +8,9 @@ const Providers = ({ children }: IAuthProvider) => {
   return (
     <SessionProvider>
       <RegisterProvider>
-        <ProductProvider> {children} </ProductProvider>
+        <ProductProvider>
+          <CommentProvider>{children}</CommentProvider>
+        </ProductProvider>
       </RegisterProvider>
     </SessionProvider>
   );

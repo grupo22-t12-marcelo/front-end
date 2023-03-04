@@ -45,10 +45,6 @@ const CardAuction = ({
   idProduct,
   createdAtCount,
 }: ICardAuction) => {
-  let { productId } = useParams();
-
-  productId = idProduct;
-
   const navigate = useNavigate();
 
   const { setIsModalEditAnuncio } = useProductContext();
@@ -129,13 +125,13 @@ const CardAuction = ({
               color="var(--grey10)"
               height={40}
               width={120}
-              onClick={() => navigate(`product/${productId}`)}
+              onClick={() => navigate(`product/${idProduct}`)}
             />
           </div>
         ) : (
           <div
             className="divRedirect"
-            onClick={() => navigate(`product/${productId}`)}
+            onClick={() => navigate(`product/${idProduct}`)}
           >
             <p>Acessar página do leilão</p>
 

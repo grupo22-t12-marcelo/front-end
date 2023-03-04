@@ -1,19 +1,26 @@
 import { Badge, Button } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
+import { formatPrice } from "../../utils/formatPrice";
 import { Info } from "./style";
 
 const InfoProduct = () => {
-  const { tagsCar } = useProductContext();
+  const { oneVehicle } = useProductContext();
 
   return (
     <Info>
-      <h3>{"Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200 "}</h3>
+      <h3>{oneVehicle.title}</h3>
       <div>
-        {tagsCar.map((tag: string) => {
-          return <Badge color="primary">{tag}</Badge>;
-        })}
+        <div className="infoDiv">
+          <p> {oneVehicle.kilometers} km </p>
+          <p> {oneVehicle.year} </p>
+        </div>
       </div>
-      <span>{"R$ 00.000,00"}</span>
+      <span>
+        {oneVehicle.price?.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </span>
       <Button>Comprar</Button>
     </Info>
   );

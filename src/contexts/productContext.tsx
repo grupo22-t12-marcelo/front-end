@@ -1,6 +1,11 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import {
+  NavigateFunction,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { IAuthProvider, IVehicle } from "../interfaces";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
@@ -11,7 +16,6 @@ interface IProductProvider {
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
   userLogged: string;
-  tagsCar: string[];
   photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
@@ -31,8 +35,11 @@ interface IProductProvider {
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  oneVehicle: Partial<IVehicle>;
   isModalEditAddress: boolean;
   setIsModalEditAddress: (value: boolean) => void;
+  setIdVehicle: (value: any) => void;
+  idVehicle: string;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -48,6 +55,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [oneVehicle, setOneVehicle] = useState({});
+  const [idVehicle, setIdVehicle] = useState("");
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -61,7 +70,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [idPhoto, setIdPhoto] = useState("");
   const userLogged = "Samuel Leão";
   const accountType = "Anunciante";
-  const tagsCar = ["2013", "0KM"];
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
@@ -121,6 +129,17 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     getVehicles();
   }, []);
 
+  useEffect(() => {
+    api
+      .get(`/products/${idVehicle}`)
+      .then((response: AxiosResponse) => {
+        setOneVehicle(response.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  }, [idVehicle]);
+
   return (
     <ProductContext.Provider
       value={{
@@ -129,7 +148,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalAnuncio,
         setIsModalAnuncio,
         userLogged,
-        tagsCar,
         photos,
         comments,
         accountType,
@@ -151,6 +169,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         motorbikeVehicle,
         isModalEditAddress,
         setIsModalEditAddress,
+        setIdVehicle,
+        idVehicle,
+        oneVehicle,
       }}
     >
       {children}
