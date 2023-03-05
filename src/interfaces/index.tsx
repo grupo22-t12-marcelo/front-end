@@ -144,12 +144,3 @@ export interface IComments {
   createdAt: string;
   user: IUserVehicle;
 }
-
-export interface IUserVehicles {
-  id: string;
-  name: string;
-  description: string;
-  type_account: string;
-  createdAt: Date;
-  products: IVehicle;
-}

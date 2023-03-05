@@ -1,17 +1,19 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 
-import { IAuthProvider, IUserVehicles } from "../interfaces";
+import { IAuthProvider } from "../interfaces";
+import { IUserProducts } from "../interfaces/productsUser";
 import api from "../services/api";
 
 interface IUserProductsProvider {
   setUserId: (value: any) => void;
+  userVehicles: Partial<IUserProducts>;
 }
 
 export const UserProductsContext = createContext({} as IUserProductsProvider);
 
 const UserProductsProvider = ({ children }: IAuthProvider) => {
-  const [userVehicles, setUserVehicles] = useState<IUserVehicles[]>([]);
+  const [userVehicles, setUserVehicles] = useState({});
   const [userId, setUserId] = useState<string>("");
 
   useEffect(() => {
@@ -25,10 +27,8 @@ const UserProductsProvider = ({ children }: IAuthProvider) => {
       });
   }, [userId]);
 
-  console.log(userVehicles);
-
   return (
-    <UserProductsContext.Provider value={{ setUserId }}>
+    <UserProductsContext.Provider value={{ setUserId, userVehicles }}>
       {children}
     </UserProductsContext.Provider>
   );
