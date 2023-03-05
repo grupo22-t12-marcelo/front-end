@@ -7,7 +7,7 @@ import { Container, SubHeaderDiv } from "./styles";
 
 const SubHeader: React.FC<IProps> = () => {
   const { setIsModalAnuncio } = useProductContext();
-  const { isLogged } = useSessionContext();
+  const { isLogged, userData } = useSessionContext();
 
   return (
     <>
@@ -16,6 +16,9 @@ const SubHeader: React.FC<IProps> = () => {
           <div className="divBlue"></div>
           <div>
             <InfosUserPage
+              abrevName={userData?.name!}
+              description={userData?.description!}
+              name={userData?.name!}
               children={
                 <Button
                   onClick={() => setIsModalAnuncio(true)}

@@ -29,7 +29,11 @@ const UserAnnouncement = () => {
       <div className="divBlue"></div>
       <main className="divWhite">
         <div>
-          <InfosUserPage />
+          <InfosUserPage
+            name={userVehicles?.name!}
+            abrevName={userVehicles?.name!}
+            description={userVehicles?.description!}
+          />
         </div>
         <Carousel
           type="Carro"
