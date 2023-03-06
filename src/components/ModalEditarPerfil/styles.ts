@@ -114,10 +114,10 @@ export const Form = styled.form`
       font-weight: var(--heading-7-600);
     }
 
-    .cancelar {
-      background-color: var(--grey6);
-      color: var(--grey2);
-      border: 1.5px solid var(--grey6);
+    .excluir {
+      background-color: var(--alert2);
+      color: var(--alert1);
+      border: 1.5px solid transparent;
     }
 
     .salvar {
