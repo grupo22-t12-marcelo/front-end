@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import EditarAnuncio from "../ModalEditarAnuncio";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 
 interface ICardAuction {
   image: string;
@@ -50,12 +51,6 @@ const CardAuction = ({
   const { setIsModalEditAnuncio } = useProductContext();
   const { isLogged, userData } = useSessionContext();
 
-  let name = abrevUser;
-
-  if (userData.name) {
-    name = userData.name;
-  }
-
   return (
     <Container>
       <CardContainer>
@@ -78,20 +73,9 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                {name.split(" ").length > 0 ? (
-                  <>
-                    <p>{name.split(" ")[0].charAt(0)}</p>
-                    <p>
-                      {name
-                        .split(" ")
-                        [Number(name.split(" ").length - 1)].charAt(0)}
-                    </p>
-                  </>
-                ) : (
-                  <p> {name[0]} </p>
-                )}
+                <p>{returnAbrevName(abrevUser)} </p>
               </div>
-              <h5> {name} </h5>
+              <h5> {nameUser} </h5>
             </UserContainer>
           )}
 

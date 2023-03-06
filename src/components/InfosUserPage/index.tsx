@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { returnAbrevName } from "../../utils/abrevName";
 import { Container, DescriptionUser } from "./styles";
 
 interface InfosUser {
@@ -17,7 +18,7 @@ const InfosUserPage = ({
   return (
     <Container>
       <div className="abrevName">
-        <p> {abrevName} </p>
+        <p> {returnAbrevName(abrevName)} </p>
       </div>
 
       <div className="name">

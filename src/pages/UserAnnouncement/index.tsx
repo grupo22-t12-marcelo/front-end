@@ -1,12 +1,11 @@
 import { useParams } from "react-router-dom";
 import { CardPublished } from "../../components/CardPublished";
 import Carousel from "../../components/Carousel";
+import { EmptyVehicles } from "../../components/EmptyVehicles";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { InfosUserPage } from "../../components/InfosUserPage";
 import { useUserProductsContext } from "../../contexts/productsUser.context";
-import { useSessionContext } from "../../contexts/sessionContext";
-import { Vehicle } from "../../utils/data";
 import { Container } from "./style";
 
 const UserAnnouncement = () => {
@@ -39,21 +38,25 @@ const UserAnnouncement = () => {
           type="Carro"
           children={
             <>
-              {carVehicles?.map((vehicle) => (
-                <li className="div-item-vei" key={vehicle.id}>
-                  <CardPublished
-                    image={vehicle.image}
-                    title={vehicle.title}
-                    subtitle={vehicle.description}
-                    abrevName={userVehicles?.name!}
-                    name={userVehicles?.name!}
-                    kmCar={vehicle.kilometers}
-                    yearCar={vehicle.year}
-                    priceCar={vehicle.price}
-                    is_published={true}
-                  />
-                </li>
-              ))}
+              {carVehicles?.length! > 0 ? (
+                carVehicles?.map((vehicle) => (
+                  <li className="div-item-vei" key={vehicle.id}>
+                    <CardPublished
+                      image={vehicle.image}
+                      title={vehicle.title}
+                      subtitle={vehicle.description}
+                      abrevName={userVehicles?.name!}
+                      name={userVehicles?.name!}
+                      kmCar={vehicle.kilometers}
+                      yearCar={vehicle.year}
+                      priceCar={vehicle.price}
+                      is_published={vehicle.is_published}
+                    />
+                  </li>
+                ))
+              ) : (
+                <EmptyVehicles message="Não há carros no momento" />
+              )}
             </>
           }
         />
@@ -62,21 +65,25 @@ const UserAnnouncement = () => {
           type="Moto"
           children={
             <>
-              {motoVehicles?.map((vehicle) => (
-                <li className="div-item-vei" key={vehicle.id}>
-                  <CardPublished
-                    image={vehicle.image}
-                    title={vehicle.title}
-                    subtitle={vehicle.description}
-                    abrevName={userVehicles?.name!}
-                    name={userVehicles?.name!}
-                    kmCar={vehicle.kilometers}
-                    yearCar={vehicle.year}
-                    priceCar={vehicle.price}
-                    is_published={true}
-                  />
-                </li>
-              ))}
+              {motoVehicles?.length! > 0 ? (
+                motoVehicles?.map((vehicle) => (
+                  <li className="div-item-vei" key={vehicle.id}>
+                    <CardPublished
+                      image={vehicle.image}
+                      title={vehicle.title}
+                      subtitle={vehicle.description}
+                      abrevName={userVehicles?.name!}
+                      name={userVehicles?.name!}
+                      kmCar={vehicle.kilometers}
+                      yearCar={vehicle.year}
+                      priceCar={vehicle.price}
+                      is_published={vehicle.is_published}
+                    />
+                  </li>
+                ))
+              ) : (
+                <EmptyVehicles message="Não há motos no momento" />
+              )}
             </>
           }
         />

@@ -1,6 +1,7 @@
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
 import { IProps } from "../../interfaces";
+import { returnAbrevName } from "../../utils/abrevName";
 import { Button } from "../Button";
 import { InfosUserPage } from "../InfosUserPage";
 import { Container, SubHeaderDiv } from "./styles";
@@ -16,7 +17,7 @@ const SubHeader: React.FC<IProps> = () => {
           <div className="divBlue"></div>
           <div>
             <InfosUserPage
-              abrevName={userData?.name!}
+              abrevName={returnAbrevName(userData?.name!)}
               description={userData?.description!}
               name={userData?.name!}
               children={

@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { IAuthProvider, IVehicle } from "../interfaces";
 import api from "../services/api";
-import { dateHour } from "../utils/date";
 import { useSessionContext } from "./sessionContext";
 
 interface IProductProvider {
