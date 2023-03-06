@@ -8,7 +8,8 @@ import {
   Dispatch,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { IAuthProvider, ILogin, IRegister, IUser } from "../interfaces";
+import { IAuthProvider, ILogin } from "../interfaces";
+import { IUserLogged } from "../interfaces/sessions";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
 
@@ -16,8 +17,9 @@ interface ISessionProvider {
   isLogged: boolean;
   setIsLogged: (value: boolean) => void;
   login: (data: ILogin) => void;
-  userData: Partial<IUser>;
-  setUserData: Dispatch<SetStateAction<() => void>>;
+  userData: Partial<IUserLogged>;
+  setUserData: (value: IUserLogged) => void;
+  token: string | null;
 }
 
 export const SessionContext = createContext({} as ISessionProvider);
@@ -27,13 +29,9 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isLogged, setIsLogged] = useState(false);
   const [userData, setUserData] = useState({});
 
-  console.log(userData);
+  const token = localStorage.getItem("@TOKEN");
 
-  let user = {};
-
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-
+  /*  useEffect(() => {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       api.get("/users").then((response: AxiosResponse) => {
@@ -48,7 +46,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
     }
 
     // dataUserLogin();
-  }, []);
+  }, [token]); */
 
   // useEffect(() => {
   //   console.log(userData);
@@ -92,6 +90,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
         login,
         userData,
         setUserData,
+        token,
       }}
     >
       {children}

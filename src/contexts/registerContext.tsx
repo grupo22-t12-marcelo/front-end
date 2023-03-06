@@ -39,7 +39,6 @@ const RegisterProvider = ({ children }: IAuthProvider) => {
     api
       .post("/users", newObj)
       .then((response: AxiosResponse) => {
-        console.log(response.data);
         setModalSucess(true);
       })
       .catch((err: AxiosError) => {

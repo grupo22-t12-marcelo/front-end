@@ -9,6 +9,7 @@ import {
 import { IAuthProvider, IVehicle } from "../interfaces";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
+import { useSessionContext } from "./sessionContext";
 
 interface IProductProvider {
   count: string;
@@ -49,13 +50,14 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
+
+  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -79,17 +81,22 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   ];
 
   const auctionVehicles = vehicles.filter(
-    (vehicle) => vehicle.type_announcement === "Leilão"
+    (vehicle) =>
+      vehicle.type_announcement === "Leilão" && vehicle.is_published === true
   );
 
   const carsVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Carro"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Carro" &&
+      vehicle.is_published === true
   );
 
   const motorbikeVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Moto"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Moto" &&
+      vehicle.is_published === true
   );
 
   const getVehicles = () => {
@@ -103,9 +110,27 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  const getUser = () => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+
   useEffect(() => {
-    getVehicles();
-  }, []);
+    if (token) {
+      getUser();
+    } else {
+      getVehicles();
+    }
+  }, [isLogged]);
 
   useEffect(() => {
     api
