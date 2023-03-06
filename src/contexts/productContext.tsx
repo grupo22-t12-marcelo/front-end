@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAuthProvider, IVehicle } from "../interfaces";
+import { IAuthProvider, IProduct, IVehicle } from "../interfaces";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
 
@@ -33,6 +33,7 @@ interface IProductProvider {
   motorbikeVehicle: IVehicle[];
   isModalEditAddress: boolean;
   setIsModalEditAddress: (value: boolean) => void;
+  createProduct: (data: IProduct) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -40,7 +41,7 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(true);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
@@ -117,6 +118,10 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  const createProduct = async (data: IProduct) => {
+    await api.post("/products", data);
+  };
+
   useEffect(() => {
     getVehicles();
   }, []);
@@ -151,6 +156,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         motorbikeVehicle,
         isModalEditAddress,
         setIsModalEditAddress,
+        createProduct,
       }}
     >
       {children}

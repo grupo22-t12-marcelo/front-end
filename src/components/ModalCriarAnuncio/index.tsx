@@ -19,9 +19,7 @@ import { schemaAnuncio } from "../../validators/schemas";
 
 const CriarAnuncio = () => {
   const [isMoreImages, setIsMoreImages] = useState(false);
-  const [tipo, setTipo] = useState("Venda");
-  const [ano, setAno] = useState("");
-  const [preco, setPreco] = useState<String>("");
+  const [tipo, setTipo] = useState("");
 
   const { setIsModalAnuncio, isModalAnuncio } = useContext(ProductContext);
 
@@ -30,12 +28,7 @@ const CriarAnuncio = () => {
   });
 
   const cadastro = (data: IAnuncio) => {
-    const newObj = {
-      ...data,
-      ano,
-      preco,
-    };
-    console.log(newObj);
+    console.log(data);
   };
 
   return (
@@ -103,17 +96,12 @@ const CriarAnuncio = () => {
                     <div>
                       <label>
                         <span>Ano</span>
-                        <IMaskInput
-                          mask="0000"
-                          onAccept={(value: any) => {
-                            setAno(value);
-                          }}
-                        />
+                        <input {...register("ano")} type="number" />
                       </label>
                       <label>
                         <span>Quilometragem</span>
                         <input
-                          type="text"
+                          type="number"
                           placeholder="0"
                           {...register("quilometragem")}
                         />
@@ -123,12 +111,7 @@ const CriarAnuncio = () => {
                       <span>
                         {tipo === "Venda" ? "Preço" : "Lance inícial"}
                       </span>
-                      <IMaskInput
-                        mask="R$ 0000000"
-                        onAccept={(value: any) => {
-                          setPreco(value);
-                        }}
-                      />
+                      <input {...register("preco")} />
                     </label>
                   </div>
 

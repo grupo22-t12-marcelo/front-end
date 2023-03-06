@@ -3,9 +3,9 @@ import * as yup from "yup";
 export const schemaAnuncio = yup.object().shape({
   tipo: yup.string().required(),
   titulo: yup.string().required(),
-  // ano: yup.number().required(),
+  ano: yup.number().required(),
   quilometragem: yup.string().required(),
-  // preco: yup.string().required(),
+  preco: yup.string().required(),
   descricao: yup.string().required(),
   tipoDoVeiculo: yup.string().required(),
   imagemCapa: yup.string().required(),
