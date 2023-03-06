@@ -21,7 +21,22 @@ const dateHour = (time: string) => {
     minutes: minutes,
     seconds: seconds,
   };
-  return dateH;
+
+  if (days > 0) {
+    return `há ${days} dias`;
+  }
+
+  if (hours > 0) {
+    return `há ${hours} horas`;
+  }
+
+  if (minutes > 0) {
+    return `há ${minutes} minutos`;
+  }
+
+  if (seconds > 0) {
+    return `há ${seconds} segundos`;
+  }
 };
 
 export { dateHour };

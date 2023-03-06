@@ -37,9 +37,6 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  console.log(isLogged);
-  console.log(userData);
-
   let name = "Undefined Undefined";
 
   if (userData.name) {

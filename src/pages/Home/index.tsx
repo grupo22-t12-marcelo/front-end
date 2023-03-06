@@ -1,8 +1,5 @@
-import { CardAuction } from "../../components/CardAuction";
-import { CardVehicle } from "../../components/CardVehicles";
-import Carousel from "../../components/Carousel";
-import CarouselAuction from "../../components/CarouselAuction";
-import { EmptyVehicles } from "../../components/EmptyVehicles";
+import { AllVehicles } from "../../components/AllVehicles";
+import { AllVehiclesUser } from "../../components/AllVehiclesUser";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CriarAnuncio from "../../components/ModalCriarAnuncio";
@@ -13,7 +10,6 @@ import ExcluirUser from "../../components/ModalExcluirUser";
 import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
-import { dateHour } from "../../utils/date";
 import "./index.css";
 
 const Home = () => {
@@ -21,14 +17,10 @@ const Home = () => {
     isModalEditPerfil,
     isModalAnuncio,
     isModalEditAnuncio,
-    auctionVehicles,
-    carsVehicle,
-    motorbikeVehicle,
     isModalEditAddress,
     isModalExcluirPerfil,
   } = useProductContext();
-
-  console.log(dateHour("2023-03-03T14:58:43.267Z"));
+  const { isLogged } = useSessionContext();
 
   return (
     <div className="home-div">
@@ -41,86 +33,7 @@ const Home = () => {
 
       <Header></Header>
       <SubHeader></SubHeader>
-      <CarouselAuction
-        children={
-          <>
-            {auctionVehicles.length > 0 ? (
-              auctionVehicles.map((vehicle) => (
-                <li className="div-item-vei" key={vehicle.id}>
-                  <CardAuction
-                    title={vehicle.title}
-                    subtitle={vehicle.description}
-                    kmCar={vehicle.kilometers}
-                    image={vehicle.image}
-                    abrevUser={vehicle.user.name}
-                    yearCar={vehicle.year}
-                    nameUser={vehicle.user.name}
-                    priceCar={vehicle.price}
-                    idProduct={vehicle.id}
-                    createdAtCount={vehicle.createdAt}
-                  ></CardAuction>
-                </li>
-              ))
-            ) : (
-              <EmptyVehicles message="Não há leilões no momento" />
-            )}
-          </>
-        }
-      ></CarouselAuction>
-
-      <Carousel
-        type="Carro"
-        children={
-          <>
-            {carsVehicle.length > 0 ? (
-              carsVehicle.map((vehicle) => (
-                <li className="div-item-vei" key={vehicle.id}>
-                  <CardVehicle
-                    image={vehicle.image}
-                    title={vehicle.title}
-                    subtitle={vehicle.description}
-                    abrevName={vehicle.user.name}
-                    name={vehicle.user.name}
-                    kmCar={vehicle.kilometers}
-                    yearCar={vehicle.year}
-                    priceCar={vehicle.price}
-                    idProduct={vehicle.id}
-                  />
-                </li>
-              ))
-            ) : (
-              <EmptyVehicles message="Não há carros para venda no momento" />
-            )}
-          </>
-        }
-      />
-
-      <Carousel
-        type="Moto"
-        children={
-          <>
-            {motorbikeVehicle.length > 0 ? (
-              motorbikeVehicle.map((vehicle) => (
-                <li className="div-item-vei" key={vehicle.id}>
-                  <CardVehicle
-                    image={vehicle.image}
-                    title={vehicle.title}
-                    subtitle={vehicle.description}
-                    abrevName={vehicle.user.name}
-                    name={vehicle.user.name}
-                    kmCar={vehicle.kilometers}
-                    yearCar={vehicle.year}
-                    priceCar={vehicle.price}
-                    idProduct={vehicle.id}
-                  />
-                </li>
-              ))
-            ) : (
-              <EmptyVehicles message="Não há motos para venda no momento" />
-            )}
-          </>
-        }
-      />
+      {isLogged ? <AllVehiclesUser /> : <AllVehicles />}
 
       <Footer />
     </div>

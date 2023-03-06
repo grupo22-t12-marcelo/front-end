@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
+import { returnAbrevName } from "../../utils/abrevName";
 import { formatPrice } from "../../utils/formatPrice";
 import {
   CardSubtitle,
@@ -52,14 +53,7 @@ const CardPublished = ({
 
       <UserContainer>
         <div>
-          {abrevName.split(" ").length === 1 ? (
-            <p> {abrevName[0]} </p>
-          ) : (
-            <>
-              <p>{abrevName[0]}</p>
-              <p>{abrevName.split(" ")[1][0]}</p>
-            </>
-          )}
+          <p> {returnAbrevName(abrevName)} </p>
         </div>
         <h5> {name} </h5>
       </UserContainer>

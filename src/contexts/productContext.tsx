@@ -1,9 +1,14 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import {
+  NavigateFunction,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { IAuthProvider, IVehicle } from "../interfaces";
 import api from "../services/api";
-import { dateHour } from "../utils/date";
+import { useSessionContext } from "./sessionContext";
 
 interface IProductProvider {
   count: string;
@@ -11,11 +16,9 @@ interface IProductProvider {
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
   userLogged: string;
-  tagsCar: string[];
   photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
-  comments: object[];
   accountType: string;
   navigate: NavigateFunction;
   modal: boolean;
@@ -31,8 +34,11 @@ interface IProductProvider {
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  oneVehicle: Partial<IVehicle>;
   isModalEditAddress: boolean;
   setIsModalEditAddress: (value: boolean) => void;
+  setIdVehicle: (value: any) => void;
+  idVehicle: string;
   setIsModalExcluirPerfil: (value: boolean) => void;
   isModalExcluirPerfil: boolean;
 }
@@ -45,12 +51,17 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
-  const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false)
+
+  const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
+
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [oneVehicle, setOneVehicle] = useState({});
+  const [idVehicle, setIdVehicle] = useState("");
+
+  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -64,7 +75,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [idPhoto, setIdPhoto] = useState("");
   const userLogged = "Samuel Leão";
   const accountType = "Anunciante";
-  const tagsCar = ["2013", "0KM"];
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
     "/src/assets/Carro-CapaProduct.png",
@@ -74,39 +84,23 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     "/src/assets/Carro-CapaProduct.png",
   ];
 
-  const comments = [
-    {
-      nameUser: "Júlia Lima",
-      dateComment: "há 3 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Marcos Antônio",
-      dateComment: "há 7 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Camila Silva",
-      dateComment: "há 1 mês",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-  ];
-
   const auctionVehicles = vehicles.filter(
-    (vehicle) => vehicle.type_announcement === "Leilão"
+    (vehicle) =>
+      vehicle.type_announcement === "Leilão" && vehicle.is_published === true
   );
 
   const carsVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Carro"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Carro" &&
+      vehicle.is_published === true
   );
 
   const motorbikeVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Moto"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Moto" &&
+      vehicle.is_published === true
   );
 
   const getVehicles = () => {
@@ -120,9 +114,38 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  const getUser = () => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+
   useEffect(() => {
-    getVehicles();
-  }, []);
+    if (token) {
+      getUser();
+    } else {
+      getVehicles();
+    }
+  }, [isLogged]);
+
+  useEffect(() => {
+    api
+      .get(`/products/${idVehicle}`)
+      .then((response: AxiosResponse) => {
+        setOneVehicle(response.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  }, [idVehicle]);
 
   return (
     <ProductContext.Provider
@@ -132,9 +155,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalAnuncio,
         setIsModalAnuncio,
         userLogged,
-        tagsCar,
         photos,
-        comments,
         accountType,
         navigate,
         modal,
@@ -154,8 +175,11 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         motorbikeVehicle,
         isModalEditAddress,
         setIsModalEditAddress,
+        setIdVehicle,
+        idVehicle,
+        oneVehicle,
         setIsModalExcluirPerfil,
-        isModalExcluirPerfil
+        isModalExcluirPerfil,
       }}
     >
       {children}

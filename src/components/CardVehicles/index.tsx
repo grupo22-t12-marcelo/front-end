@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 import { formatPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import {
@@ -76,14 +77,7 @@ const CardVehicle = ({
       ) : (
         <UserContainer>
           <div>
-            {abrevName.split(" ").length === 1 ? (
-              <p> {abrevName[0]} </p>
-            ) : (
-              <>
-                <p>{abrevName[0]}</p>
-                <p>{abrevName.split(" ")[1][0]}</p>
-              </>
-            )}
+            <p>{returnAbrevName(abrevName)} </p>
           </div>
           <h5> {name} </h5>
         </UserContainer>

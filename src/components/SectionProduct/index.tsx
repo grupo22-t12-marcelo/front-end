@@ -9,11 +9,11 @@ import { PhotoGalery } from "../PhotoGalery";
 import { useProductContext } from "../../contexts/productContext";
 
 const SectionProduct = () => {
-  const { photos } = useProductContext();
+  const { oneVehicle } = useProductContext();
 
   return (
     <Section>
-      <CoverProduct id="0" src={photos[0]} />
+      <CoverProduct id={oneVehicle.id} src={oneVehicle.image} />
       <InfoProduct />
       <DescriptionProduct />
       <PhotoGalery />

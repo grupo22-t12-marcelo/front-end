@@ -9,8 +9,8 @@ export interface IProps {
 }
 
 export interface ICoverProduct {
-  src: string;
-  id: string;
+  src: string | undefined;
+  id: string | undefined;
 }
 
 export interface IAnuncio {
@@ -63,6 +63,16 @@ export interface IUserVehicle {
   type_account: string;
 }
 
+export interface IImagesGallery {
+  id: string;
+  image1: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
+  image5?: string;
+  image6?: string;
+}
+
 export interface IVehicle {
   id: string;
   description: string;
@@ -76,6 +86,7 @@ export interface IVehicle {
   type_vehicle: string;
   createdAt: string;
   user: IUserVehicle;
+  imagesGallery?: IImagesGallery;
 }
 
 export interface IProduct {
@@ -125,4 +136,11 @@ export interface IUser {
   products?: IProduct[];
   type_account: string;
   updatedAt: string;
+}
+
+export interface IComments {
+  id: string;
+  comment: string;
+  createdAt: string;
+  user: IUserVehicle;
 }
