@@ -8,10 +8,9 @@ import {
   useProductContext,
 } from "./../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
-import IMask, { MaskElement } from "imask";
 
 const EditarPerfil = () => {
-  const { setIsModalEditPerfil } = useContext(ProductContext);
+  const { setIsModalEditPerfil, setIsModalExcluirPerfil } = useContext(ProductContext);
   const { userData, setUserData } = useSessionContext();
 
   return (
@@ -77,7 +76,10 @@ const EditarPerfil = () => {
             </label>
 
             <div>
-              <Button className="cancelar">Cancelar</Button>
+              <Button className="excluir" onClick={() => {
+                setIsModalExcluirPerfil(true)
+                setIsModalEditPerfil(false)
+              }}>Excluir perfil</Button>
               <Button className="salvar">Salvar alterações</Button>
             </div>
           </Form>
