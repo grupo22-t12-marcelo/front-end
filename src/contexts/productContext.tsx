@@ -39,6 +39,8 @@ interface IProductProvider {
   setIsModalEditAddress: (value: boolean) => void;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
+  setIsModalExcluirPerfil: (value: boolean) => void;
+  isModalExcluirPerfil: boolean;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -49,6 +51,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
+
+  const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
+
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
@@ -173,6 +178,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setIdVehicle,
         idVehicle,
         oneVehicle,
+        setIsModalExcluirPerfil,
+        isModalExcluirPerfil,
       }}
     >
       {children}

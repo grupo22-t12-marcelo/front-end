@@ -6,6 +6,7 @@ import CriarAnuncio from "../../components/ModalCriarAnuncio";
 import EditarAddress from "../../components/ModalEditarAddress";
 import EditarAnuncio from "../../components/ModalEditarAnuncio";
 import EditarPerfil from "../../components/ModalEditarPerfil";
+import ExcluirUser from "../../components/ModalExcluirUser";
 import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
@@ -17,6 +18,7 @@ const Home = () => {
     isModalAnuncio,
     isModalEditAnuncio,
     isModalEditAddress,
+    isModalExcluirPerfil,
   } = useProductContext();
   const { isLogged } = useSessionContext();
 
@@ -27,6 +29,7 @@ const Home = () => {
       {isModalEditPerfil && <EditarPerfil />}
       {isModalEditAnuncio && <EditarAnuncio />}
       {isModalEditAddress && <EditarAddress />}
+      {isModalExcluirPerfil && <ExcluirUser />}
 
       <Header></Header>
       <SubHeader></SubHeader>
