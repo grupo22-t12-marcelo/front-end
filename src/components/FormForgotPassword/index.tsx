@@ -32,6 +32,7 @@ const FormForgotPassword = () => {
         <FormGroup>
           <Label>Email</Label>
           <input placeholder="Digitar email" {...register("email")} />
+          {errors.email && <p className="error">{errors.email.message}</p>}
         </FormGroup>
 
         <span onClick={() => navigate("/login")}>Voltar para o Login</span>

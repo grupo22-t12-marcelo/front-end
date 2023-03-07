@@ -17,14 +17,16 @@ const UserProductsProvider = ({ children }: IAuthProvider) => {
   const [userId, setUserId] = useState<string>("");
 
   useEffect(() => {
-    api
-      .get(`/users/${userId}`)
-      .then((response: AxiosResponse) => {
-        setUserVehicles(response.data);
-      })
-      .catch((err: AxiosError) => {
-        console.log(err);
-      });
+    if (userId) {
+      api
+        .get(`/users/${userId}`)
+        .then((response: AxiosResponse) => {
+          setUserVehicles(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
   }, [userId]);
 
   return (

@@ -73,6 +73,16 @@ export interface IImagesGallery {
   image6?: string;
 }
 
+export interface INewImagesGallery {
+  id: string;
+  image1: string;
+  image2: string;
+  image3: string;
+  image4: string;
+  image5: string;
+  image6: string;
+}
+
 export interface IVehicle {
   id: string;
   description: string;
@@ -86,7 +96,7 @@ export interface IVehicle {
   type_vehicle: string;
   createdAt: string;
   user: IUserVehicle;
-  imagesGallery?: IImagesGallery;
+  imagesGallery: IImagesGallery;
 }
 
 export interface IProduct {
