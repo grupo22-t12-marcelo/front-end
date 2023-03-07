@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAuthProvider, IProduct, IVehicle } from "../interfaces";
+import { IAnuncio, IAuthProvider, IProduct, IVehicle } from "../interfaces";
 import api from "../services/api";
 import { dateHour } from "../utils/date";
 
@@ -33,7 +33,7 @@ interface IProductProvider {
   motorbikeVehicle: IVehicle[];
   isModalEditAddress: boolean;
   setIsModalEditAddress: (value: boolean) => void;
-  createProduct: (data: IProduct) => void;
+  createProduct: (data: IAnuncio) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -118,8 +118,22 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
-  const createProduct = async (data: IProduct) => {
-    await api.post("/products", data);
+  const createProduct = async (data: IAnuncio) => {
+    const token = localStorage.getItem("@TOKEN");
+    const { image1, image2, image3, image4, image5, image6 } = data;
+    const imagesGallery = { image1, image2, image3, image4, image5, image6 };
+
+    delete data.image1;
+    delete data.image2;
+    const newData = { imagesGallery: { ...imagesGallery }, ...data };
+    try {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await api.post("/products", newData).then(({ data }) => {
+        vehicles.push(data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
