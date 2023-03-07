@@ -65,6 +65,11 @@ const Form = styled.form`
       border-radius: 4px;
       outline: none;
     }
+
+    .error {
+      font-size: 0.75rem;
+      color: var(--alert1);
+    }
   }
 
   span:first-of-type {

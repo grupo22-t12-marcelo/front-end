@@ -33,14 +33,16 @@ const CommentProvider = ({ children }: IAuthProvider) => {
   };
 
   useEffect(() => {
-    api
-      .get(`/comment/${idVehicle}`)
-      .then((response: AxiosResponse) => {
-        setComments(response.data);
-      })
-      .catch((err: AxiosError) => {
-        console.log(err);
-      });
+    if (idVehicle) {
+      api
+        .get(`/comment/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setComments(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
   }, [idVehicle, postComments]);
 
   return (

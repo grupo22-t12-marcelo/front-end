@@ -56,6 +56,7 @@ const FormRegister = () => {
       <Input
         label="Data de nascimento"
         placeholder="00/00/00"
+        type="date"
         {...register("birthdate")}
         error={errors.birthdate}
       />

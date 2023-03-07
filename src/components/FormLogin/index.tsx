@@ -26,11 +26,18 @@ const FormLogin = () => {
         <FormGroup>
           <Label>Email</Label>
           <input placeholder="Digite seu email" {...register("email")} />
+          {errors.email && <p className="error">{errors.email.message}</p>}
         </FormGroup>
-
         <FormGroup>
           <Label>Senha</Label>
-          <input placeholder="Digite sua senha" {...register("password")} />
+          <input
+            placeholder="Digite sua senha"
+            type={"password"}
+            {...register("password")}
+          />
+          {errors.password && (
+            <p className="error">{errors.password.message}</p>
+          )}
         </FormGroup>
         <span onClick={() => navigate("/forgot-password")}>
           Esqueci minha senha

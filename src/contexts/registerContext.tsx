@@ -34,6 +34,10 @@ const RegisterProvider = ({ children }: IAuthProvider) => {
 
     data.address = address;
 
+    let birthdateCustom = data.birthdate.split("-");
+
+    data.birthdate = `${birthdateCustom[0]}-${birthdateCustom[2]}-${birthdateCustom[1]}`;
+
     const { zipCode, state, city, road, number, complement, ...newObj } = data;
 
     api

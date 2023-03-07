@@ -61,6 +61,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   // };
 
   const login = (data: ILogin) => {
+    console.log(data);
     api
       .post("/login", {
         email: data.email,

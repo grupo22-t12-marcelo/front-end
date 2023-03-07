@@ -49,7 +49,7 @@ export const schemaLogin = yup.object().shape({
 });
 
 export const schemaForgotPassword = yup.object().shape({
-  email: yup.string().email().required("CAmpo Obrigatório"),
+  email: yup.string().email().required("Campo Obrigatório"),
 });
 
 export const schemaComments = yup.object().shape({
