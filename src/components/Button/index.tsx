@@ -3,11 +3,11 @@ import { Container } from "./styles";
 interface ButtonProps {
   width: number;
   height: number;
-  backgroundColor: string;
-  color: string;
+  backgroundColor?: string;
+  color?: string;
   type?: "button" | "reset" | "submit" | undefined;
   nameButton: string;
-  borderColor: string;
+  borderColor?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 const Button = ({

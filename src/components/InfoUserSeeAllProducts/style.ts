@@ -56,6 +56,25 @@ const InfoUser = styled.div`
       font-size: 14px;
     }
   }
+
+  .abrevName {
+    width: 55px;
+    height: 55px;
+    border-radius: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    background-color: red;
+
+    & > p {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--white-fixed);
+    }
+  }
 `;
 
 export { InfoUser };

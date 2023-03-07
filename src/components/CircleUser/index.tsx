@@ -1,19 +1,14 @@
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 import { Circle } from "./style";
 
 const CircleUser = () => {
-  const { userLogged } = useProductContext();
-
-  let initials = "";
-
-  if (userLogged.length > 0) {
-    initials =
-      userLogged.split(" ")[0].charAt(0) + userLogged.split(" ")[1].charAt(0);
-  }
+  const { userData } = useSessionContext();
 
   return (
     <Circle>
-      <p>{initials}</p>
+      <p>{returnAbrevName(userData?.name!)}</p>
     </Circle>
   );
 };

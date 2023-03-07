@@ -15,23 +15,33 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
-import { useProductContext } from "../../contexts/productContext";
 import { IProps } from "../../interfaces";
 import { UserContainer } from "../CardAuction/styles";
 import SubHeader from "../SubHeader";
 import { DivHeader } from "./styles";
 import { CircleUser } from "../CircleUser";
+import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
+  const { isLogged, setIsLogged } = useSessionContext();
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { userLogged, accountType, isLogged, setIsLogged, navigate } =
+  const { navigate, setIsModalEditPerfil, setIsModalEditAddress } =
     useProductContext();
+
+  const { userData } = useSessionContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  let name = "Undefined Undefined";
+
+  if (userData.name) {
+    name = userData.name;
+  }
 
   return (
     <div id="container">
@@ -41,15 +51,15 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
           <div className="navbar-list">
             <NavItem>
-              <NavLink href="#">Carros</NavLink>
+              <NavLink href="#Carro">Carros</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Motos</NavLink>
+              <NavLink href="#Moto">Motos</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Leilão</NavLink>
+              <NavLink href="#Leilão">Leilão</NavLink>
             </NavItem>
-            {isLogged === true && userLogged !== "" ? (
+            {isLogged === true && userData.name ? (
               <div className="logado-user">
                 <UncontrolledDropdown
                   isOpen={dropdownOpen}
@@ -63,16 +73,29 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   </div>
                   <h5>João Paulo</h5> */}
                       <CircleUser />
-                      <h5>{userLogged}</h5>
+                      <h5>{name}</h5>
                     </UserContainer>
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>Editar Perfil</DropdownItem>
-                    <DropdownItem>Editar Endereço</DropdownItem>
-                    {accountType === "Anunciante" && (
-                      <DropdownItem>Meus Anúncios</DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditPerfil(true)}>
+                      Editar Perfil
+                    </DropdownItem>
+                    <DropdownItem onClick={() => setIsModalEditAddress(true)}>
+                      Editar Endereço
+                    </DropdownItem>
+                    {userData.type_account === "Anunciante" && (
+                      <DropdownItem
+                        onClick={() => navigate(`/users/${userData.id}`)}
+                      >
+                        Meus Anúncios
+                      </DropdownItem>
                     )}
-                    <DropdownItem onClick={() => setIsLogged(false)}>
+                    <DropdownItem
+                      onClick={() => {
+                        localStorage.clear();
+                        setIsLogged(false);
+                      }}
+                    >
                       Sair
                     </DropdownItem>
                   </DropdownMenu>
@@ -82,9 +105,16 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
               <>
                 <div className="cadastro-login">
                   <NavItem>
-                    <NavLink href="#">Fazer login</NavLink>
+                    <NavLink onClick={() => navigate("/login")}>
+                      Fazer login
+                    </NavLink>
                   </NavItem>
-                  <button className="btn-cadastrar">Cadastrar</button>
+                  <button
+                    className="btn-cadastrar"
+                    onClick={() => navigate("/register")}
+                  >
+                    Cadastrar
+                  </button>
                 </div>
               </>
             )}
@@ -99,13 +129,13 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
             <Collapse isOpen={!collapsed} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="#">Carros</NavLink>
+                  <NavLink href="#Carro">Carros</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Motos</NavLink>
+                  <NavLink href="#Moto">Motos</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Leilão</NavLink>
+                  <NavLink href="#Leilão">Leilão</NavLink>
                 </NavItem>
                 {isLogged === true ? (
                   <div className="logado-user">
@@ -120,14 +150,23 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                   </div>
                   <h5>João Paulo</h5> */}
                           <CircleUser />
-                          <h5>{userLogged}</h5>
+                          <h5>{name}</h5>
                         </UserContainer>
                       </DropdownToggle>
                       <DropdownMenu>
                         <DropdownItem>Editar Perfil</DropdownItem>
-                        <DropdownItem>Editar Endereço</DropdownItem>
-                        {accountType === "Anunciante" && (
-                          <DropdownItem>Meus Anúncios</DropdownItem>
+
+                        <DropdownItem
+                          onClick={() => setIsModalEditAddress(true)}
+                        >
+                          Editar Endereço
+                        </DropdownItem>
+                        {userData.type_account === "Anunciante" && (
+                          <DropdownItem
+                            onClick={() => navigate(`/users/${userData.id}`)}
+                          >
+                            Meus Anúncios
+                          </DropdownItem>
                         )}
                         <DropdownItem>Sair</DropdownItem>
                       </DropdownMenu>

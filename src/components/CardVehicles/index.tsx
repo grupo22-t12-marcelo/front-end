@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 import { formatPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import {
@@ -41,7 +43,8 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { isLogged } = useProductContext();
+  const { setIsModalEditAnuncio } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   const EnableClick = () => {
     navigate(`product/${productId}`);
@@ -74,7 +77,7 @@ const CardVehicle = ({
       ) : (
         <UserContainer>
           <div>
-            <p>{abrevName}</p>
+            <p>{returnAbrevName(abrevName)} </p>
           </div>
           <h5> {name} </h5>
         </UserContainer>
@@ -90,6 +93,7 @@ const CardVehicle = ({
       {isLogged ? (
         <div className="divButtonEdit">
           <Button
+            onClick={() => setIsModalEditAnuncio(true)}
             nameButton="Editar"
             backgroundColor="var(--grey8)"
             borderColor="var(--grey1)"

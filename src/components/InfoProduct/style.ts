@@ -43,6 +43,24 @@ const Info = styled.div`
     border-radius: 4px;
     color: var(--white-fixed);
   }
+
+  .infoDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .infoDiv p {
+    background-color: var(--brand4);
+    border-radius: 4px;
+    padding: 0 8px;
+    height: 28px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--brand1);
+  }
 `;
 
 export { Info };

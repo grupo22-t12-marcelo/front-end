@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackgroundModal = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
 
   top: 0;
   left: 0;
@@ -115,20 +115,25 @@ export const TipoAnuncio = styled.div`
     width: max-content;
     margin: 0 auto;
     gap: 7px;
+    width: 90%;
 
     input {
       display: none;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
     }
 
     span {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100px;
-    }
 
-    span {
-      width: 230px;
+      width: 100%;
       height: 48px;
 
       color: var(--grey0);
@@ -260,20 +265,25 @@ export const TipoVeiculo = styled.div`
     width: max-content;
     margin: 0 auto;
     gap: 7px;
+    width: 90%;
 
     input {
       display: none;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
     }
 
     span {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100px;
-    }
 
-    span {
-      width: 230px;
+      width: 100%;
       height: 48px;
 
       color: var(--grey0);

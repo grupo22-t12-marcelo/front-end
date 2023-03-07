@@ -17,6 +17,9 @@ import { CardImg, CardImgOverlay } from "reactstrap";
 import { formatPrice } from "../../utils/formatPrice";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
+import EditarAnuncio from "../ModalEditarAnuncio";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 
 interface ICardAuction {
   image: string;
@@ -43,13 +46,10 @@ const CardAuction = ({
   idProduct,
   createdAtCount,
 }: ICardAuction) => {
-  let { productId } = useParams();
-
-  productId = idProduct;
-
   const navigate = useNavigate();
 
-  const { isLogged } = useProductContext();
+  const { setIsModalEditAnuncio } = useProductContext();
+  const { isLogged, userData } = useSessionContext();
 
   return (
     <Container>
@@ -73,7 +73,7 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                <p> {abrevUser} </p>
+                <p>{returnAbrevName(abrevUser)} </p>
               </div>
               <h5> {nameUser} </h5>
             </UserContainer>
@@ -93,6 +93,7 @@ const CardAuction = ({
         {isLogged ? (
           <div className="divButtonEdit">
             <Button
+              onClick={() => setIsModalEditAnuncio(true)}
               nameButton="Editar"
               backgroundColor="var(--brand1)"
               borderColor="var(--grey10)"
@@ -108,13 +109,13 @@ const CardAuction = ({
               color="var(--grey10)"
               height={40}
               width={120}
-              onClick={() => navigate(`product/${productId}`)}
+              onClick={() => navigate(`product/${idProduct}`)}
             />
           </div>
         ) : (
           <div
             className="divRedirect"
-            onClick={() => navigate(`product/${productId}`)}
+            onClick={() => navigate(`product/${idProduct}`)}
           >
             <p>Acessar página do leilão</p>
 

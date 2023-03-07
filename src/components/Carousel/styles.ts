@@ -22,7 +22,7 @@ export const DivCarousel = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: start;
     width: 94%;
     margin-left: 30px;
     gap: 30px;
