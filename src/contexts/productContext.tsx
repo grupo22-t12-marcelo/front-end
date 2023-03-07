@@ -137,14 +137,16 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   }, [isLogged]);
 
   useEffect(() => {
-    api
-      .get(`/products/${idVehicle}`)
-      .then((response: AxiosResponse) => {
-        setOneVehicle(response.data);
-      })
-      .catch((err: AxiosError) => {
-        console.log(err);
-      });
+    if (idVehicle) {
+      api
+        .get(`/products/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setOneVehicle(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
   }, [idVehicle]);
 
   return (
