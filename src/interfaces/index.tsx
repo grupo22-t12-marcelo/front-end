@@ -122,6 +122,10 @@ export interface IComment {
   updatedAt: string;
 }
 
+export interface ICommentRequest {
+  comment: string;
+}
+
 export interface IUser {
   address?: IAddress;
   birthdate: string;

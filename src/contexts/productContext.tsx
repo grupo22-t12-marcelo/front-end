@@ -15,7 +15,6 @@ interface IProductProvider {
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  userLogged: string;
   photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
@@ -73,7 +72,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
-  const userLogged = "Samuel Leão";
   const accountType = "Anunciante";
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
@@ -154,7 +152,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-        userLogged,
         photos,
         accountType,
         navigate,
