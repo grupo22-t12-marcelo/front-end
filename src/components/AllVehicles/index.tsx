@@ -29,6 +29,7 @@ const AllVehicles = () => {
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
                     createdAtCount={vehicle.createdAt}
+                    id={vehicle.id}
                   ></CardAuction>
                 </li>
               ))
@@ -56,6 +57,7 @@ const AllVehicles = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    id={vehicle.id}
                   />
                 </li>
               ))
@@ -83,6 +85,7 @@ const AllVehicles = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    id={vehicle.id}
                   />
                 </li>
               ))

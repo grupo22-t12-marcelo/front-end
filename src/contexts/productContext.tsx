@@ -10,6 +10,7 @@ import {
 } from "../interfaces";
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
+import { toast } from "react-toastify";
 
 interface IProductProvider {
   count: string;
@@ -95,7 +96,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setVehicles(response.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err); 
+        console.log(err);
       });
   };
 
@@ -112,6 +113,19 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       await api.post("/products", newData).then(({ data }) => {
         setIsModalAnuncio(false);
       });
+      toast.success("Anuncio criado!", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       console.log(error);
     }

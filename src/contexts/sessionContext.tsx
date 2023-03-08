@@ -1,5 +1,11 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IAuthProvider, ILogin, IUserUpdate } from "../interfaces";
@@ -25,6 +31,8 @@ interface ISessionProvider {
   setIsModalExcluirPerfil: (value: boolean) => void;
   isModalExcluirAnuncio: boolean;
   setIsModalExcluirAnuncio: (value: boolean) => void;
+  setIdExcluirAnuncio: Dispatch<SetStateAction<String>>;
+  IdExcluirAnuncio: String;
 }
 
 interface IresponseData {
@@ -42,6 +50,8 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
   const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
+
+  const [IdExcluirAnuncio, setIdExcluirAnuncio] = useState<String>("");
 
   const token = localStorage.getItem("@TOKEN");
 
@@ -142,6 +152,8 @@ const SessionProvider = ({ children }: IAuthProvider) => {
         setIsModalExcluirPerfil,
         isModalExcluirAnuncio,
         setIsModalExcluirAnuncio,
+        setIdExcluirAnuncio,
+        IdExcluirAnuncio
       }}
     >
       {children}
