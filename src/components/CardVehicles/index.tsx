@@ -45,11 +45,7 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio, setIdVehicleEdit, carsVehicle } =
-    useProductContext();
-  const { isLogged, userData } = useSessionContext();
-
-  const algo = carsVehicle.map((vehicle) => vehicle.user.id === userData.id);
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
 
   const EnableClick = () => {
     navigate(`/product/${productId}`);

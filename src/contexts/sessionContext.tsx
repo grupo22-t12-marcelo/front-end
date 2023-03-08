@@ -1,12 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import {
-  useContext,
-  createContext,
-  useState,
-  SetStateAction,
-  Dispatch,
-  useEffect,
-} from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IAuthProvider, ILogin, IUserUpdate } from "../interfaces";
