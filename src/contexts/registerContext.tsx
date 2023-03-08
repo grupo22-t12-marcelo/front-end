@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { IAuthProvider, IRegister } from "../interfaces";
 import api from "../services/api";
@@ -36,7 +36,7 @@ const RegisterProvider = ({ children }: IAuthProvider) => {
 
     let birthdateCustom = data.birthdate.split("-");
 
-    data.birthdate = `${birthdateCustom[0]}-${birthdateCustom[2]}-${birthdateCustom[1]}`;
+    data.birthdate = `${birthdateCustom[0]}-${birthdateCustom[1]}-${birthdateCustom[2]}`;
 
     const { zipCode, state, city, road, number, complement, ...newObj } = data;
 

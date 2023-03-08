@@ -1,4 +1,3 @@
-import { type } from "os";
 import { ReactNode } from "react";
 
 export interface IAuthProvider {
@@ -133,6 +132,11 @@ export interface IComment {
 }
 
 export interface ICommentRequest {
+  comment: string;
+}
+
+export interface IEditCommentRequest {
+  id: string;
   comment: string;
 }
 

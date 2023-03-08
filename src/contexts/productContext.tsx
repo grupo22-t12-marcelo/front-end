@@ -101,8 +101,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       vehicle.is_published === true
   );
 
-  console.log(oneVehicle);
-
   const getVehicles = () => {
     api
       .get("/products")

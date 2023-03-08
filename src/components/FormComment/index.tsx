@@ -1,13 +1,12 @@
-import { CircleUser } from "../CircleUser";
-import { Badges, Form } from "./style";
-import { Input, FormGroup, Button, Badge } from "reactstrap";
-import { useProductContext } from "../../contexts/productContext";
-import { useSessionContext } from "../../contexts/sessionContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { schemaComments } from "../../validators/schemas";
-import { ICommentRequest } from "../../interfaces";
+import { Badge, Button, FormGroup, Input } from "reactstrap";
 import { useCommentContext } from "../../contexts/commentsContext";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { ICommentRequest } from "../../interfaces";
+import { schemaComments } from "../../validators/schemas";
+import { CircleUser } from "../CircleUser";
+import { Badges, Form } from "./style";
 
 const FormComment = () => {
   const { isLogged, userData } = useSessionContext();
@@ -81,3 +80,4 @@ const FormComment = () => {
 };
 
 export { FormComment };
+
