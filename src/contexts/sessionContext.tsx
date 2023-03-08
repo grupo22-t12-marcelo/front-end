@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { IAuthProvider, ILogin, IUserUpdate } from "../interfaces";
 import { IUserLogged } from "../interfaces/sessions";
 import api from "../services/api";
@@ -22,6 +23,10 @@ interface ISessionProvider {
   setIsModalEditAddress: (value: boolean) => void;
   isModalExcluirPerfil: boolean;
   setIsModalExcluirPerfil: (value: boolean) => void;
+}
+
+interface IresponseData {
+  message: string;
 }
 
 export const SessionContext = createContext({} as ISessionProvider);
@@ -48,13 +53,26 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           const { token } = response.data;
 
           localStorage.setItem("@TOKEN", token);
-          setIsLogged(true);
+          toast.success("Login com sucesso!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           // dataUserLogin();
-
-          navigate("/");
+          setTimeout(() => {
+            setIsLogged(true);
+            navigate("/");
+          }, 2500);
         }
       })
       .catch((err: AxiosError) => {
+        const data: any = err.response?.data;
+        toast.error(`${data.message}`);
         console.log(err);
       });
   };
