@@ -75,20 +75,6 @@ const SessionProvider = ({ children }: IAuthProvider) => {
       });
   };
 
-  useEffect(() => {
-    if (token) {
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
-      api.get("/users").then((response: AxiosResponse) => {
-        setUserData({
-          ...response.data,
-        });
-      });
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  }, [token]);
-
   const userUpdate = (data: IUserUpdate) => {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;

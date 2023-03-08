@@ -15,7 +15,7 @@ const ProtectedRoutes = () => {
     );
   }
 
-  return userData.type_account === "Anunciante" ? (
+  return userData?.type_account === "Anunciante" ? (
     <Outlet />
   ) : (
     <Navigate to="/" replace state={{ from: location }} />
