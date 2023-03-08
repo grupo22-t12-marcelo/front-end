@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { schemaLogin } from "../../validators/schemas";
 import { ILogin } from "../../interfaces";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { ToastContainer } from "react-toastify";
 
 const FormLogin = () => {
   const { navigate } = useProductContext();
@@ -48,6 +49,18 @@ const FormLogin = () => {
           Cadastrar
         </Button>
       </Form>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

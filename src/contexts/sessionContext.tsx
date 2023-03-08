@@ -8,6 +8,7 @@ import {
   Dispatch,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { IAuthProvider, ILogin } from "../interfaces";
 import { IUserLogged } from "../interfaces/sessions";
 import api from "../services/api";
@@ -22,6 +23,10 @@ interface ISessionProvider {
   token: string | null;
 }
 
+interface IresponseData {
+  message: string;
+}
+
 export const SessionContext = createContext({} as ISessionProvider);
 
 const SessionProvider = ({ children }: IAuthProvider) => {
@@ -31,37 +36,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
 
   const token = localStorage.getItem("@TOKEN");
 
-  /*  useEffect(() => {
-    if (token) {
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
-      api.get("/users").then((response: AxiosResponse) => {
-        console.log(response.data);
-        setUserData({
-          ...response.data,
-        });
-      });
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-
-    // dataUserLogin();
-  }, [token]); */
-
-  // useEffect(() => {
-  //   console.log(userData);
-  //   console.log(isLogged);
-  //   if (isLogged) {
-  //     dataUserLogin();
-  //   }
-  // }, [isLogged]);
-
-  // const dataUserLogin = () => {
-  //   const token = localStorage.getItem("@TOKEN");
-  // };
-
   const login = (data: ILogin) => {
-    console.log(data);
     api
       .post("/login", {
         email: data.email,
@@ -72,13 +47,26 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           const { token } = response.data;
 
           localStorage.setItem("@TOKEN", token);
-          setIsLogged(true);
+          toast.success("Login com sucesso!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           // dataUserLogin();
-
-          navigate("/");
+          setTimeout(() => {
+            setIsLogged(true);
+            navigate("/");
+          }, 2500);
         }
       })
       .catch((err: AxiosError) => {
+        const data: any = err.response?.data;
+        toast.error(`${data.message}`);
         console.log(err);
       });
   };
