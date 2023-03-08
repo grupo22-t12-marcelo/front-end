@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackgroundModal = styled.div`
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
 
   top: 0;
   left: 0;
@@ -15,7 +15,7 @@ export const BackgroundModal = styled.div`
 
   background: rgba(0, 0, 0, 0.5);
   z-index: 6;
-  padding: 100px 0;
+  padding: 50px 0;
 `;
 
 export const Modal = styled.section`
@@ -23,8 +23,7 @@ export const Modal = styled.section`
   height: max-content;
   padding-bottom: 20px;
   border-radius: 8px;
-  margin: 100px 0;
-  margin: auto 0;
+  margin: auto ;
 
   background-color: var(--white-fixed);
 

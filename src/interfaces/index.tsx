@@ -14,19 +14,22 @@ export interface ICoverProduct {
 }
 
 export interface IAnuncio {
-  tipo: String;
-  titulo: String;
-  ano: Date;
-  quilometragem: String;
-  preco: String;
-  descricao: String;
-  tipoDoVeiculo: String;
-  imagemCapa?: String;
-  imagem1?: String;
-  imagem2?: String;
-  imagem3?: String;
-  imagem4?: String;
+  type_announcement: String;
+  title: String;
+  year: Date;
+  kilometers: String;
+  price: String;
+  description: String;
+  type_vehicle: String;
+  image?: String;
+  image1?: String;
+  image2?: String;
+  image3?: String;
+  image4?: String;
+  image5?: String;
+  image6?: String;
 }
+
 
 export interface IRegister {
   name: string;
@@ -160,6 +163,29 @@ export interface IUserUpdate {
   birthdate?: string;
   description?: string;
   address?: IUserAddressUpdate;
+}
+
+export interface IImagesGalleryUpdate {
+  image1?: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
+  image5?: string;
+  image6?: string;
+  image?: string;
+}
+
+export interface IProductUpdate {
+  type_announcement?: string;
+  title?: string;
+  year?: number;
+  kilometers?: number;
+  price?: number;
+  description?: string;
+  type_vehicle?: string;
+  is_published?: string;
+  image?: string;
+  imagesGallery: IImagesGalleryUpdate;
 }
 
 export interface IComments {

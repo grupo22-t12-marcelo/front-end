@@ -1,19 +1,13 @@
 import { AxiosError, AxiosResponse } from "axios";
+import { useContext, createContext, useState, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
-  useContext,
-  createContext,
-  useState,
-  useEffect,
-  SetStateAction,
-  Dispatch,
-} from "react";
-import {
-  NavigateFunction,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { IAuthProvider, IVehicle } from "../interfaces";
+  IAnuncio,
+  IAuthProvider,
+  IProduct,
+  IProductUpdate,
+  IVehicle,
+} from "../interfaces";
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
 
@@ -37,9 +31,14 @@ interface IProductProvider {
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  isModalEditAddress: boolean;
+  setIsModalEditAddress: (value: boolean) => void;
+  createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
+  setIdVehicleEdit: (value: string) => void;
+  updateProduct: (data: IProductUpdate) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -49,15 +48,15 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [modal, setModal] = useState(false);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
+  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
-  const [photosCar, setPhotosCar] = useState<never[]>([]);
+  const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
 
-  const { setIsLogged, token, setUserData, isLogged, userUpdate } =
-    useSessionContext();
+  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -96,8 +95,26 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setVehicles(response.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err);
+        console.log(err); 
       });
+  };
+
+  const createProduct = async (data: IAnuncio) => {
+    const token = localStorage.getItem("@TOKEN");
+    const { image1, image2, image3, image4, image5, image6 } = data;
+    const imagesGallery = { image1, image2, image3, image4, image5, image6 };
+
+    delete data.image1;
+    delete data.image2;
+    const newData = { imagesGallery: { ...imagesGallery }, ...data };
+    try {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await api.post("/products", newData).then(({ data }) => {
+        setIsModalAnuncio(false);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getUser = () => {
@@ -120,7 +137,25 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     } else {
       getVehicles();
     }
-  }, [isLogged, userUpdate]);
+  }, [isLogged]);
+
+  const updateProduct = (data: IProductUpdate) => {
+    console.log(data);
+
+    if (token && idVehicleEdit) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api
+        .patch(`/products/${idVehicleEdit}`, data)
+        .then((response: AxiosResponse) => {
+          console.log(response.data);
+          setIsModalEditAnuncio(false);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
+  };
 
   useEffect(() => {
     if (idVehicle) {
@@ -142,7 +177,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-
         navigate,
         modal,
         setModal,
@@ -158,9 +192,14 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
+        createProduct,
         setIdVehicle,
         idVehicle,
         oneVehicle,
+        setIdVehicleEdit,
+        updateProduct,
+        isModalEditAddress,
+        setIsModalEditAddress,
       }}
     >
       {children}

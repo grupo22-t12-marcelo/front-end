@@ -43,7 +43,7 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
   const { isLogged } = useSessionContext();
 
   const EnableClick = () => {
@@ -77,6 +77,14 @@ const CardVehicle = ({
       ) : (
         <UserContainer>
           <div>
+            {abrevName.split(" ").length === 1 ? (
+              <p> {abrevName[0]} </p>
+            ) : (
+              <>
+                <p>{abrevName[0]}</p>
+                <p>{abrevName.split(" ")[1][0]}</p>
+              </>
+            )}
             <p>{returnAbrevName(abrevName)} </p>
           </div>
           <h5> {name} </h5>
@@ -93,7 +101,10 @@ const CardVehicle = ({
       {isLogged ? (
         <div className="divButtonEdit">
           <Button
-            onClick={() => setIsModalEditAnuncio(true)}
+            onClick={() => {
+              setIsModalEditAnuncio(true);
+              setIdVehicleEdit(idProduct);
+            }}
             nameButton="Editar"
             backgroundColor="var(--grey8)"
             borderColor="var(--grey1)"
