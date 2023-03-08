@@ -23,20 +23,43 @@ const dateHour = (time: string) => {
   };
 
   if (days > 0) {
-    return `há ${days} dias`;
+    return days === 1 ? `há ${days} dia` : `há ${days} dias`;
   }
 
   if (hours > 0) {
-    return `há ${hours} horas`;
+    return hours === 1 ? `há ${hours} hora` : `há ${hours} horas`;
   }
 
   if (minutes > 0) {
-    return `há ${minutes} minutos`;
+    return minutes === 1 ? `há ${minutes} minuto` : `há ${minutes} minutos`;
   }
 
   if (seconds > 0) {
-    return `há ${seconds} segundos`;
+    return seconds === 1 ? `há ${seconds} segundo` : `há ${seconds} segundos`;
   }
 };
 
-export { dateHour };
+const convertDate = (date: string) => {
+  if (date?.length > 0) {
+    const dateBirthDate = date;
+    const dateSplit = dateBirthDate?.split("");
+
+    const dateFormated =
+      dateSplit[4] +
+      dateSplit[5] +
+      dateSplit[6] +
+      dateSplit[7] +
+      "-" +
+      dateSplit[2] +
+      dateSplit[3] +
+      "-" +
+      dateSplit[0] +
+      dateSplit[1];
+
+    return dateFormated;
+  } else {
+    return "";
+  }
+};
+
+export { dateHour, convertDate };

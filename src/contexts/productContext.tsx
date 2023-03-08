@@ -35,20 +35,13 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
-  isModalEditPerfil: boolean;
-  setIsModalEditPerfil: (value: boolean) => void;
+  getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
   oneVehicle: Partial<IVehicle>;
-  isModalEditAddress: boolean;
-  setIsModalEditAddress: (value: boolean) => void;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
-  setIsModalExcluirPerfil: (value: boolean) => void;
-  isModalExcluirPerfil: boolean;
-  photosCar: never[];
-  setPhotosCar: Dispatch<SetStateAction<never[]>>;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -59,18 +52,14 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-
-  const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
-
-  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
-  const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
   const [photosCar, setPhotosCar] = useState<never[]>([]);
 
-  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
+  const { setIsLogged, token, setUserData, isLogged, userUpdate } =
+    useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -143,7 +132,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     } else {
       getVehicles();
     }
-  }, [isLogged]);
+  }, [isLogged, userUpdate]);
 
   useEffect(() => {
     if (idVehicle) {
@@ -178,20 +167,13 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalSucess,
         isModalEditAnuncio,
         setIsModalEditAnuncio,
-        isModalEditPerfil,
-        setIsModalEditPerfil,
+        getVehicles,
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
-        isModalEditAddress,
-        setIsModalEditAddress,
         setIdVehicle,
         idVehicle,
         oneVehicle,
-        setIsModalExcluirPerfil,
-        isModalExcluirPerfil,
-        photosCar,
-        setPhotosCar,
       }}
     >
       {children}
