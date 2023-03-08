@@ -162,6 +162,29 @@ export interface IUserUpdate {
   address?: IUserAddressUpdate;
 }
 
+export interface IImagesGalleryUpdate {
+  image1?: string;
+  image2?: string;
+  image3?: string;
+  image4?: string;
+  image5?: string;
+  image6?: string;
+  image?: string;
+}
+
+export interface IProductUpdate {
+  type_announcement?: string;
+  title?: string;
+  year?: number;
+  kilometers?: number;
+  price?: number;
+  description?: string;
+  type_vehicle?: string;
+  is_published?: string;
+  image?: string;
+  imagesGallery: IImagesGalleryUpdate;
+}
+
 export interface IComments {
   id: string;
   comment: string;

@@ -1,19 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
-import {
-  useContext,
-  createContext,
-  useState,
-  useEffect,
-  SetStateAction,
-  Dispatch,
-} from "react";
-import {
-  NavigateFunction,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { IAuthProvider, IVehicle } from "../interfaces";
+import { useContext, createContext, useState, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { IAuthProvider, IProductUpdate, IVehicle } from "../interfaces";
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
 
@@ -40,6 +28,8 @@ interface IProductProvider {
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
+  setIdVehicleEdit: (value: string) => void;
+  updateProduct: (data: IProductUpdate) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -54,10 +44,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
-  const [photosCar, setPhotosCar] = useState<never[]>([]);
+  const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
 
-  const { setIsLogged, token, setUserData, isLogged, userUpdate } =
-    useSessionContext();
+  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -120,7 +109,25 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     } else {
       getVehicles();
     }
-  }, [isLogged, userUpdate]);
+  }, [isLogged]);
+
+  const updateProduct = (data: IProductUpdate) => {
+    console.log(data);
+
+    if (token && idVehicleEdit) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api
+        .patch(`/products/${idVehicleEdit}`, data)
+        .then((response: AxiosResponse) => {
+          console.log(response.data);
+          setIsModalEditAnuncio(false);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
+  };
 
   useEffect(() => {
     if (idVehicle) {
@@ -142,7 +149,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-
         navigate,
         modal,
         setModal,
@@ -161,6 +167,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setIdVehicle,
         idVehicle,
         oneVehicle,
+        setIdVehicleEdit,
+        updateProduct,
       }}
     >
       {children}

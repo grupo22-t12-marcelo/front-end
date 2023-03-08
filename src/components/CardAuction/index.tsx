@@ -48,8 +48,8 @@ const CardAuction = ({
 }: ICardAuction) => {
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
-  const { isLogged, userData } = useSessionContext();
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Container>
@@ -93,7 +93,10 @@ const CardAuction = ({
         {isLogged ? (
           <div className="divButtonEdit">
             <Button
-              onClick={() => setIsModalEditAnuncio(true)}
+              onClick={() => {
+                setIsModalEditAnuncio(true);
+                setIdVehicleEdit(idProduct);
+              }}
               nameButton="Editar"
               backgroundColor="var(--brand1)"
               borderColor="var(--grey10)"

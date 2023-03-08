@@ -3,7 +3,7 @@ import { CoverProduct } from "../CoverProduct/index";
 import { Photo } from "./style";
 
 const PhotoGalery = () => {
-  const { oneVehicle, setPhotosCar } = useProductContext();
+  const { oneVehicle } = useProductContext();
 
   const images: { [unit: string]: string } = { ...oneVehicle.imagesGallery };
 
