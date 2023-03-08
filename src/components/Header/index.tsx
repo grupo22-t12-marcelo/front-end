@@ -29,8 +29,8 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { navigate, setIsModalEditPerfil, setIsModalEditAddress } =
-    useProductContext();
+  const { navigate } = useProductContext();
+  const { setIsModalEditPerfil, setIsModalEditAddress } = useSessionContext();
 
   const { userData } = useSessionContext();
 
@@ -39,7 +39,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   let name = "Undefined Undefined";
 
-  if (userData.name) {
+  if (userData?.name!) {
     name = userData.name;
   }
 

@@ -43,6 +43,24 @@ export const schemaRegisterUser = yup.object().shape({
     .oneOf([yup.ref("password")], "Senhas não são iguais"),
 });
 
+export const schemaUserUpdate = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email("Email invalido"),
+  cpf: yup.string(),
+  phone: yup.string(),
+  birthdate: yup.string(),
+  description: yup.string(),
+});
+
+export const schemaUserAddressUpdate = yup.object().shape({
+  zipCode: yup.string(),
+  state: yup.string(),
+  city: yup.string(),
+  road: yup.string(),
+  number: yup.string(),
+  complement: yup.string(),
+});
+
 export const schemaLogin = yup.object().shape({
   email: yup.string().email().required("Campo obrigatório"),
   password: yup.string().required("Campo obrigatório"),

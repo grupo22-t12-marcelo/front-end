@@ -143,6 +143,25 @@ export interface IUser {
   updatedAt: string;
 }
 
+export interface IUserAddressUpdate {
+  zipCode?: string;
+  state?: string;
+  city?: string;
+  road?: string;
+  number?: string;
+  complement?: string;
+}
+
+export interface IUserUpdate {
+  name?: string;
+  email?: string;
+  cpf?: string;
+  phone?: string;
+  birthdate?: string;
+  description?: string;
+  address?: IUserAddressUpdate;
+}
+
 export interface IComments {
   id: string;
   comment: string;
