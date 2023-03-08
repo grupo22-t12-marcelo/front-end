@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../Button";
 import EditarAnuncio from "../ModalEditarAnuncio";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 
 interface ICardAuction {
   image: string;
@@ -45,20 +46,10 @@ const CardAuction = ({
   idProduct,
   createdAtCount,
 }: ICardAuction) => {
-  let { productId } = useParams();
-
-  productId = idProduct;
-
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
-  const { isLogged, userData } = useSessionContext();
-
-  let name = abrevUser;
-
-  if (userData.name) {
-    name = userData.name;
-  }
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Container>
@@ -82,20 +73,9 @@ const CardAuction = ({
           ) : (
             <UserContainer>
               <div className="abrevName">
-                {name.split(" ").length > 0 ? (
-                  <>
-                    <p>{name.split(" ")[0].charAt(0)}</p>
-                    <p>
-                      {name
-                        .split(" ")
-                        [Number(name.split(" ").length - 1)].charAt(0)}
-                    </p>
-                  </>
-                ) : (
-                  <p> {name[0]} </p>
-                )}
+                <p>{returnAbrevName(abrevUser)} </p>
               </div>
-              <h5> {name} </h5>
+              <h5> {nameUser} </h5>
             </UserContainer>
           )}
 
@@ -113,7 +93,10 @@ const CardAuction = ({
         {isLogged ? (
           <div className="divButtonEdit">
             <Button
-              onClick={() => setIsModalEditAnuncio(true)}
+              onClick={() => {
+                setIsModalEditAnuncio(true);
+                setIdVehicleEdit(idProduct);
+              }}
               nameButton="Editar"
               backgroundColor="var(--brand1)"
               borderColor="var(--grey10)"
@@ -129,13 +112,13 @@ const CardAuction = ({
               color="var(--grey10)"
               height={40}
               width={120}
-              onClick={() => navigate(`product/${productId}`)}
+              onClick={() => navigate(`product/${idProduct}`)}
             />
           </div>
         ) : (
           <div
             className="divRedirect"
-            onClick={() => navigate(`product/${productId}`)}
+            onClick={() => navigate(`product/${idProduct}`)}
           >
             <p>Acessar página do leilão</p>
 

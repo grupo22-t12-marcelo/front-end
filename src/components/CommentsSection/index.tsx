@@ -1,18 +1,22 @@
+import { useCommentContext } from "../../contexts/commentsContext";
 import { useProductContext } from "../../contexts/productContext";
+import { dateHour } from "../../utils/date";
 import { Comment } from "../Comment";
 import { Comments } from "./style";
 
 const CommentsSection = () => {
-  const { comments } = useProductContext();
+  const { comments } = useCommentContext();
 
   return (
     <Comments>
-      {comments.map((comment: any) => {
+      {comments.map((comment) => {
         return (
           <Comment
-            nameUser={comment.nameUser}
-            dateComment={comment.dateComment}
-            commentText={comment.commentText}
+            abrevName={comment.user.name}
+            key={comment.id}
+            nameUser={comment.user.name}
+            dateComment={dateHour(comment?.createdAt)}
+            commentText={comment.comment}
           />
         );
       })}

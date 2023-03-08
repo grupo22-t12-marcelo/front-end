@@ -59,9 +59,8 @@ const Photo = styled.div`
       }
 
       img {
-        width: 94px;
+        width: 90%;
         height: 54px;
-        object-fit: cover;
       }
     }
   }

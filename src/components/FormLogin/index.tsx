@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { schemaLogin } from "../../validators/schemas";
 import { ILogin } from "../../interfaces";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { ToastContainer } from "react-toastify";
 
 const FormLogin = () => {
   const { navigate } = useProductContext();
@@ -26,11 +27,18 @@ const FormLogin = () => {
         <FormGroup>
           <Label>Email</Label>
           <input placeholder="Digite seu email" {...register("email")} />
+          {errors.email && <p className="error">{errors.email.message}</p>}
         </FormGroup>
-
         <FormGroup>
           <Label>Senha</Label>
-          <input placeholder="Digite sua senha" {...register("password")} />
+          <input
+            placeholder="Digite sua senha"
+            type={"password"}
+            {...register("password")}
+          />
+          {errors.password && (
+            <p className="error">{errors.password.message}</p>
+          )}
         </FormGroup>
         <span onClick={() => navigate("/forgot-password")}>
           Esqueci minha senha
@@ -41,6 +49,18 @@ const FormLogin = () => {
           Cadastrar
         </Button>
       </Form>
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

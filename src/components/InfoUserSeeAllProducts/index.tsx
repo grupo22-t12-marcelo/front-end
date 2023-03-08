@@ -4,26 +4,24 @@ import { CircleUser } from "../CircleUser";
 import { useProductContext } from "../../contexts/productContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 
 const InfoUserSeeAllProducts = () => {
-  const { userLogged, photos } = useProductContext();
-  const { userData } = useSessionContext();
+  const { oneVehicle } = useProductContext();
 
   let { userId } = useParams();
 
-  userId = "a5c64a3b-a7b9-4454-a984-9d24aa23c35e";
+  userId = oneVehicle.user?.id;
 
   const navigate = useNavigate();
 
   return (
     <InfoUser id="info-user">
-      <CircleUser />
-      <h3>{userData.name}</h3>
-      <p id="text-user">
-        {
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's"
-        }
-      </p>
+      <div className="abrevName">
+        <p> {returnAbrevName(oneVehicle.user?.name!)} </p>
+      </div>
+      <h3>{oneVehicle.user?.name}</h3>
+      <p id="text-user">{oneVehicle.user?.description}</p>
       <Button onClick={() => navigate(`/users/${userId}`)}>
         Ver todos os anúncios
       </Button>

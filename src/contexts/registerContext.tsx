@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import { IAuthProvider, IRegister } from "../interfaces";
 import api from "../services/api";
@@ -34,15 +35,22 @@ const RegisterProvider = ({ children }: IAuthProvider) => {
 
     data.address = address;
 
+    let birthdateCustom = data.birthdate.split("-");
+
+    data.birthdate = `${birthdateCustom[0]}-${birthdateCustom[1]}-${birthdateCustom[2]}`;
+
     const { zipCode, state, city, road, number, complement, ...newObj } = data;
 
     api
       .post("/users", newObj)
       .then((response: AxiosResponse) => {
-        console.log(response.data);
-        setModalSucess(true);
+        if (response.status === 201) {
+          setModalSucess(true);
+        }
       })
       .catch((err: AxiosError) => {
+        const data: any = err.response?.data;
+        toast.error(`${data.message}`);
         console.log(err);
       });
   };

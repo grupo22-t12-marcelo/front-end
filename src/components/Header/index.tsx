@@ -29,20 +29,17 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
-  const { navigate, setIsModalEditPerfil, setIsModalEditAddress } =
-    useProductContext();
+  const { navigate } = useProductContext();
+  const { setIsModalEditPerfil, setIsModalEditAddress } = useSessionContext();
 
   const { userData } = useSessionContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-  console.log(isLogged);
-  console.log(userData);
-
   let name = "Undefined Undefined";
 
-  if (userData.name) {
+  if (userData?.name!) {
     name = userData.name;
   }
 

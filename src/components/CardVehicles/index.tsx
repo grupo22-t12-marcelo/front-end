@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {} from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { returnAbrevName } from "../../utils/abrevName";
 import { formatPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import {
@@ -42,7 +43,7 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
   const { isLogged } = useSessionContext();
 
   const EnableClick = () => {
@@ -76,7 +77,7 @@ const CardVehicle = ({
       ) : (
         <UserContainer>
           <div>
-            {abrevName?.split(" ").length === 1 ? (
+            {abrevName.split(" ").length === 1 ? (
               <p> {abrevName[0]} </p>
             ) : (
               <>
@@ -84,6 +85,7 @@ const CardVehicle = ({
                 <p>{abrevName.split(" ")[1][0]}</p>
               </>
             )}
+            <p>{returnAbrevName(abrevName)} </p>
           </div>
           <h5> {name} </h5>
         </UserContainer>
@@ -99,7 +101,10 @@ const CardVehicle = ({
       {isLogged ? (
         <div className="divButtonEdit">
           <Button
-            onClick={() => setIsModalEditAnuncio(true)}
+            onClick={() => {
+              setIsModalEditAnuncio(true);
+              setIdVehicleEdit(idProduct);
+            }}
             nameButton="Editar"
             backgroundColor="var(--grey8)"
             borderColor="var(--grey1)"

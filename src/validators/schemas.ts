@@ -45,11 +45,55 @@ export const schemaRegisterUser = yup.object().shape({
     .oneOf([yup.ref("password")], "Senhas não são iguais"),
 });
 
+export const schemaUserUpdate = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email("Email invalido"),
+  cpf: yup.string(),
+  phone: yup.string(),
+  birthdate: yup.string(),
+  description: yup.string(),
+});
+
+export const schemaUserAddressUpdate = yup.object().shape({
+  zipCode: yup.string(),
+  state: yup.string(),
+  city: yup.string(),
+  road: yup.string(),
+  number: yup.string(),
+  complement: yup.string(),
+});
+
 export const schemaLogin = yup.object().shape({
   email: yup.string().email().required("Campo obrigatório"),
   password: yup.string().required("Campo obrigatório"),
 });
 
 export const schemaForgotPassword = yup.object().shape({
-  email: yup.string().email().required("CAmpo Obrigatório"),
+  email: yup.string().email().required("Campo Obrigatório"),
+});
+
+export const schemaComments = yup.object().shape({
+  comment: yup.string().required("Campo Obrigatório"),
+});
+
+export const schemaImagesUpdate = yup.object().shape({
+  image1: yup.string(),
+  image2: yup.string(),
+  image3: yup.string(),
+  image4: yup.string(),
+  image5: yup.string(),
+  image6: yup.string(),
+});
+
+export const schemaAnuncioUpdate = yup.object().shape({
+  type_announcement: yup.string(),
+  title: yup.string(),
+  year: yup.number(),
+  kilometers: yup.number(),
+  price: yup.number(),
+  description: yup.string(),
+  type_vehicle: yup.string(),
+  is_published: yup.string(),
+  image: yup.string(),
+  imagesGallery: schemaImagesUpdate,
 });

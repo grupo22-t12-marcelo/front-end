@@ -5,16 +5,20 @@ import { SectionProduct } from "../../components/SectionProduct";
 import { AsideProduct } from "../../components/AsideProduct";
 import Footer from "../../components/Footer";
 import { useProductContext } from "../../contexts/productContext";
+import { useParams } from "react-router-dom";
 
 const Product = () => {
-  const { photos, idPhoto } = useProductContext();
+  const { productId } = useParams();
+  const { setIdVehicle, idPhoto } = useProductContext();
+
+  setIdVehicle(productId);
 
   return (
     <ProductPage>
       <Header />
       <ModaL
         titleModal={"Foto veículo"}
-        bodyModal={<img src={photos[Number(idPhoto)]}></img>}
+        bodyModal={<img width={400} height={300} src={idPhoto}></img>}
       />
       <main>
         <SectionProduct />

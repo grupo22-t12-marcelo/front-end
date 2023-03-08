@@ -1,22 +1,23 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAnuncio, IAuthProvider, IProduct, IVehicle } from "../interfaces";
+import {
+  IAnuncio,
+  IAuthProvider,
+  IProduct,
+  IProductUpdate,
+  IVehicle,
+} from "../interfaces";
 import api from "../services/api";
-import { dateHour } from "../utils/date";
+import { useSessionContext } from "./sessionContext";
 
 interface IProductProvider {
   count: string;
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  userLogged: string;
-  tagsCar: string[];
-  photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
-  comments: object[];
-  accountType: string;
   navigate: NavigateFunction;
   modal: boolean;
   setModal: (value: boolean) => void;
@@ -26,14 +27,18 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
-  isModalEditPerfil: boolean;
-  setIsModalEditPerfil: (value: boolean) => void;
+  getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
   isModalEditAddress: boolean;
   setIsModalEditAddress: (value: boolean) => void;
   createProduct: (data: IAnuncio) => void;
+  oneVehicle: Partial<IVehicle>;
+  setIdVehicle: (value: any) => void;
+  idVehicle: string;
+  setIdVehicleEdit: (value: string) => void;
+  updateProduct: (data: IProductUpdate) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -43,12 +48,15 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [modal, setModal] = useState(false);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
-  const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
-  const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
+  const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [oneVehicle, setOneVehicle] = useState({});
+  const [idVehicle, setIdVehicle] = useState("");
+  const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
+
+  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -60,51 +68,24 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
-  const userLogged = "Samuel Leão";
-  const accountType = "Anunciante";
-  const tagsCar = ["2013", "0KM"];
-  const photos = [
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-  ];
-
-  const comments = [
-    {
-      nameUser: "Júlia Lima",
-      dateComment: "há 3 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Marcos Antônio",
-      dateComment: "há 7 dias",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-      nameUser: "Camila Silva",
-      dateComment: "há 1 mês",
-      commentText:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-  ];
 
   const auctionVehicles = vehicles.filter(
-    (vehicle) => vehicle.type_announcement === "Leilão"
+    (vehicle) =>
+      vehicle.type_announcement === "Leilão" && vehicle.is_published === true
   );
 
   const carsVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Carro"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Carro" &&
+      vehicle.is_published === true
   );
 
   const motorbikeVehicle = vehicles.filter(
     (vehicle) =>
-      vehicle.type_announcement === "Venda" && vehicle.type_vehicle === "Moto"
+      vehicle.type_announcement === "Venda" &&
+      vehicle.type_vehicle === "Moto" &&
+      vehicle.is_published === true
   );
 
   const getVehicles = () => {
@@ -130,16 +111,65 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       await api.post("/products", newData).then(({ data }) => {
         vehicles.push(data);
-        setIsModalAnuncio(false)
+        setIsModalAnuncio(false);
       });
     } catch (error) {
       console.log(error);
     }
   };
 
+  const getUser = () => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+
   useEffect(() => {
-    getVehicles();
-  }, []);
+    if (token) {
+      getUser();
+    } else {
+      getVehicles();
+    }
+  }, [isLogged]);
+
+  const updateProduct = (data: IProductUpdate) => {
+    console.log(data);
+
+    if (token && idVehicleEdit) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api
+        .patch(`/products/${idVehicleEdit}`, data)
+        .then((response: AxiosResponse) => {
+          console.log(response.data);
+          setIsModalEditAnuncio(false);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (idVehicle) {
+      api
+        .get(`/products/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setOneVehicle(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
+  }, [idVehicle]);
 
   return (
     <ProductContext.Provider
@@ -148,11 +178,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-        userLogged,
-        tagsCar,
-        photos,
-        comments,
-        accountType,
         navigate,
         modal,
         setModal,
@@ -164,14 +189,18 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalSucess,
         isModalEditAnuncio,
         setIsModalEditAnuncio,
-        isModalEditPerfil,
-        setIsModalEditPerfil,
+        getVehicles,
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
+        createProduct,
+        setIdVehicle,
+        idVehicle,
+        oneVehicle,
+        setIdVehicleEdit,
+        updateProduct,
         isModalEditAddress,
         setIsModalEditAddress,
-        createProduct,
       }}
     >
       {children}
