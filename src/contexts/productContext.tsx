@@ -22,10 +22,8 @@ interface IProductProvider {
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
-  accountType: string;
   navigate: NavigateFunction;
   modal: boolean;
   setModal: (value: boolean) => void;
@@ -71,16 +69,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
-
-  const accountType = "Anunciante";
-  const photos = [
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-  ];
 
   const auctionVehicles = vehicles.filter(
     (vehicle) =>
@@ -154,8 +142,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-        photos,
-        accountType,
+
         navigate,
         modal,
         setModal,

@@ -4,6 +4,7 @@ import "./App.css";
 
 import RoutesMain from "./routes/RoutesMain";
 import GlobalStyle from "./style/GlobalStyle";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (

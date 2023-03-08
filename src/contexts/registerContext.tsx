@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 import { IAuthProvider, IRegister } from "../interfaces";
 import api from "../services/api";
@@ -40,14 +41,16 @@ const RegisterProvider = ({ children }: IAuthProvider) => {
 
     const { zipCode, state, city, road, number, complement, ...newObj } = data;
 
-    console.log(newObj.birthdate);
-
     api
       .post("/users", newObj)
       .then((response: AxiosResponse) => {
-        setModalSucess(true);
+        if (response.status === 201) {
+          setModalSucess(true);
+        }
       })
       .catch((err: AxiosError) => {
+        const data: any = err.response?.data;
+        toast.error(`${data.message}`);
         console.log(err);
       });
   };
