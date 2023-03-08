@@ -6,15 +6,24 @@ import { AsideProduct } from "../../components/AsideProduct";
 import Footer from "../../components/Footer";
 import { useProductContext } from "../../contexts/productContext";
 import { useParams } from "react-router-dom";
+import { useSessionContext } from "../../contexts/sessionContext";
+import EditarPerfil from "../../components/ModalEditarPerfil";
+import EditarAddress from "../../components/ModalEditarAddress";
+import ExcluirUser from "../../components/ModalExcluirUser";
 
 const Product = () => {
   const { productId } = useParams();
   const { setIdVehicle, idPhoto } = useProductContext();
+  const { isModalEditPerfil, isModalEditAddress, isModalExcluirPerfil } =
+    useSessionContext();
 
   setIdVehicle(productId);
 
   return (
     <ProductPage>
+      {isModalEditPerfil && <EditarPerfil />}
+      {isModalEditAddress && <EditarAddress />}
+      {isModalExcluirPerfil && <ExcluirUser />}
       <Header />
       <ModaL
         titleModal={"Foto veículo"}

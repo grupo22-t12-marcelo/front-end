@@ -26,7 +26,6 @@ const Home = () => {
       {isModalAnuncio && <CriarAnuncio />}
       {isModalEditAnuncio && <EditarAnuncio />}
       {isModalEditPerfil && <EditarPerfil />}
-      {isModalEditAnuncio && <EditarAnuncio />}
       {isModalEditAddress && <EditarAddress />}
       {isModalExcluirPerfil && <ExcluirUser />}
 

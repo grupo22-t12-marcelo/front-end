@@ -23,7 +23,7 @@ const Comment = ({ nameUser, dateComment, commentText, abrevName }: any) => {
         </div>
         <h5>{nameUser}</h5>
         <span>
-          <img src="src/assets/pointComment.png" alt="" id="point" />
+          <img src="../../src/assets/pointComment.png" alt="" id="point" />
         </span>
         <span>{dateComment}</span>
       </div>
