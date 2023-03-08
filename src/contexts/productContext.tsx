@@ -95,7 +95,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setVehicles(response.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err);
+        console.log(err); 
       });
   };
 
