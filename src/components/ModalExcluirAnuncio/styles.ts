@@ -1,56 +1,87 @@
 import styled from "styled-components";
 
-export const BackgroundModalExcluir = styled.section`
+export const Background = styled.section`
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
 
   top: 0;
   left: 0;
+  overflow-y: scroll;
+
   position: fixed;
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
 
-  padding-top: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 6;
 `;
 
-export const DivContentExcluir = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+export const Modal = styled.div`
+  background-color: var(--white-fixed);
 
-  span {
-    font-weight: var(--heading-7-600);
-    color: black;
+  width: 90%;
+  height: 200px;
+  border-radius: 4px;
+
+  @media screen and (min-width: 485px) {
+    width: 436px;
   }
 
-  p {
-    font-weight: 400;
-  }
-`;
+  .header {
+    width: 90%;
+    height: 50px;
 
-export const Buttons = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    align-items: center;
 
-  button {
-    padding: 10px 22px;
-    border: none;
-    border-radius: 4px;
-    font-weight: var(--heading-7-600);
-  }
+    h4 {
+      font-size: 16px;
+      font-weight: var(--heading-7-500);
+    }
 
-  .cancelar {
-    background-color: var(--grey6);
-    color: var(--grey2);
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
-  .excluir-anuncio {
-    background-color: var(--alert2);
-    color: var(--alert1);
-  }
+  .content {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap: 20px;
+    margin-top: 20px;
 
+    span {
+      width: 90%;
+      flex-wrap: wrap;
+      font-weight: var(--heading-7-500);
+    }
 
-  @media screen and (min-width: 415px) {
-    justify-content: end;
-    gap: 10px;
+    div {
+      display: flex;
+      gap: 20px;
+
+      button {
+        border: solid 2px transparent;
+        width: 120px;
+      }
+
+      .nao {
+        font-weight: var(--heading-7-600);
+        color: var(--grey2);
+        background-color: var(--grey6);
+      }
+
+      .sim {
+        background-color: var(--brand1);
+        font-weight: var(--heading-7-600);
+      }
+    }
   }
 `;
