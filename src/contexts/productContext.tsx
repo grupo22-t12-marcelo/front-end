@@ -1,7 +1,13 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { IAuthProvider, IProductUpdate, IVehicle } from "../interfaces";
+import {
+  IAnuncio,
+  IAuthProvider,
+  IProduct,
+  IProductUpdate,
+  IVehicle,
+} from "../interfaces";
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
 
@@ -25,6 +31,9 @@ interface IProductProvider {
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  isModalEditAddress: boolean;
+  setIsModalEditAddress: (value: boolean) => void;
+  createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
@@ -39,6 +48,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [modal, setModal] = useState(false);
   const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
+  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -87,6 +97,25 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       .catch((err: AxiosError) => {
         console.log(err);
       });
+  };
+
+  const createProduct = async (data: IAnuncio) => {
+    const token = localStorage.getItem("@TOKEN");
+    const { image1, image2, image3, image4, image5, image6 } = data;
+    const imagesGallery = { image1, image2, image3, image4, image5, image6 };
+
+    delete data.image1;
+    delete data.image2;
+    const newData = { imagesGallery: { ...imagesGallery }, ...data };
+    try {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await api.post("/products", newData).then(({ data }) => {
+        vehicles.push(data);
+        setIsModalAnuncio(false);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getUser = () => {
@@ -164,11 +193,14 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
+        createProduct,
         setIdVehicle,
         idVehicle,
         oneVehicle,
         setIdVehicleEdit,
         updateProduct,
+        isModalEditAddress,
+        setIsModalEditAddress,
       }}
     >
       {children}
