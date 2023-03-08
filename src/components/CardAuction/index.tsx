@@ -49,7 +49,7 @@ const CardAuction = ({
   const navigate = useNavigate();
 
   const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
-  const { isLogged } = useSessionContext();
+  const { isLogged, setIdExcluirAnuncio } = useSessionContext();
 
   return (
     <Container>
@@ -94,6 +94,7 @@ const CardAuction = ({
           <div className="divButtonEdit">
             <Button
               onClick={() => {
+                setIdExcluirAnuncio(idProduct);
                 setIsModalEditAnuncio(true);
                 setIdVehicleEdit(idProduct);
               }}
