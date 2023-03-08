@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../utils/colorsUser";
 
 const InfoUser = styled.div`
   display: flex;
@@ -67,7 +68,7 @@ const InfoUser = styled.div`
     justify-content: center;
     flex-direction: row;
 
-    background-color: red;
+    background-color: ${colors[Math.floor(Math.random() * colors.length)]};
 
     & > p {
       font-weight: 500;

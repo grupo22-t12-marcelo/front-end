@@ -1,5 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  SetStateAction,
+  Dispatch,
+  useEffect,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IAuthProvider, ILogin, IUserUpdate } from "../interfaces";
@@ -77,6 +84,20 @@ const SessionProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, [token]);
+
   const userUpdate = (data: IUserUpdate) => {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
@@ -112,7 +133,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           setTimeout(() => {
             navigate("/", { replace: true });
             navigate(0);
-          }, 3000);
+          }, 1500);
         })
         .then((err) => {
           console.log(err);

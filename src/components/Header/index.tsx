@@ -84,9 +84,7 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                       Editar Endereço
                     </DropdownItem>
                     {userData.type_account === "Anunciante" && (
-                      <DropdownItem
-                        onClick={() => navigate(`/users/${userData.id}`)}
-                      >
+                      <DropdownItem onClick={() => navigate(`/my_vehicles/`)}>
                         Meus Anúncios
                       </DropdownItem>
                     )}

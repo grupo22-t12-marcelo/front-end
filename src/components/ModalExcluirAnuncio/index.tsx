@@ -4,7 +4,7 @@ import { Button } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 
 const ExcluirAnuncio = () => {
-  const { setIsModalExcluirAnuncio, deleteProduct } = useProductContext();
+  const { setIsModalExcluirAnuncio, deleteAnuncio } = useProductContext();
 
   return (
     <Background>
@@ -13,7 +13,9 @@ const ExcluirAnuncio = () => {
           <h4>Excluir anuncio</h4>
           <AiOutlineClose
             style={{ cursor: "pointer" }}
-            onClick={() => setIsModalExcluirAnuncio(false)}
+            onClick={() => {
+              setIsModalExcluirAnuncio(false);
+            }}
           />
         </div>
         <div className="content">
@@ -21,11 +23,19 @@ const ExcluirAnuncio = () => {
           <div>
             <Button
               className="nao"
-              onClick={() => setIsModalExcluirAnuncio(false)}
+              onClick={() => {
+                setIsModalExcluirAnuncio(false);
+              }}
             >
               Não
             </Button>
-            <Button className="sim" onClick={deleteProduct}>
+            <Button
+              className="sim"
+              onClick={(e) => {
+                e.preventDefault();
+                deleteAnuncio();
+              }}
+            >
               Sim
             </Button>
           </div>

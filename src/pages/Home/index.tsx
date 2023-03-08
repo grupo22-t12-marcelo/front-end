@@ -14,8 +14,6 @@ import "./index.css";
 import ExcluirAnuncio from "./../../components/ModalExcluirAnuncio/index";
 
 const Home = () => {
-  const { isModalAnuncio, isModalEditAnuncio, isModalExcluirAnuncio } =
-    useProductContext();
   const {
     isLogged,
     isModalEditPerfil,
@@ -25,16 +23,13 @@ const Home = () => {
 
   return (
     <div className="home-div">
-      {isModalAnuncio && <CriarAnuncio />}
-      {isModalEditAnuncio && <EditarAnuncio />}
       {isModalEditPerfil && <EditarPerfil />}
       {isModalEditAddress && <EditarAddress />}
       {isModalExcluirPerfil && <ExcluirUser />}
-      {isModalExcluirAnuncio && <ExcluirAnuncio />}
 
       <Header></Header>
       <SubHeader></SubHeader>
-      {isLogged ? <AllVehiclesUser /> : <AllVehicles />}
+      <AllVehicles />
 
       <Footer />
     </div>
