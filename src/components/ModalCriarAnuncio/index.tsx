@@ -11,10 +11,11 @@ import {
   TipoAnuncio,
   TipoVeiculo,
 } from "./styles";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { IAnuncio } from "../../interfaces";
 import { ProductContext } from "../../contexts/productContext";
 import { schemaAnuncio } from "../../validators/schemas";
+import { useIMask } from "react-imask";
 
 const CriarAnuncio = () => {
   const [isMoreImages, setIsMoreImages] = useState(false);
@@ -23,13 +24,21 @@ const CriarAnuncio = () => {
   const { setIsModalAnuncio, isModalAnuncio, createProduct } =
     useContext(ProductContext);
 
-  const { register, handleSubmit, unregister } = useForm<IAnuncio>({
+  const { register, handleSubmit, unregister, control } = useForm<IAnuncio>({
     resolver: yupResolver(schemaAnuncio),
   });
 
   const cadastro = (data: IAnuncio) => {
     createProduct(data);
   };
+
+  const yearCar = useIMask({
+    mask: "0000",
+  });
+
+  const priceCar = useIMask({
+    mask: "R$ 00.000",
+  });
 
   return (
     <>
@@ -96,7 +105,24 @@ const CriarAnuncio = () => {
                     <div>
                       <label>
                         <span>Ano</span>
-                        <input {...register("year")} type="number" />
+                        <Controller
+                          render={(params) => (
+                            <input
+                              name={params.field.name}
+                              onBlur={params.field.onBlur}
+                              defaultValue={params.field.value}
+                              ref={yearCar.ref}
+                              onChange={() =>
+                                params.field.onChange({
+                                  target: { value: yearCar.unmaskedValue },
+                                })
+                              }
+                              placeholder="0000"
+                            />
+                          )}
+                          name="year"
+                          control={control}
+                        />
                       </label>
                       <label>
                         <span>Quilometragem</span>
@@ -111,7 +137,24 @@ const CriarAnuncio = () => {
                       <span>
                         {tipo === "Venda" ? "Preço" : "Lance inícial"}
                       </span>
-                      <input {...register("price")} type="number" />
+                      <Controller
+                        render={(params) => (
+                          <input
+                            name={params.field.name}
+                            onBlur={params.field.onBlur}
+                            defaultValue={params.field.value}
+                            ref={priceCar.ref}
+                            onChange={() =>
+                              params.field.onChange({
+                                target: { value: priceCar.unmaskedValue },
+                              })
+                            }
+                            placeholder="R$ 00.000,00"
+                          />
+                        )}
+                        name="price"
+                        control={control}
+                      />
                     </label>
                   </div>
 

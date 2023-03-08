@@ -40,7 +40,7 @@ const EditarAnuncio = () => {
   });
 
   const priceCar = useIMask({
-    mask: "R$ 000.000,00",
+    mask: "R$ 00.000",
   });
 
   return (
