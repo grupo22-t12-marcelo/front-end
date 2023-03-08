@@ -71,16 +71,7 @@ export interface IImagesGallery {
   image4?: string;
   image5?: string;
   image6?: string;
-}
-
-export interface INewImagesGallery {
-  id: string;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
-  image5: string;
-  image6: string;
+  image?: string;
 }
 
 export interface IVehicle {

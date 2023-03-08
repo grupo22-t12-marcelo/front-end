@@ -1,5 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState, useEffect } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import {
   NavigateFunction,
   useLocation,
@@ -40,6 +47,8 @@ interface IProductProvider {
   idVehicle: string;
   setIsModalExcluirPerfil: (value: boolean) => void;
   isModalExcluirPerfil: boolean;
+  photosCar: never[];
+  setPhotosCar: Dispatch<SetStateAction<never[]>>;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -59,6 +68,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
+  const [photosCar, setPhotosCar] = useState<never[]>([]);
 
   const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
 
@@ -72,6 +82,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
+
+  console.log(idPhoto);
   const accountType = "Anunciante";
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
@@ -100,8 +112,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       vehicle.type_vehicle === "Moto" &&
       vehicle.is_published === true
   );
-
-  console.log(oneVehicle);
 
   const getVehicles = () => {
     api
@@ -181,6 +191,8 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         oneVehicle,
         setIsModalExcluirPerfil,
         isModalExcluirPerfil,
+        photosCar,
+        setPhotosCar,
       }}
     >
       {children}

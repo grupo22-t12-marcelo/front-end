@@ -61,7 +61,6 @@ const Photo = styled.div`
       img {
         width: 94px;
         height: 54px;
-        object-fit: cover;
       }
     }
   }
