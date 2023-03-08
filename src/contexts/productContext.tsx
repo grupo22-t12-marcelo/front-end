@@ -83,7 +83,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
 
   const [idPhoto, setIdPhoto] = useState("");
 
-  console.log(idPhoto);
   const accountType = "Anunciante";
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
