@@ -11,30 +11,25 @@ import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
 import "./index.css";
-import ExcluirAnuncio from './../../components/ModalExcluirAnuncio/index';
+import ExcluirAnuncio from "./../../components/ModalExcluirAnuncio/index";
 
 const Home = () => {
-  const { isModalAnuncio, isModalEditAnuncio } = useProductContext();
   const {
     isLogged,
     isModalEditPerfil,
     isModalEditAddress,
     isModalExcluirPerfil,
-    isModalExcluirAnuncio
   } = useSessionContext();
 
   return (
     <div className="home-div">
-      {isModalAnuncio && <CriarAnuncio />}
-      {isModalEditAnuncio && <EditarAnuncio />}
       {isModalEditPerfil && <EditarPerfil />}
       {isModalEditAddress && <EditarAddress />}
       {isModalExcluirPerfil && <ExcluirUser />}
-      {isModalExcluirAnuncio && <ExcluirAnuncio />}
 
       <Header></Header>
       <SubHeader></SubHeader>
-      {isLogged ? <AllVehiclesUser /> : <AllVehicles />}
+      <AllVehicles />
 
       <Footer />
     </div>

@@ -28,18 +28,19 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
+  isModalExcluirAnuncio: boolean;
+  setIsModalExcluirAnuncio: (value: boolean) => void;
   getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
-  isModalEditAddress: boolean;
-  setIsModalEditAddress: (value: boolean) => void;
   createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
   setIdVehicleEdit: (value: string) => void;
   updateProduct: (data: IProductUpdate) => void;
+  deleteAnuncio: () => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -47,17 +48,17 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
-  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
+  const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
   const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
 
-  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
+  const { token } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -131,31 +132,11 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     }
   };
 
-  const getUser = () => {
-    if (token) {
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
-      api.get("/users").then((response: AxiosResponse) => {
-        setUserData({
-          ...response.data,
-        });
-      });
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  };
-
   useEffect(() => {
-    if (token) {
-      getUser();
-    } else {
-      getVehicles();
-    }
-  }, [isLogged]);
+    getVehicles();
+  }, []);
 
   const updateProduct = (data: IProductUpdate) => {
-    console.log(data);
-
     if (token && idVehicleEdit) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
@@ -164,11 +145,38 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         .then((response: AxiosResponse) => {
           console.log(response.data);
           setIsModalEditAnuncio(false);
+
+          setTimeout(() => {
+            navigate(0);
+          }, 1500);
         })
         .catch((err: AxiosError) => {
           console.log(err);
         });
     }
+  };
+
+  const deleteAnuncio = async () => {
+    try {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      await api.delete(`/products/${idVehicleEdit}`);
+      toast.success("Anuncio excluido!", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } catch (err) {
+      toast.error("Error ao excluir o anuncio!");
+    }
+    setIsModalExcluirAnuncio(false);
   };
 
   useEffect(() => {
@@ -212,8 +220,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         oneVehicle,
         setIdVehicleEdit,
         updateProduct,
-        isModalEditAddress,
-        setIsModalEditAddress,
+        isModalExcluirAnuncio,
+        setIsModalExcluirAnuncio,
+        deleteAnuncio,
       }}
     >
       {children}

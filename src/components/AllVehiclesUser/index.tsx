@@ -42,6 +42,7 @@ const AllVehiclesUser = () => {
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
                     createdAtCount={vehicle.createdAt}
+                    isOwner={true}
                   ></CardAuction>
                 </li>
               ))
@@ -69,6 +70,7 @@ const AllVehiclesUser = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    isOwner={true}
                   />
                 </li>
               ))
@@ -96,6 +98,7 @@ const AllVehiclesUser = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    isOwner={true}
                   />
                 </li>
               ))

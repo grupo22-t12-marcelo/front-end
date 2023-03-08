@@ -1,11 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import {
-  useContext,
-  createContext,
-  useState,
-  SetStateAction,
-  Dispatch,
-} from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IAuthProvider, ILogin, IUserUpdate } from "../interfaces";
@@ -29,10 +23,6 @@ interface ISessionProvider {
   setIsModalEditAddress: (value: boolean) => void;
   isModalExcluirPerfil: boolean;
   setIsModalExcluirPerfil: (value: boolean) => void;
-  isModalExcluirAnuncio: boolean;
-  setIsModalExcluirAnuncio: (value: boolean) => void;
-  setIdExcluirAnuncio: Dispatch<SetStateAction<String>>;
-  IdExcluirAnuncio: String;
 }
 
 interface IresponseData {
@@ -49,9 +39,6 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
-  const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
-
-  const [IdExcluirAnuncio, setIdExcluirAnuncio] = useState<String>("");
 
   const token = localStorage.getItem("@TOKEN");
 
@@ -90,6 +77,20 @@ const SessionProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, [token]);
+
   const userUpdate = (data: IUserUpdate) => {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
@@ -125,7 +126,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
           setTimeout(() => {
             navigate("/", { replace: true });
             navigate(0);
-          }, 3000);
+          }, 1500);
         })
         .then((err) => {
           console.log(err);
@@ -150,10 +151,6 @@ const SessionProvider = ({ children }: IAuthProvider) => {
         setIsModalEditAddress,
         isModalExcluirPerfil,
         setIsModalExcluirPerfil,
-        isModalExcluirAnuncio,
-        setIsModalExcluirAnuncio,
-        setIdExcluirAnuncio,
-        IdExcluirAnuncio
       }}
     >
       {children}
