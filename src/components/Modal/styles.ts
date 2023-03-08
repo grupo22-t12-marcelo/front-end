@@ -11,7 +11,10 @@ export const Header = styled(ModalHeader)`
 `;
 
 export const Body = styled(ModalBody)`
-
+  img {
+    object-fit: cover;
+    width: 100%;
+  }
 `;
 
 export const Footer = styled(ModalFooter)`

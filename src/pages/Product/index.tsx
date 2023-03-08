@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 const Product = () => {
   const { productId } = useParams();
-  const { setIdVehicle, oneVehicle } = useProductContext();
+  const { setIdVehicle, idPhoto } = useProductContext();
 
   setIdVehicle(productId);
 
@@ -18,7 +18,7 @@ const Product = () => {
       <Header />
       <ModaL
         titleModal={"Foto veículo"}
-        bodyModal={<img width={400} height={300} src={oneVehicle.image}></img>}
+        bodyModal={<img width={400} height={300} src={idPhoto}></img>}
       />
       <main>
         <SectionProduct />

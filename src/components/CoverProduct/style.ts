@@ -9,6 +9,10 @@ const Cover = styled.div`
   width: 100%;
   cursor: pointer;
 
+  img {
+    height: 90%;
+  }
+
   @media (min-width: 1100px) {
     height: 300px;
   }
