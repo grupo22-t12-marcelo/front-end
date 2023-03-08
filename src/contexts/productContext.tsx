@@ -27,18 +27,19 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
+  isModalExcluirAnuncio: boolean;
+  setIsModalExcluirAnuncio: (value: boolean) => void;
   getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
-  isModalEditAddress: boolean;
-  setIsModalEditAddress: (value: boolean) => void;
   createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
   setIdVehicleEdit: (value: string) => void;
   updateProduct: (data: IProductUpdate) => void;
+  deleteProduct: () => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -46,10 +47,10 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
-  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
+  const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
@@ -95,7 +96,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setVehicles(response.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err); 
+        console.log(err);
       });
   };
 
@@ -140,8 +141,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   }, [isLogged]);
 
   const updateProduct = (data: IProductUpdate) => {
-    console.log(data);
-
     if (token && idVehicleEdit) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
@@ -150,6 +149,21 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         .then((response: AxiosResponse) => {
           console.log(response.data);
           setIsModalEditAnuncio(false);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const deleteProduct = () => {
+    if (token && idVehicleEdit) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api
+        .delete(`/products/${idVehicleEdit}`)
+        .then((response: AxiosResponse) => {
+          setIsModalExcluirAnuncio(false);
         })
         .catch((err: AxiosError) => {
           console.log(err);
@@ -198,8 +212,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         oneVehicle,
         setIdVehicleEdit,
         updateProduct,
-        isModalEditAddress,
-        setIsModalEditAddress,
+        isModalExcluirAnuncio,
+        setIsModalExcluirAnuncio,
+        deleteProduct,
       }}
     >
       {children}

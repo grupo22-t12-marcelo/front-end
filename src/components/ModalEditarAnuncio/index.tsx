@@ -18,14 +18,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { IProductUpdate } from "../../interfaces";
 import { schemaImagesUpdate } from "../../validators/schemas";
-import { useSessionContext } from "../../contexts/sessionContext";
 
 const EditarAnuncio = () => {
-  const { setIsModalEditAnuncio, updateProduct } = useProductContext();
+  const { setIsModalEditAnuncio, updateProduct, setIsModalExcluirAnuncio } =
+    useProductContext();
   const [tipo, setTipo] = useState("Venda");
   const [isMoreImages, setIsMoreImages] = useState(false);
-
-  const { setIsModalExcluirAnuncio} = useSessionContext()
 
   const {
     register,
@@ -314,9 +312,9 @@ const EditarAnuncio = () => {
           <div className="buttons">
             <Button
               className="excluir"
-              onClick={() =>{ 
-                setIsModalExcluirAnuncio(true)
-                setIsModalEditAnuncio(false)
+              onClick={() => {
+                setIsModalExcluirAnuncio(true);
+                setIsModalEditAnuncio(false);
               }}
             >
               Excluir anuncio

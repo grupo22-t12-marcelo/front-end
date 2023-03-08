@@ -11,16 +11,16 @@ import SubHeader from "../../components/SubHeader";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
 import "./index.css";
-import ExcluirAnuncio from './../../components/ModalExcluirAnuncio/index';
+import ExcluirAnuncio from "./../../components/ModalExcluirAnuncio/index";
 
 const Home = () => {
-  const { isModalAnuncio, isModalEditAnuncio } = useProductContext();
+  const { isModalAnuncio, isModalEditAnuncio, isModalExcluirAnuncio } =
+    useProductContext();
   const {
     isLogged,
     isModalEditPerfil,
     isModalEditAddress,
     isModalExcluirPerfil,
-    isModalExcluirAnuncio
   } = useSessionContext();
 
   return (

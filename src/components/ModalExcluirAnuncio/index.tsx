@@ -1,10 +1,10 @@
 import { Background, Modal } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "reactstrap";
-import { useSessionContext } from "../../contexts/sessionContext";
+import { useProductContext } from "../../contexts/productContext";
 
 const ExcluirAnuncio = () => {
-  const { setIsModalExcluirAnuncio, deleteUser } = useSessionContext();
+  const { setIsModalExcluirAnuncio, deleteProduct } = useProductContext();
 
   return (
     <Background>
@@ -25,7 +25,7 @@ const ExcluirAnuncio = () => {
             >
               Não
             </Button>
-            <Button className="sim" onClick={deleteUser}>
+            <Button className="sim" onClick={deleteProduct}>
               Sim
             </Button>
           </div>

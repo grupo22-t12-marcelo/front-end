@@ -23,8 +23,6 @@ interface ISessionProvider {
   setIsModalEditAddress: (value: boolean) => void;
   isModalExcluirPerfil: boolean;
   setIsModalExcluirPerfil: (value: boolean) => void;
-  isModalExcluirAnuncio: boolean;
-  setIsModalExcluirAnuncio: (value: boolean) => void;
 }
 
 interface IresponseData {
@@ -41,7 +39,6 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
-  const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
 
   const token = localStorage.getItem("@TOKEN");
 
@@ -140,8 +137,6 @@ const SessionProvider = ({ children }: IAuthProvider) => {
         setIsModalEditAddress,
         isModalExcluirPerfil,
         setIsModalExcluirPerfil,
-        isModalExcluirAnuncio,
-        setIsModalExcluirAnuncio,
       }}
     >
       {children}
