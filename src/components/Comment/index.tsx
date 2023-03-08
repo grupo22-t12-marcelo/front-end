@@ -1,4 +1,5 @@
 import { useCommentContext } from "../../contexts/commentsContext";
+import { returnAbrevName } from "../../utils/abrevName";
 import { CircleUser } from "../CircleUser";
 import { CommentDiv } from "./style";
 
@@ -8,18 +9,7 @@ const Comment = ({ nameUser, dateComment, commentText, abrevName }: any) => {
     <CommentDiv>
       <div>
         <div className="circleUser">
-          {abrevName?.length > 0 ? (
-            abrevName?.split(" ").length === 1 ? (
-              <p> {abrevName[0]} </p>
-            ) : (
-              <>
-                <p>{abrevName[0]}</p>
-                <p>{abrevName.split(" ")[1][0]}</p>
-              </>
-            )
-          ) : (
-            <></>
-          )}
+          <p>{returnAbrevName(abrevName)} </p>
         </div>
         <h5>{nameUser}</h5>
         <span>
