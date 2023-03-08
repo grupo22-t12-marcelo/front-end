@@ -41,7 +41,7 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [isModalAnuncio, setIsModalAnuncio] = useState(true);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
@@ -130,6 +130,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       await api.post("/products", newData).then(({ data }) => {
         vehicles.push(data);
+        setIsModalAnuncio(false)
       });
     } catch (error) {
       console.log(error);
