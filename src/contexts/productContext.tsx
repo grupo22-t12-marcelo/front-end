@@ -110,7 +110,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     try {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       await api.post("/products", newData).then(({ data }) => {
-        vehicles.push(data);
         setIsModalAnuncio(false);
       });
     } catch (error) {
