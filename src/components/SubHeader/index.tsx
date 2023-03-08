@@ -20,6 +20,7 @@ const SubHeader: React.FC<IProps> = () => {
               abrevName={returnAbrevName(userData?.name!)}
               description={userData?.description!}
               name={userData?.name!}
+              typeAccount={userData?.type_account!}
               children={
                 <Button
                   onClick={() => setIsModalAnuncio(true)}

@@ -3,17 +3,19 @@ import { CoverProduct } from "../CoverProduct/index";
 import { Photo } from "./style";
 
 const PhotoGalery = () => {
-  const { oneVehicle, setPhotosCar } = useProductContext();
+  const { oneVehicle } = useProductContext();
 
   const images: { [unit: string]: string } = { ...oneVehicle.imagesGallery };
 
   const imagesArray = [];
 
   for (let image in images) {
-    if (images[image] !== "none" && image !== "id") {
+    if (images[image] !== "none" && images[image] !== "" && image !== "id") {
       imagesArray.push(images[image]);
     }
   }
+
+  console.log(images);
 
   return (
     <>
