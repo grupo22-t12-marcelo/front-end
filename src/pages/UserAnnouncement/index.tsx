@@ -31,6 +31,7 @@ const UserAnnouncement = () => {
           <InfosUserPage
             name={userVehicles?.name!}
             abrevName={userVehicles?.name!}
+            typeAccount={userVehicles?.type_account!}
             description={userVehicles?.description!}
           />
         </div>
