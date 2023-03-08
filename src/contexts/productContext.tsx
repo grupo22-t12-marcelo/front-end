@@ -1,5 +1,12 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState, useEffect } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import {
   NavigateFunction,
   useLocation,
@@ -49,6 +56,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
+  const [photosCar, setPhotosCar] = useState<never[]>([]);
 
   const { setIsLogged, token, setUserData, isLogged, userUpdate } =
     useSessionContext();
@@ -63,6 +71,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
+
   const accountType = "Anunciante";
   const photos = [
     "/src/assets/Carro-CapaProduct.png",
@@ -126,14 +135,16 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   }, [isLogged, userUpdate]);
 
   useEffect(() => {
-    api
-      .get(`/products/${idVehicle}`)
-      .then((response: AxiosResponse) => {
-        setOneVehicle(response.data);
-      })
-      .catch((err: AxiosError) => {
-        console.log(err);
-      });
+    if (idVehicle) {
+      api
+        .get(`/products/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setOneVehicle(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
   }, [idVehicle]);
 
   return (
