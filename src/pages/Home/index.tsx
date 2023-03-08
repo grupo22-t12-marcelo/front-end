@@ -13,14 +13,13 @@ import { useSessionContext } from "../../contexts/sessionContext";
 import "./index.css";
 
 const Home = () => {
+  const { isModalAnuncio, isModalEditAnuncio } = useProductContext();
   const {
+    isLogged,
     isModalEditPerfil,
-    isModalAnuncio,
-    isModalEditAnuncio,
     isModalEditAddress,
     isModalExcluirPerfil,
-  } = useProductContext();
-  const { isLogged } = useSessionContext();
+  } = useSessionContext();
 
   return (
     <div className="home-div">

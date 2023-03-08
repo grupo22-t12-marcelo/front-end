@@ -8,8 +8,6 @@ import { Input } from "../input";
 import { Container, DivRadio } from "./styles";
 import { TextArea } from "../TextArea";
 import { ModalSucessRegister } from "../ModalSucessRegister";
-import api from "../../services/api";
-import { AxiosResponse } from "axios";
 import { useRegisterContext } from "../../contexts/registerContext";
 
 const FormRegister = () => {

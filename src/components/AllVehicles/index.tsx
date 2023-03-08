@@ -15,7 +15,7 @@ const AllVehicles = () => {
       <CarouselAuction
         children={
           <>
-            {auctionVehicles.length > 0 ? (
+            {auctionVehicles?.length > 0 ? (
               auctionVehicles.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
                   <CardAuction
@@ -43,7 +43,7 @@ const AllVehicles = () => {
         type="Carro"
         children={
           <>
-            {carsVehicle.length > 0 ? (
+            {carsVehicle?.length > 0 ? (
               carsVehicle.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
                   <CardVehicle
@@ -70,7 +70,7 @@ const AllVehicles = () => {
         type="Moto"
         children={
           <>
-            {motorbikeVehicle.length > 0 ? (
+            {motorbikeVehicle?.length > 0 ? (
               motorbikeVehicle.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
                   <CardVehicle
