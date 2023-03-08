@@ -77,14 +77,6 @@ const CardVehicle = ({
       ) : (
         <UserContainer>
           <div>
-            {abrevName.split(" ").length === 1 ? (
-              <p> {abrevName[0]} </p>
-            ) : (
-              <>
-                <p>{abrevName[0]}</p>
-                <p>{abrevName.split(" ")[1][0]}</p>
-              </>
-            )}
             <p>{returnAbrevName(abrevName)} </p>
           </div>
           <h5> {name} </h5>
