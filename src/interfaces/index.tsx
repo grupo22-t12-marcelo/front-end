@@ -16,9 +16,9 @@ export interface ICoverProduct {
 export interface IAnuncio {
   type_announcement: String;
   title: String;
-  year: Date;
+  year: string;
   kilometers: String;
-  price: String;
+  price: string;
   description: String;
   type_vehicle: String;
   image?: String;
@@ -29,7 +29,6 @@ export interface IAnuncio {
   image5?: String;
   image6?: String;
 }
-
 
 export interface IRegister {
   name: string;
