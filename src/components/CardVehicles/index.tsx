@@ -24,6 +24,7 @@ interface ICardVehicle {
   yearCar: number;
   priceCar: number;
   idProduct: string;
+  isOwner?: boolean;
 }
 
 const CardVehicle = ({
@@ -36,6 +37,7 @@ const CardVehicle = ({
   yearCar,
   priceCar,
   idProduct,
+  isOwner,
 }: ICardVehicle) => {
   let { productId } = useParams();
 
@@ -43,11 +45,10 @@ const CardVehicle = ({
 
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
-  const { isLogged } = useSessionContext();
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
 
   const EnableClick = () => {
-    navigate(`product/${productId}`);
+    navigate(`/product/${productId}`);
   };
 
   const DisableClick = () => {
@@ -55,7 +56,7 @@ const CardVehicle = ({
   };
 
   const onClick = () => {
-    if (isLogged) {
+    if (isOwner) {
       DisableClick();
     } else {
       EnableClick();
@@ -72,7 +73,7 @@ const CardVehicle = ({
 
       <CardSubtitle>{subtitle}</CardSubtitle>
 
-      {isLogged ? (
+      {isOwner ? (
         <></>
       ) : (
         <UserContainer>
@@ -90,10 +91,13 @@ const CardVehicle = ({
         </div>
         <span>{formatPrice(priceCar)} </span>
       </InfosVehicle>
-      {isLogged ? (
+      {isOwner ? (
         <div className="divButtonEdit">
           <Button
-            onClick={() => setIsModalEditAnuncio(true)}
+            onClick={() => {
+              setIsModalEditAnuncio(true);
+              setIdVehicleEdit(idProduct);
+            }}
             nameButton="Editar"
             backgroundColor="var(--grey8)"
             borderColor="var(--grey1)"
@@ -109,7 +113,7 @@ const CardVehicle = ({
             color="var(--grey1)"
             height={40}
             width={120}
-            onClick={() => navigate(`product/${productId}`)}
+            onClick={() => navigate(`/product/${productId}`)}
           />
         </div>
       ) : (

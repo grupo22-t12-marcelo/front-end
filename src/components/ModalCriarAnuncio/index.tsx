@@ -1,8 +1,7 @@
 import { AiOutlineClose } from "react-icons/ai";
-import { useState, useContext, SetStateAction } from "react";
+import { useState, useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "reactstrap";
-import { IMaskInput } from "react-imask";
 import {
   BackgroundModal,
   DivImages,
@@ -12,31 +11,34 @@ import {
   TipoAnuncio,
   TipoVeiculo,
 } from "./styles";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { IAnuncio } from "../../interfaces";
 import { ProductContext } from "../../contexts/productContext";
 import { schemaAnuncio } from "../../validators/schemas";
+import { useIMask } from "react-imask";
 
 const CriarAnuncio = () => {
   const [isMoreImages, setIsMoreImages] = useState(false);
-  const [tipo, setTipo] = useState("Venda");
-  const [ano, setAno] = useState("");
-  const [preco, setPreco] = useState<String>("");
+  const [tipo, setTipo] = useState("");
 
-  const { setIsModalAnuncio, isModalAnuncio } = useContext(ProductContext);
+  const { setIsModalAnuncio, isModalAnuncio, createProduct } =
+    useContext(ProductContext);
 
-  const { register, handleSubmit, unregister } = useForm<IAnuncio>({
+  const { register, handleSubmit, unregister, control } = useForm<IAnuncio>({
     resolver: yupResolver(schemaAnuncio),
   });
 
   const cadastro = (data: IAnuncio) => {
-    const newObj = {
-      ...data,
-      ano,
-      preco,
-    };
-    console.log(newObj);
+    createProduct(data);
   };
+
+  const yearCar = useIMask({
+    mask: "0000",
+  });
+
+  const priceCar = useIMask({
+    mask: "R$ 000000",
+  });
 
   return (
     <>
@@ -63,8 +65,8 @@ const CriarAnuncio = () => {
                       name="radio"
                       onClick={(e) => {
                         setTipo("Venda");
-                        unregister("tipo", {});
-                        register("tipo", { value: "Venda" });
+                        unregister("type_announcement", {});
+                        register("type_announcement", { value: "Venda" });
                       }}
                     />
                     <span>Venda</span>
@@ -77,8 +79,8 @@ const CriarAnuncio = () => {
                       name="radio"
                       onClick={(e) => {
                         setTipo("Leilão");
-                        unregister("tipo");
-                        register("tipo", { value: "Leilão" });
+                        unregister("type_announcement");
+                        register("type_announcement", { value: "Leilão" });
                       }}
                     />
                     <span>Leilão</span>
@@ -95,7 +97,7 @@ const CriarAnuncio = () => {
                     <input
                       type="text"
                       placeholder="Digitar título"
-                      {...register("titulo")}
+                      {...register("title")}
                     />
                   </label>
 
@@ -103,19 +105,31 @@ const CriarAnuncio = () => {
                     <div>
                       <label>
                         <span>Ano</span>
-                        <IMaskInput
-                          mask="0000"
-                          onAccept={(value: any) => {
-                            setAno(value);
-                          }}
+                        <Controller
+                          render={(params) => (
+                            <input
+                              name={params.field.name}
+                              onBlur={params.field.onBlur}
+                              defaultValue={params.field.value}
+                              ref={yearCar.ref}
+                              onChange={() =>
+                                params.field.onChange({
+                                  target: { value: yearCar.unmaskedValue },
+                                })
+                              }
+                              placeholder="0000"
+                            />
+                          )}
+                          name="year"
+                          control={control}
                         />
                       </label>
                       <label>
                         <span>Quilometragem</span>
                         <input
-                          type="text"
+                          type="number"
                           placeholder="0"
-                          {...register("quilometragem")}
+                          {...register("kilometers")}
                         />
                       </label>
                     </div>
@@ -123,11 +137,23 @@ const CriarAnuncio = () => {
                       <span>
                         {tipo === "Venda" ? "Preço" : "Lance inícial"}
                       </span>
-                      <IMaskInput
-                        mask="R$ 0000000"
-                        onAccept={(value: any) => {
-                          setPreco(value);
-                        }}
+                      <Controller
+                        render={(params) => (
+                          <input
+                            name={params.field.name}
+                            onBlur={params.field.onBlur}
+                            defaultValue={params.field.value}
+                            ref={priceCar.ref}
+                            onChange={() =>
+                              params.field.onChange({
+                                target: { value: priceCar.unmaskedValue },
+                              })
+                            }
+                            placeholder="R$ 00.000,00"
+                          />
+                        )}
+                        name="price"
+                        control={control}
                       />
                     </label>
                   </div>
@@ -136,7 +162,7 @@ const CriarAnuncio = () => {
                     <span>Descrição</span>
                     <textarea
                       placeholder="Digitar descrição"
-                      {...register("descricao")}
+                      {...register("description")}
                     ></textarea>
                   </label>
                 </div>
@@ -152,8 +178,8 @@ const CriarAnuncio = () => {
                       value="Carro"
                       name="veiculo"
                       onClick={(e) => {
-                        unregister("tipoDoVeiculo");
-                        register("tipoDoVeiculo", { value: "Carro" });
+                        unregister("type_vehicle");
+                        register("type_vehicle", { value: "Carro" });
                       }}
                     />
                     <span>Carro</span>
@@ -165,8 +191,8 @@ const CriarAnuncio = () => {
                       value="Moto"
                       name="veiculo"
                       onClick={(e) => {
-                        unregister("tipoDoVeiculo");
-                        register("tipoDoVeiculo", { value: "Moto" });
+                        unregister("type_vehicle");
+                        register("type_vehicle", { value: "Moto" });
                       }}
                     />
                     <span>Moto</span>
@@ -180,7 +206,7 @@ const CriarAnuncio = () => {
                   <input
                     type="text"
                     placeholder="https://image.com"
-                    {...register("imagemCapa")}
+                    {...register("image")}
                   />
                 </label>
 
@@ -189,7 +215,7 @@ const CriarAnuncio = () => {
                   <input
                     type="text"
                     placeholder="https://image.com"
-                    {...register("imagem1")}
+                    {...register("image1")}
                   />
                 </label>
 
@@ -198,7 +224,7 @@ const CriarAnuncio = () => {
                   <input
                     type="text"
                     placeholder="https://image.com"
-                    {...register("imagem2")}
+                    {...register("image2")}
                   />
                 </label>
 
@@ -209,7 +235,7 @@ const CriarAnuncio = () => {
                       <input
                         type="text"
                         placeholder="https://image.com"
-                        {...register("imagem3")}
+                        {...register("image3")}
                       />
                     </label>
 
@@ -218,18 +244,26 @@ const CriarAnuncio = () => {
                       <input
                         type="text"
                         placeholder="https://image.com"
-                        {...register("imagem4")}
+                        {...register("image4")}
                       />
                     </label>
 
                     <label>
                       <span>5° Imagem da galeria</span>
-                      <input type="text" placeholder="https://image.com" />
+                      <input
+                        type="text"
+                        placeholder="https://image.com"
+                        {...register("image5")}
+                      />
                     </label>
 
                     <label>
                       <span>6° Imagem da galeria</span>
-                      <input type="text" placeholder="https://image.com" />
+                      <input
+                        type="text"
+                        placeholder="https://image.com"
+                        {...register("image6")}
+                      />
                     </label>
                   </>
                 )}

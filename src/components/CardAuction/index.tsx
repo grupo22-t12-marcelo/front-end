@@ -32,6 +32,7 @@ interface ICardAuction {
   priceCar: number;
   idProduct: string;
   createdAtCount: string;
+  isOwner?: boolean;
 }
 
 const CardAuction = ({
@@ -45,11 +46,12 @@ const CardAuction = ({
   priceCar,
   idProduct,
   createdAtCount,
+  isOwner,
 }: ICardAuction) => {
   const navigate = useNavigate();
 
-  const { setIsModalEditAnuncio } = useProductContext();
-  const { isLogged, userData } = useSessionContext();
+  const { setIsModalEditAnuncio, setIdVehicleEdit } = useProductContext();
+  const { isLogged } = useSessionContext();
 
   return (
     <Container>
@@ -68,7 +70,7 @@ const CardAuction = ({
             <CardSubtitle>{subtitle}</CardSubtitle>
           </Description>
 
-          {isLogged ? (
+          {isOwner ? (
             <div style={{ margin: 62 }}></div>
           ) : (
             <UserContainer>
@@ -90,10 +92,13 @@ const CardAuction = ({
       </CardContainer>
 
       <DivRedirectAuction>
-        {isLogged ? (
+        {isOwner ? (
           <div className="divButtonEdit">
             <Button
-              onClick={() => setIsModalEditAnuncio(true)}
+              onClick={() => {
+                setIsModalEditAnuncio(true);
+                setIdVehicleEdit(idProduct);
+              }}
               nameButton="Editar"
               backgroundColor="var(--brand1)"
               borderColor="var(--grey10)"
@@ -109,13 +114,13 @@ const CardAuction = ({
               color="var(--grey10)"
               height={40}
               width={120}
-              onClick={() => navigate(`product/${idProduct}`)}
+              onClick={() => navigate(`/product/${idProduct}`)}
             />
           </div>
         ) : (
           <div
             className="divRedirect"
-            onClick={() => navigate(`product/${idProduct}`)}
+            onClick={() => navigate(`/product/${idProduct}`)}
           >
             <p>Acessar página do leilão</p>
 

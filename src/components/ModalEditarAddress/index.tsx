@@ -1,13 +1,22 @@
 import { Background, Body, Form } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "reactstrap";
-import { useContext } from "react";
-import { ProductContext } from "./../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { IUserUpdate } from "../../interfaces";
+import { schemaUserAddressUpdate } from "../../validators/schemas";
 
 const EditarAddress = () => {
-  const { setIsModalEditAddress } = useContext(ProductContext);
-  const { userData } = useSessionContext();
+  const { userData, setIsModalEditAddress, userUpdate } = useSessionContext();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserUpdate>({
+    resolver: yupResolver(schemaUserAddressUpdate),
+  });
 
   return (
     <Background>
@@ -19,12 +28,13 @@ const EditarAddress = () => {
 
         <div className="content">
           <h5>Informações de endereço</h5>
-          <Form>
+          <Form onSubmit={handleSubmit(userUpdate)}>
             <label>
               <span>CEP</span>
               <input
                 type="number"
                 placeholder={userData.address && userData.address.zipCode}
+                {...register("address.zipCode")}
               />
             </label>
 
@@ -34,6 +44,7 @@ const EditarAddress = () => {
                 <input
                   type="text"
                   placeholder={userData.address && userData.address.state}
+                  {...register("address.state")}
                 />
               </label>
 
@@ -42,6 +53,7 @@ const EditarAddress = () => {
                 <input
                   type="text"
                   placeholder={userData.address && userData.address.city}
+                  {...register("address.city")}
                 />
               </label>
             </div>
@@ -51,6 +63,7 @@ const EditarAddress = () => {
               <input
                 type="text"
                 placeholder={userData.address && userData.address.road}
+                {...register("address.road")}
               />
             </label>
 
@@ -60,6 +73,7 @@ const EditarAddress = () => {
                 <input
                   type="number"
                   placeholder={userData.address && userData.address.number}
+                  {...register("address.number")}
                 />
               </label>
 
@@ -68,13 +82,16 @@ const EditarAddress = () => {
                 <input
                   type="text"
                   placeholder={userData.address && userData.address.complement}
+                  {...register("address.complement")}
                 />
               </label>
             </div>
 
             <div className="buttons">
               <Button className="cancelar">Cancelar</Button>
-              <Button className="salvar">Salvar alterações</Button>
+              <Button className="salvar" type="submit">
+                Salvar alterações
+              </Button>
             </div>
           </Form>
         </div>

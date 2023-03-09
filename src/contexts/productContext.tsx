@@ -1,24 +1,24 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useContext, createContext, useState, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import {
-  NavigateFunction,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { IAuthProvider, IVehicle } from "../interfaces";
+  IAnuncio,
+  IAuthProvider,
+  IProduct,
+  IProductUpdate,
+  IVehicle,
+} from "../interfaces";
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
+import { toast } from "react-toastify";
 
 interface IProductProvider {
   count: string;
   setCount: (value: string) => void;
   isModalAnuncio: boolean;
   setIsModalAnuncio: (value: boolean) => void;
-  photos: string[];
   idPhoto: string;
   setIdPhoto: (value: string) => void;
-  accountType: string;
   navigate: NavigateFunction;
   modal: boolean;
   setModal: (value: boolean) => void;
@@ -28,18 +28,19 @@ interface IProductProvider {
   isModalSucess: boolean;
   setIsModalEditAnuncio: (value: boolean) => void;
   isModalEditAnuncio: boolean;
-  isModalEditPerfil: boolean;
-  setIsModalEditPerfil: (value: boolean) => void;
+  isModalExcluirAnuncio: boolean;
+  setIsModalExcluirAnuncio: (value: boolean) => void;
+  getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
   motorbikeVehicle: IVehicle[];
+  createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
-  isModalEditAddress: boolean;
-  setIsModalEditAddress: (value: boolean) => void;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
-  setIsModalExcluirPerfil: (value: boolean) => void;
-  isModalExcluirPerfil: boolean;
+  setIdVehicleEdit: (value: string) => void;
+  updateProduct: (data: IProductUpdate) => void;
+  deleteAnuncio: () => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -47,20 +48,18 @@ export const ProductContext = createContext({} as IProductProvider);
 const ProductProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalSucess, setIsModalSucess] = useState(false);
+  const [isModalAnuncio, setIsModalAnuncio] = useState(false);
   const [isModalEditAnuncio, setIsModalEditAnuncio] = useState(false);
-
-  const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
-
-  const [isModalEditAddress, setIsModalEditAddress] = useState(false);
-  const [isModalEditPerfil, setIsModalEditPerfil] = useState(false);
+  const [isModalExcluirAnuncio, setIsModalExcluirAnuncio] = useState(false);
   const [count, setCount] = useState("");
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
+  const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
+  const [vehicleUpdate, setVehicleUpdate] = useState("");
 
-  const { setIsLogged, token, setUserData, isLogged } = useSessionContext();
+  const { token, setUserData, setIsLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -72,15 +71,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   };
 
   const [idPhoto, setIdPhoto] = useState("");
-  const accountType = "Anunciante";
-  const photos = [
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-    "/src/assets/Carro-CapaProduct.png",
-  ];
 
   const auctionVehicles = vehicles.filter(
     (vehicle) =>
@@ -112,7 +102,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
-  const getUser = () => {
+  useEffect(() => {
     if (token) {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       api.get("/users").then((response: AxiosResponse) => {
@@ -124,25 +114,93 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     } else {
       setIsLogged(false);
     }
+  }, [token, vehicleUpdate]);
+
+  const createProduct = async (data: IAnuncio) => {
+    const token = localStorage.getItem("@TOKEN");
+    const { image1, image2, image3, image4, image5, image6 } = data;
+    const imagesGallery = { image1, image2, image3, image4, image5, image6 };
+
+    delete data.image1;
+    delete data.image2;
+    const newData = { imagesGallery: { ...imagesGallery }, ...data };
+    try {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await api.post("/products", newData).then((response: AxiosResponse) => {
+        setIsModalAnuncio(false);
+        setVehicleUpdate(response.data);
+      });
+      toast.success("Anuncio criado!", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    if (token) {
-      getUser();
-    } else {
-      getVehicles();
+    getVehicles();
+  }, []);
+
+  const updateProduct = (data: IProductUpdate) => {
+    if (token && idVehicleEdit) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api
+        .patch(`/products/${idVehicleEdit}`, data)
+        .then((response: AxiosResponse) => {
+          console.log(response.data);
+          setIsModalEditAnuncio(false);
+          setVehicleUpdate(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
     }
-  }, [isLogged]);
+  };
+
+  const deleteAnuncio = async () => {
+    try {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      await api
+        .delete(`/products/${idVehicleEdit}`)
+        .then((response: AxiosResponse) => {
+          setVehicleUpdate(response.data);
+        });
+      toast.success("Anuncio excluido!", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (err) {
+      toast.error("Error ao excluir o anuncio!");
+    }
+    setIsModalExcluirAnuncio(false);
+  };
 
   useEffect(() => {
-    api
-      .get(`/products/${idVehicle}`)
-      .then((response: AxiosResponse) => {
-        setOneVehicle(response.data);
-      })
-      .catch((err: AxiosError) => {
-        console.log(err);
-      });
+    if (idVehicle) {
+      api
+        .get(`/products/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setOneVehicle(response.data);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        });
+    }
   }, [idVehicle]);
 
   return (
@@ -152,8 +210,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         setCount,
         isModalAnuncio,
         setIsModalAnuncio,
-        photos,
-        accountType,
         navigate,
         modal,
         setModal,
@@ -165,18 +221,19 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalSucess,
         isModalEditAnuncio,
         setIsModalEditAnuncio,
-        isModalEditPerfil,
-        setIsModalEditPerfil,
+        getVehicles,
         auctionVehicles,
         carsVehicle,
         motorbikeVehicle,
-        isModalEditAddress,
-        setIsModalEditAddress,
+        createProduct,
         setIdVehicle,
         idVehicle,
         oneVehicle,
-        setIsModalExcluirPerfil,
-        isModalExcluirPerfil,
+        setIdVehicleEdit,
+        updateProduct,
+        isModalExcluirAnuncio,
+        setIsModalExcluirAnuncio,
+        deleteAnuncio,
       }}
     >
       {children}

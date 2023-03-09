@@ -1,4 +1,5 @@
 import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { CardAuction } from "../CardAuction";
 import { CardVehicle } from "../CardVehicles";
 import Carousel from "../Carousel";
@@ -9,13 +10,14 @@ import { Container } from "./styles";
 const AllVehicles = () => {
   const { auctionVehicles, carsVehicle, motorbikeVehicle } =
     useProductContext();
+  const { userData } = useSessionContext();
 
   return (
     <Container>
       <CarouselAuction
         children={
           <>
-            {auctionVehicles.length > 0 ? (
+            {auctionVehicles?.length > 0 ? (
               auctionVehicles.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
                   <CardAuction
@@ -29,6 +31,7 @@ const AllVehicles = () => {
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
                     createdAtCount={vehicle.createdAt}
+                    isOwner={false}
                   ></CardAuction>
                 </li>
               ))
@@ -43,9 +46,10 @@ const AllVehicles = () => {
         type="Carro"
         children={
           <>
-            {carsVehicle.length > 0 ? (
+            {carsVehicle?.length > 0 ? (
               carsVehicle.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
+                  <p>{vehicle.id === userData}</p>
                   <CardVehicle
                     image={vehicle.image}
                     title={vehicle.title}
@@ -56,6 +60,7 @@ const AllVehicles = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    isOwner={false}
                   />
                 </li>
               ))
@@ -70,7 +75,7 @@ const AllVehicles = () => {
         type="Moto"
         children={
           <>
-            {motorbikeVehicle.length > 0 ? (
+            {motorbikeVehicle?.length > 0 ? (
               motorbikeVehicle.map((vehicle) => (
                 <li className="div-item-vei" key={vehicle.id}>
                   <CardVehicle
@@ -83,6 +88,7 @@ const AllVehicles = () => {
                     yearCar={vehicle.year}
                     priceCar={vehicle.price}
                     idProduct={vehicle.id}
+                    isOwner={false}
                   />
                 </li>
               ))

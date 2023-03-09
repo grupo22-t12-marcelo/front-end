@@ -5,11 +5,17 @@ import { EmptyVehicles } from "../../components/EmptyVehicles";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { InfosUserPage } from "../../components/InfosUserPage";
+import EditarAddress from "../../components/ModalEditarAddress";
+import EditarPerfil from "../../components/ModalEditarPerfil";
+import ExcluirUser from "../../components/ModalExcluirUser";
 import { useUserProductsContext } from "../../contexts/productsUser.context";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { Container } from "./style";
 
 const UserAnnouncement = () => {
   const { setUserId, userVehicles } = useUserProductsContext();
+  const { isModalEditPerfil, isModalEditAddress, isModalExcluirPerfil } =
+    useSessionContext();
   const { userId } = useParams();
 
   setUserId(userId);
@@ -24,6 +30,9 @@ const UserAnnouncement = () => {
 
   return (
     <Container>
+      {isModalEditPerfil && <EditarPerfil />}
+      {isModalEditAddress && <EditarAddress />}
+      {isModalExcluirPerfil && <ExcluirUser />}
       <Header />
       <div className="divBlue"></div>
       <main className="divWhite">
@@ -31,6 +40,7 @@ const UserAnnouncement = () => {
           <InfosUserPage
             name={userVehicles?.name!}
             abrevName={userVehicles?.name!}
+            typeAccount={userVehicles?.type_account!}
             description={userVehicles?.description!}
           />
         </div>

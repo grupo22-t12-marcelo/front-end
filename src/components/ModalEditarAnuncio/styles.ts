@@ -92,9 +92,9 @@ export const Form = styled.form`
       }
     }
 
-    .cancelar {
-      color: var(--grey2);
-      background-color: var(--grey6);
+    .excluir {
+      color: var(--alert1);
+      background-color: var(--alert2);
       font-weight: var(--heading-2-600);
     }
     .criar {

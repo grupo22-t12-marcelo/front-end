@@ -6,6 +6,7 @@ interface InfosUser {
   abrevName: string;
   name: string;
   description: string;
+  typeAccount: string;
   children?: ReactNode;
 }
 
@@ -13,6 +14,7 @@ const InfosUserPage = ({
   abrevName,
   name,
   description,
+  typeAccount,
   children,
 }: InfosUser) => {
   return (
@@ -23,7 +25,7 @@ const InfosUserPage = ({
 
       <div className="name">
         <h3> {name} </h3>
-        <p>Anunciante</p>
+        <p>{typeAccount}</p>
       </div>
       <DescriptionUser> {description} </DescriptionUser>
       {children}

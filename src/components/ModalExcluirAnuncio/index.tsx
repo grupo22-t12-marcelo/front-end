@@ -1,38 +1,47 @@
-import { useContext } from "react";
+import { Background, Modal } from "./styles";
+import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "reactstrap";
-import { ProductContext } from "../../contexts/productContext";
-import { ModaL } from "../Modal";
-import { BackgroundModalExcluir, DivContentExcluir, Buttons } from "./styles";
-
+import { useProductContext } from "../../contexts/productContext";
 
 const ExcluirAnuncio = () => {
-  const { toggle } = useContext(ProductContext);
+  const { setIsModalExcluirAnuncio, deleteAnuncio } = useProductContext();
 
   return (
-    <BackgroundModalExcluir>
-      <div className="modal">
-        <ModaL
-          titleModal="Excluir Anúncio"
-          bodyModal={
-            <DivContentExcluir>
-              <span>Tem certeza que deseja remover este anúncio?</span>
-              <p>
-                Essa ação não pode ser desfeita. Isso excluirá permanentemente
-                sua conta e removerá seus dados de nossos servidores.
-              </p>
-            </DivContentExcluir>
-          }
-          footerModal={
-            <Buttons>
-              <Button className="cancelar" onClick={() => toggle()}>
-                Cancelar
-              </Button>
-              <Button className="excluir-anuncio">Sim, excluir anúncio</Button>
-            </Buttons>
-          }
-        />
-      </div>
-    </BackgroundModalExcluir>
+    <Background>
+      <Modal>
+        <div className="header">
+          <h4>Excluir anuncio</h4>
+          <AiOutlineClose
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setIsModalExcluirAnuncio(false);
+            }}
+          />
+        </div>
+        <div className="content">
+          <span>Tem certeza que deseja excluir seu anuncio?</span>
+          <div>
+            <Button
+              className="nao"
+              onClick={() => {
+                setIsModalExcluirAnuncio(false);
+              }}
+            >
+              Não
+            </Button>
+            <Button
+              className="sim"
+              onClick={(e) => {
+                e.preventDefault();
+                deleteAnuncio();
+              }}
+            >
+              Sim
+            </Button>
+          </div>
+        </div>
+      </Modal>
+    </Background>
   );
 };
 
