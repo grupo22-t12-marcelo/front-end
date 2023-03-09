@@ -1,7 +1,4 @@
 import { ReactNode } from "react";
-import { Vehicle } from "../../utils/data";
-import { CardPublished } from "../CardPublished";
-import { CardVehicle } from "../CardVehicles";
 import { DivCarousel } from "./styles";
 
 interface ICarousel {
