@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { IAuthProvider } from "../interfaces";
 import { IUserProducts } from "../interfaces/productsUser";
@@ -8,6 +8,7 @@ import api from "../services/api";
 interface IUserProductsProvider {
   setUserId: (value: any) => void;
   userVehicles: Partial<IUserProducts>;
+  userId: string;
 }
 
 export const UserProductsContext = createContext({} as IUserProductsProvider);
@@ -30,7 +31,7 @@ const UserProductsProvider = ({ children }: IAuthProvider) => {
   }, [userId]);
 
   return (
-    <UserProductsContext.Provider value={{ setUserId, userVehicles }}>
+    <UserProductsContext.Provider value={{ userId, setUserId, userVehicles }}>
       {children}
     </UserProductsContext.Provider>
   );

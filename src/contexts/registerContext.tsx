@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import { IAuthProvider, IRegister } from "../interfaces";

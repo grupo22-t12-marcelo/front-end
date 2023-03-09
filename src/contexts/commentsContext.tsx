@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { useContext, createContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import { IAuthProvider, ICommentRequest, IComments } from "../interfaces";
+import { IAuthProvider, ICommentRequest, IComments, IEditCommentRequest } from "../interfaces";
 import api from "../services/api";
 import { useProductContext } from "./productContext";
 import { useSessionContext } from "./sessionContext";
@@ -9,6 +9,16 @@ import { useSessionContext } from "./sessionContext";
 interface ICommentProvider {
   comments: IComments[];
   postComment: (value: ICommentRequest) => void;
+  editComment: (value: IEditCommentRequest) => void;
+  setOpenModalEditComments: (value: boolean) => void;
+  idComment:string;
+  setIdComment: (value: string) => void;
+  openModalEditComments: Boolean;
+  setIsModalExcluirComentario: (value: boolean) => void;
+  isModalExcluirComentario: Boolean;
+  excludeComment:(value:string ) => void;
+  setPlaceholderComment: (value: string) => void;
+  placeholderComment: string;
 }
 
 export const CommentsContext = createContext({} as ICommentProvider);
@@ -18,7 +28,12 @@ const CommentProvider = ({ children }: IAuthProvider) => {
   const { token } = useSessionContext();
 
   const [comments, setComments] = useState<IComments[]>([]);
+  const [openModalEditComments, setOpenModalEditComments] = useState(false);
+  const [editComments, setEditComments] = useState("");
+  const [idComment, setIdComment] = useState("");
   const [postComments, setPostComments] = useState("");
+  const [placeholderComment, setPlaceholderComment] = useState("");
+  const [isModalExcluirComentario, setIsModalExcluirComentario] = useState(false);
 
   const postComment = (data: ICommentRequest) => {
     api.defaults.headers.common.authorization = `Bearer ${token}`;
@@ -26,6 +41,34 @@ const CommentProvider = ({ children }: IAuthProvider) => {
       .post(`/comment/${idVehicle}`, data)
       .then((response: AxiosResponse) => {
         setPostComments(response.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  };
+
+  const excludeComment = (id:string) => {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+    api
+      .delete(`/comment/${id}`)
+      .then((response: AxiosResponse) => {
+        console.log(response)
+        setIsModalExcluirComentario(false)
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  }
+
+
+  const editComment = (data: IEditCommentRequest) => {
+
+    api.defaults.headers.common.authorization = `Bearer ${token}`;
+    api
+      .patch(`/comment/${idVehicle}`, data)
+      .then((response: AxiosResponse) => {
+        setOpenModalEditComments(false);
+        setEditComments(response.data);
       })
       .catch((err: AxiosError) => {
         console.log(err);
@@ -43,10 +86,11 @@ const CommentProvider = ({ children }: IAuthProvider) => {
           console.log(err);
         });
     }
-  }, [idVehicle, postComments]);
+  }, [idVehicle, postComments, editComment]);
 
+  
   return (
-    <CommentsContext.Provider value={{ comments, postComment }}>
+    <CommentsContext.Provider value={{placeholderComment, setPlaceholderComment, excludeComment, idComment, setIdComment, isModalExcluirComentario ,comments, postComment, editComment, setOpenModalEditComments, openModalEditComments, setIsModalExcluirComentario }}>
       {children}
     </CommentsContext.Provider>
   );

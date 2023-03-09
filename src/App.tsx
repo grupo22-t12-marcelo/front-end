@@ -2,10 +2,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import RoutesMain from "./routes/RoutesMain";
 import GlobalStyle from "./style/GlobalStyle";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (

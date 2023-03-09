@@ -6,12 +6,78 @@ const CommentDiv = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  width: 100%;
 
+  .div-editar-comentario{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+
+    .div-btns-editar-excluir{
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: row;
+      width: 20%;
+
+      .excluir {
+        background-color: var(--alert2);
+        color: var(--alert1);
+        border: 1.5px solid transparent;
+      }
+      button{
+        width: 100px;
+      }
+       @media (min-width: 768px) {
+        flex-direction: column;
+        width: 20%;
+        height: 70px;
+      }
+
+
+    }
+    .input-textera{
+      display: flex;
+      align-items: center;
+      width: 250px;
+      margin-top: 15px;
+
+      @media (min-width: 768px) {
+        width: 500px;
+      }
+
+      @media (min-width: 1440px) {
+        width: 500px;
+      }
+
+    }
+
+  }
   div {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    width: 100%;
+
+    .div-circle-name-date{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+
+    }
+
+    #editicon{
+      width: 20px;
+      height: 20px;
+      color: var(--grey3);
+      justify-self: end;
+    }
 
     div {
       width: 32px;
@@ -34,7 +100,7 @@ const CommentDiv = styled.div`
     }
   }
 
-  #comment-text {
+  .comment-text {
     font-family: var(--body-font-family);
     font-weight: var(--body-1-400);
     color: var(--grey2);
@@ -63,3 +129,4 @@ const CommentDiv = styled.div`
 `;
 
 export { CommentDiv };
+

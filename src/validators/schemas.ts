@@ -76,6 +76,7 @@ export const schemaComments = yup.object().shape({
   comment: yup.string().required("Campo Obrigatório"),
 });
 
+
 export const schemaImagesUpdate = yup.object().shape({
   image1: yup.string(),
   image2: yup.string(),

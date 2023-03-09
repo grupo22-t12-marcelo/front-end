@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
-  Collapse,
-  Dropdown,
-  DropdownItem,
+  Collapse, DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
@@ -12,17 +10,15 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
+  UncontrolledDropdown
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
-import { IProps } from "../../interfaces";
-import { UserContainer } from "../CardAuction/styles";
-import SubHeader from "../SubHeader";
-import { DivHeader } from "./styles";
-import { CircleUser } from "../CircleUser";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
-import { toast } from "react-toastify";
+import { IProps } from "../../interfaces";
+import { UserContainer } from "../CardAuction/styles";
+import { CircleUser } from "../CircleUser";
+import { DivHeader } from "./styles";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
   const { isLogged, setIsLogged } = useSessionContext();

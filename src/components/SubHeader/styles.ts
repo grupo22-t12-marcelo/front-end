@@ -41,7 +41,7 @@ export const SubHeaderDiv = styled.div`
       .button-sub-header {
         border: 1.5px solid var(--grey10);
         border-radius: 4px;
-        width: 90%;
+        width: 150px;
         padding: 8px;
         color: var(--grey10);
         background-color: var(--brand2);

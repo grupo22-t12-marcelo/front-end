@@ -92,3 +92,4 @@ const Badges = styled.div`
   }
 `;
 export { Form, Badges };
+

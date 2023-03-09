@@ -1,5 +1,6 @@
 import { Button } from "reactstrap";
 import { useCommentContext } from "../../contexts/commentsContext";
+
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
 import { dateHour } from "../../utils/date";
@@ -15,17 +16,15 @@ const CommentsSection = () => {
     <Comments>
       {comments.map((comment) => {
         return (
-          <>
-            <Comment
-              abrevName={comment.user.name}
-              key={comment.id}
-              nameUser={comment.user.name}
-              dateComment={dateHour(comment?.createdAt)}
-              commentText={comment.comment}
-            />
-            {oneVehicle.type_announcement === "Leilão" &&
-              userData.id === oneVehicle.user?.id && <Button>Vender</Button>}
-          </>
+          <Comment
+            key={comment.id}
+            id={comment.id}
+            userId={userData?.id}
+            userCommentId={comment.user.id}
+            nameUser={comment.user.name}
+            dateComment={dateHour(comment?.createdAt)}
+            commentText={comment.comment}
+          />
         );
       })}
     </Comments>
@@ -33,3 +32,4 @@ const CommentsSection = () => {
 };
 
 export { CommentsSection };
+
