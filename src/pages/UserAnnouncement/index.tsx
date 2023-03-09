@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { CardPublished } from "../../components/CardPublished";
 import Carousel from "../../components/Carousel";
@@ -5,17 +6,23 @@ import { EmptyVehicles } from "../../components/EmptyVehicles";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { InfosUserPage } from "../../components/InfosUserPage";
+import { Loading } from "../../components/Loading";
 import EditarAddress from "../../components/ModalEditarAddress";
 import EditarPerfil from "../../components/ModalEditarPerfil";
 import ExcluirUser from "../../components/ModalExcluirUser";
+import { ModalLoading } from "../../components/ModalLoading";
 import { useUserProductsContext } from "../../contexts/productsUser.context";
 import { useSessionContext } from "../../contexts/sessionContext";
 import { Container } from "./style";
 
 const UserAnnouncement = () => {
   const { setUserId, userVehicles } = useUserProductsContext();
-  const { isModalEditPerfil, isModalEditAddress, isModalExcluirPerfil } =
-    useSessionContext();
+  const {
+    isModalEditPerfil,
+    isModalEditAddress,
+    isModalExcluirPerfil,
+    isLoading,
+  } = useSessionContext();
   const { userId } = useParams();
 
   setUserId(userId);
@@ -30,6 +37,16 @@ const UserAnnouncement = () => {
 
   return (
     <Container>
+      <HelmetProvider>
+        <Helmet title={userVehicles?.name!} />
+      </HelmetProvider>
+
+      {isLoading ? (
+        <ModalLoading>
+          <Loading />
+        </ModalLoading>
+      ) : null}
+
       {isModalEditPerfil && <EditarPerfil />}
       {isModalEditAddress && <EditarAddress />}
       {isModalExcluirPerfil && <ExcluirUser />}
