@@ -11,6 +11,7 @@ import {
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
 import { toast } from "react-toastify";
+import { IUserProducts } from "../interfaces/productsUser";
 
 interface IProductProvider {
   count: string;
@@ -41,6 +42,9 @@ interface IProductProvider {
   setIdVehicleEdit: (value: string) => void;
   updateProduct: (data: IProductUpdate) => void;
   deleteAnuncio: () => void;
+  buyProduct: (idUserProduct: string) => void;
+  phoneOwnerProduct: string;
+  setphoneOwnerProduct: (value: string) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -57,7 +61,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
   const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
-
+  const [phoneOwnerProduct, setphoneOwnerProduct] = useState("");
   const { token } = useSessionContext();
 
   const closeSucess = () => {
@@ -179,12 +183,24 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     setIsModalExcluirAnuncio(false);
   };
 
+  const buyProduct = (idUserProduct: string) => {
+    api
+      .get(`/users/${idUserProduct}`)
+      .then((response: AxiosResponse) => {
+        setphoneOwnerProduct(response.data.phone);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (idVehicle) {
       api
         .get(`/products/${idVehicle}`)
         .then((response: AxiosResponse) => {
           setOneVehicle(response.data);
+          buyProduct(response.data.user.id);
         })
         .catch((err: AxiosError) => {
           console.log(err);
@@ -223,6 +239,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         isModalExcluirAnuncio,
         setIsModalExcluirAnuncio,
         deleteAnuncio,
+        buyProduct,
+        phoneOwnerProduct,
+        setphoneOwnerProduct,
       }}
     >
       {children}

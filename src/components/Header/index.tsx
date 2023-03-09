@@ -22,6 +22,7 @@ import { DivHeader } from "./styles";
 import { CircleUser } from "../CircleUser";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { toast } from "react-toastify";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
   const { isLogged, setIsLogged } = useSessionContext();
@@ -92,6 +93,19 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                       onClick={() => {
                         localStorage.clear();
                         setIsLogged(false);
+                        toast.success("Saindo...", {
+                          position: "top-right",
+                          autoClose: 1500,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                        setTimeout(() => {
+                          navigate("/");
+                        }, 2500);
                       }}
                     >
                       Sair

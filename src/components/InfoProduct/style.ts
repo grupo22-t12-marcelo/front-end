@@ -38,7 +38,7 @@ const Info = styled.div`
     font-size: 16px;
   }
 
-  button {
+  a {
     background-color: var(--brand1);
     border-radius: 4px;
     color: var(--white-fixed);

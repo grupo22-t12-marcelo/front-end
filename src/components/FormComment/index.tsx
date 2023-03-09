@@ -12,6 +12,7 @@ import { useCommentContext } from "../../contexts/commentsContext";
 const FormComment = () => {
   const { isLogged, userData } = useSessionContext();
   const { postComment } = useCommentContext();
+  const { oneVehicle } = useProductContext();
 
   const {
     register,
@@ -25,12 +26,37 @@ const FormComment = () => {
 
   return (
     <Form onSubmit={handleSubmit(postComment)}>
-      {isLogged ? (
+      {oneVehicle.type_announcement === "Leilão" && isLogged ? (
         <>
           <div>
             <CircleUser />
             <h5>{userData?.name!}</h5>
           </div>
+          <h5>Leilão</h5>
+
+          <FormGroup>
+            <Input
+              className="lance"
+              type="text"
+              placeholder="Inserir valor de lance"
+              bsSize="lg"
+              size={128}
+              innerRef={ref}
+              {...registerComment}
+            />
+            {errors.comment?.message}
+            <Button color={"secondary"} type="submit" className="inserir">
+              Inserir
+            </Button>
+          </FormGroup>
+        </>
+      ) : isLogged ? (
+        <>
+          <div>
+            <CircleUser />
+            <h5>{userData?.name!}</h5>
+          </div>
+
           <FormGroup>
             <Input
               id="exampleText"
