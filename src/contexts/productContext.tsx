@@ -63,8 +63,12 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
   const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
+
   const [phoneOwnerProduct, setphoneOwnerProduct] = useState("");
-  const { token } = useSessionContext();
+
+  const [vehicleUpdate, setVehicleUpdate] = useState("");
+
+  const { token, setUserData, setIsLogged } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -107,6 +111,20 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       });
   };
 
+  useEffect(() => {
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      api.get("/users").then((response: AxiosResponse) => {
+        setUserData({
+          ...response.data,
+        });
+      });
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, [token, vehicleUpdate]);
+
   const createProduct = async (data: IAnuncio) => {
     const token = localStorage.getItem("@TOKEN");
     const { image1, image2, image3, image4, image5, image6 } = data;
@@ -117,8 +135,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     const newData = { imagesGallery: { ...imagesGallery }, ...data };
     try {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      await api.post("/products", newData).then(({ data }) => {
+      await api.post("/products", newData).then((response: AxiosResponse) => {
         setIsModalAnuncio(false);
+        setVehicleUpdate(response.data);
       });
       toast.success("Anuncio criado!", {
         position: "top-right",
@@ -130,9 +149,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         progress: undefined,
         theme: "light",
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
     } catch (error) {
       console.log(error);
     }
@@ -160,10 +176,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
             theme: "light",
           });
           setIsModalEditAnuncio(false);
-
-          setTimeout(() => {
-            navigate(0);
-          }, 1500);
+          setVehicleUpdate(response.data);
         })
         .catch((err: AxiosError) => {
           console.log(err);
@@ -174,7 +187,11 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const deleteAnuncio = async () => {
     try {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      await api.delete(`/products/${idVehicleEdit}`);
+      await api
+        .delete(`/products/${idVehicleEdit}`)
+        .then((response: AxiosResponse) => {
+          setVehicleUpdate(response.data);
+        });
       toast.success("Anuncio excluido!", {
         position: "top-right",
         autoClose: 1500,
@@ -185,9 +202,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         progress: undefined,
         theme: "light",
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
     } catch (err) {
       toast.error("Error ao excluir o anuncio!");
     }
