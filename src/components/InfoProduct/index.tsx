@@ -9,9 +9,6 @@ import { Info } from "./style";
 
 const InfoProduct = () => {
   const { oneVehicle, phoneOwnerProduct } = useProductContext();
-  const { userVehicles } = useUserProductsContext();
-
-  console.log(oneVehicle);
 
   return (
     <Info>

@@ -35,8 +35,6 @@ const EditarAnuncio = () => {
     (vehicle) => vehicle.id === idVehicleEdit
   );
 
-  console.log(vehicle);
-
   const {
     register,
     handleSubmit,
