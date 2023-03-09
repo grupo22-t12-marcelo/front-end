@@ -34,11 +34,13 @@ interface IProductProvider {
   getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
+  vehicles: IVehicle[];
   motorbikeVehicle: IVehicle[];
   createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
+  idVehicleEdit: string;
   setIdVehicleEdit: (value: string) => void;
   updateProduct: (data: IProductUpdate) => void;
   deleteAnuncio: () => void;
@@ -147,7 +149,16 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       api
         .patch(`/products/${idVehicleEdit}`, data)
         .then((response: AxiosResponse) => {
-          console.log(response.data);
+          toast.success("Anuncio Atualizado!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           setIsModalEditAnuncio(false);
 
           setTimeout(() => {
@@ -232,8 +243,10 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         motorbikeVehicle,
         createProduct,
         setIdVehicle,
+        vehicles,
         idVehicle,
         oneVehicle,
+        idVehicleEdit,
         setIdVehicleEdit,
         updateProduct,
         isModalExcluirAnuncio,
