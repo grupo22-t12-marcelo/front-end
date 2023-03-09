@@ -74,7 +74,6 @@ const CommentDiv = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
     width: 100%;
 
@@ -82,7 +81,7 @@ const CommentDiv = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 50%;
+    width: 100%;
     gap: 10px;
 
     }
@@ -115,7 +114,7 @@ const CommentDiv = styled.div`
     }
   }
 
-  #comment-text {
+  .comment-text {
     font-family: var(--body-font-family);
     font-weight: var(--body-1-400);
     color: var(--grey2);

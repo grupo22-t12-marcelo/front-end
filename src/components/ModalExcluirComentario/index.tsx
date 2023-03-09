@@ -6,7 +6,9 @@ import { Background, Modal } from "./styles";
 
 const ExcluirComentario = () => {
 
-    const { setIsModalExcluirComentario } = useContext(CommentsContext)
+    const { setIsModalExcluirComentario, idComment, excludeComment  } = useContext(CommentsContext)
+
+    
 
     return (
         <Background>
@@ -19,7 +21,7 @@ const ExcluirComentario = () => {
                     <span>Tem certeza que deseja excluir seu comentário?</span>
                     <div>
                         <Button className="nao" onClick={() => setIsModalExcluirComentario(false)}>Não</Button>
-                        <Button className="sim">Sim</Button>
+                        <Button className="sim" onClick={()=>excludeComment(idComment)}>Sim</Button>
                     </div>
                 </div>
             </Modal>

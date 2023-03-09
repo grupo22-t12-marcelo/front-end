@@ -1,25 +1,28 @@
-import { ProductPage } from "./style";
-import Header from "../../components/Header";
-import { ModaL } from "../../components/Modal";
-import { SectionProduct } from "../../components/SectionProduct";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import { AsideProduct } from "../../components/AsideProduct";
 import Footer from "../../components/Footer";
-import { useProductContext } from "../../contexts/productContext";
-import { useParams } from "react-router-dom";
-import { CommentsContext } from "../../contexts/commentsContext";
+import Header from "../../components/Header";
+import { ModaL } from "../../components/Modal";
+import EditarComentario from "../../components/ModalEditarComentario";
 import ExcluirComentario from "../../components/ModalExcluirComentario";
-import { useContext } from "react";
+import { SectionProduct } from "../../components/SectionProduct";
+import { CommentsContext } from "../../contexts/commentsContext";
+import { useProductContext } from "../../contexts/productContext";
+import { ProductPage } from "./style";
 
 const Product = () => {
   const { productId } = useParams();
   const { setIdVehicle, oneVehicle } = useProductContext();
-  const {isModalExcluirComentario} = useContext(CommentsContext)
+  const {isModalExcluirComentario, openModalEditComments} = useContext(CommentsContext)
 
   setIdVehicle(productId);
 
   return (
     <ProductPage>
       {isModalExcluirComentario && <ExcluirComentario />}
+      {openModalEditComments && <EditarComentario/>}
+      
       <Header />
       <ModaL
         titleModal={"Foto veículo"}
@@ -35,3 +38,4 @@ const Product = () => {
 };
 
 export { Product };
+

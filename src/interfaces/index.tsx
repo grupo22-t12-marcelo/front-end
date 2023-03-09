@@ -140,6 +140,10 @@ export interface IEditCommentRequest {
   comment: string;
 }
 
+export interface IExcludeCommentRequest {
+  id: string;
+}
+
 export interface IUser {
   address?: IAddress;
   birthdate: string;
