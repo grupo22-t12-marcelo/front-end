@@ -28,6 +28,8 @@ const CommentsSection = () => {
           </>
         );
       })}
+      {oneVehicle.type_announcement === "Leilão" &&
+              userData.id === oneVehicle.user?.id && <Button>Vender</Button>}
     </Comments>
   );
 };
