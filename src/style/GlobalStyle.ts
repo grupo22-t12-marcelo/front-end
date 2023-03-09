@@ -45,7 +45,7 @@ export default createGlobalStyle`
 	--random12: #30007D;
 
 	/* Typography */
-	--heading-font-family: 'Lexend', sans-serif;;
+	--heading-font-family: 'Lexend', sans-serif;
 	--heading-color: var(--grey1);
 	--heading-1-700: 700;
 	--heading-2-600: 600;
