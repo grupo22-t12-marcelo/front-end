@@ -15,8 +15,6 @@ const PhotoGalery = () => {
     }
   }
 
-  console.log(images);
-
   return (
     <>
       <Photo id="photo">

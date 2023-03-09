@@ -1,10 +1,14 @@
 import { Badge, Button } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
+import { useUserProductsContext } from "../../contexts/productsUser.context";
+import { useSessionContext } from "../../contexts/sessionContext";
+import { IUserProducts } from "../../interfaces/productsUser";
+import { IUserLogged } from "../../interfaces/sessions";
 import { formatPrice } from "../../utils/formatPrice";
 import { Info } from "./style";
 
 const InfoProduct = () => {
-  const { oneVehicle } = useProductContext();
+  const { oneVehicle, phoneOwnerProduct } = useProductContext();
 
   return (
     <Info>
@@ -21,7 +25,12 @@ const InfoProduct = () => {
           currency: "BRL",
         })}
       </span>
-      <Button>Comprar</Button>
+      <Button
+        target="_blank"
+        href={`//wa.me/55${phoneOwnerProduct}?text=Olá,%20tenho%20interesse%20no%20veiculo.%20Por%20favor%20entre%20em%20contato.`}
+      >
+        Comprar
+      </Button>
     </Info>
   );
 };

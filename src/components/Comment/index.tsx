@@ -1,10 +1,13 @@
 import { useCommentContext } from "../../contexts/commentsContext";
+import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { returnAbrevName } from "../../utils/abrevName";
 import { CircleUser } from "../CircleUser";
 import { CommentDiv } from "./style";
 
 const Comment = ({ nameUser, dateComment, commentText, abrevName }: any) => {
   const { comments } = useCommentContext();
+
   return (
     <CommentDiv>
       <div>
