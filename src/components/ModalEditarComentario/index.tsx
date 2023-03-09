@@ -36,13 +36,13 @@ const EditarComentario = () => {
         <Background>
             <Modal>
                 <Form onSubmit={handleSubmit(editarComment)}>
-                <label>
-                    <p>Novo comentário</p>
-                    <textarea
-                      placeholder={placeholderComment}
-                      {...register("comment")}
-                    ></textarea>
-                  </label>
+                    <label>
+                        <h1 className='titulo'>Novo comentário</h1>
+                        <textarea
+                        placeholder={placeholderComment}
+                        {...register("comment")}
+                        ></textarea>
+                    </label>
                   <div className='btns-modal-edit-comentario'>
                     <Button type='submit' className="sim">Editar</Button>
                     <Button className="nao" onClick={() => setOpenModalEditComments(false)}>Sair</Button>

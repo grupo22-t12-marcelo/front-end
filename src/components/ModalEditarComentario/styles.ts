@@ -24,11 +24,21 @@ export const Modal = styled.div`
   height: 180px;
   border-radius: 4px;
 
+  label{
+    width: 100%;
+  }
 
-  @media screen and (min-width: 485px) {
-    
-    width: 436px;
-    
+    textarea{
+      background-color: var(--grey10);
+      color: var(--grey1);
+      width: 90%;
+      margin-top: 10px;
+    }
+
+
+  @media screen and (min-width: 548px) {
+    width: 90%;
+    max-width: 400px;
   }
 
   form {
@@ -42,10 +52,13 @@ export const Modal = styled.div`
     align-items: center;
     gap: 15px;
 
+    .titulo{
+      font-weight: var(--heading-7-600);
+      color: var(--grey1);
+    }
     textarea{
       background-color: var(--grey10);
       color: var(--grey1);
-      width: 300px;
       margin-top: 10px;
     }
     .btns-modal-edit-comentario{
@@ -78,6 +91,8 @@ export const Modal = styled.div`
       }
       .excluir{
         background-color: var(--alert2);
+        color: var(--alert1);
+        font-weight: var(--heading-7-600);
       }
     }
 `;
