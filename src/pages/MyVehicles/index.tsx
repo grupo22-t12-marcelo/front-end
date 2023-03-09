@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { AllVehiclesUser } from "../../components/AllVehiclesUser";
 import { Button } from "../../components/Button";
 import Footer from "../../components/Footer";
@@ -29,6 +30,10 @@ const MyVehicles = () => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet title="My Vehicles" />
+      </HelmetProvider>
+
       {isModalAnuncio && <CriarAnuncio />}
       {isModalEditAnuncio && <EditarAnuncio />}
       {isModalExcluirAnuncio && <ExcluirAnuncio />}

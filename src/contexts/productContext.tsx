@@ -68,7 +68,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
 
   const [vehicleUpdate, setVehicleUpdate] = useState("");
 
-  const { token, setUserData, setIsLogged } = useSessionContext();
+  const { token, setUserData, setIsLogged, setIsLoading } = useSessionContext();
 
   const closeSucess = () => {
     setIsModalSucess(!isModalSucess);
@@ -101,6 +101,7 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   );
 
   const getVehicles = () => {
+    setIsLoading(true);
     api
       .get("/products")
       .then((response: AxiosResponse) => {
@@ -108,18 +109,45 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       })
       .catch((err: AxiosError) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
+    getVehicles();
+  }, []);
+
+  useEffect(() => {
+    if (idVehicle) {
+      setIsLoading(true);
+      api
+        .get(`/products/${idVehicle}`)
+        .then((response: AxiosResponse) => {
+          setOneVehicle(response.data);
+          buyProduct(response.data.user.id);
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+        })
+        .finally(() => setIsLoading(false));
+    }
+  }, [idVehicle]);
+
+  useEffect(() => {
     if (token) {
+      setIsLoading(true);
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-      api.get("/users").then((response: AxiosResponse) => {
-        setUserData({
-          ...response.data,
-        });
-      });
+      api
+        .get("/users")
+        .then((response: AxiosResponse) => {
+          setUserData({
+            ...response.data,
+          });
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
       setIsLogged(true);
+      setIsLoading(true);
     } else {
       setIsLogged(false);
     }
@@ -153,10 +181,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    getVehicles();
-  }, []);
 
   const updateProduct = (data: IProductUpdate) => {
     if (token && idVehicleEdit) {
@@ -218,20 +242,6 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    if (idVehicle) {
-      api
-        .get(`/products/${idVehicle}`)
-        .then((response: AxiosResponse) => {
-          setOneVehicle(response.data);
-          buyProduct(response.data.user.id);
-        })
-        .catch((err: AxiosError) => {
-          console.log(err);
-        });
-    }
-  }, [idVehicle]);
 
   return (
     <ProductContext.Provider
