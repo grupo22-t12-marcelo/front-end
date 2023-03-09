@@ -166,7 +166,11 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                         </UserContainer>
                       </DropdownToggle>
                       <DropdownMenu>
-                        <DropdownItem>Editar Perfil</DropdownItem>
+                        <DropdownItem
+                          onClick={() => setIsModalEditPerfil(true)}
+                        >
+                          Editar Perfil
+                        </DropdownItem>
 
                         <DropdownItem
                           onClick={() => setIsModalEditAddress(true)}
@@ -175,12 +179,32 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                         </DropdownItem>
                         {userData.type_account === "Anunciante" && (
                           <DropdownItem
-                            onClick={() => navigate(`/users/${userData.id}`)}
+                            onClick={() => navigate(`/my_vehicles/`)}
                           >
                             Meus Anúncios
                           </DropdownItem>
                         )}
-                        <DropdownItem>Sair</DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            localStorage.clear();
+                            setIsLogged(false);
+                            toast.success("Saindo...", {
+                              position: "top-right",
+                              autoClose: 1500,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "light",
+                            });
+                            setTimeout(() => {
+                              navigate("/");
+                            }, 2500);
+                          }}
+                        >
+                          Sair
+                        </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </div>

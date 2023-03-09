@@ -19,6 +19,7 @@ import { useForm, Controller } from "react-hook-form";
 import { IProductUpdate, IVehicle } from "../../interfaces";
 import { schemaImagesUpdate } from "../../validators/schemas";
 import { useUserProductsContext } from "../../contexts/productsUser.context";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const EditarAnuncio = () => {
   const {
@@ -27,11 +28,13 @@ const EditarAnuncio = () => {
     setIsModalExcluirAnuncio,
     idVehicleEdit,
   } = useProductContext();
-  const { userVehicles } = useUserProductsContext();
+  const { userData } = useSessionContext();
   const [tipo, setTipo] = useState("Venda");
   const [isMoreImages, setIsMoreImages] = useState(false);
 
-  const vehicle = userVehicles.products?.find(
+  console.log(userData);
+
+  const vehicle = userData.products?.find(
     (vehicle) => vehicle.id === idVehicleEdit
   );
 

@@ -19,7 +19,7 @@ export const DivCarousel = styled.div`
     margin-bottom: 50px;
   }
   .list-card-vehicles {
-    display: flex;
+    display: -webkit-box;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: start;
