@@ -28,6 +28,24 @@ const Form = styled.form`
       color: var(--grey1);
       font-size: 14px;
     }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
+
+  .lance {
+    height: 15px;
+    width: 300px;
+    border: 1.5px solid var(--grey7);
+    border-radius: 4px;
+  }
+
+  .lance::placeholder {
+    font-family: var(--body-font-family);
+    font-weight: var(--body-2-400);
+    color: var(--grey3);
+    font-size: 16px;
   }
 
   #exampleText {
@@ -74,3 +92,4 @@ const Badges = styled.div`
   }
 `;
 export { Form, Badges };
+

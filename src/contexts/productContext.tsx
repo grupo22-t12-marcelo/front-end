@@ -11,6 +11,7 @@ import {
 import api from "../services/api";
 import { useSessionContext } from "./sessionContext";
 import { toast } from "react-toastify";
+import { IUserProducts } from "../interfaces/productsUser";
 
 interface IProductProvider {
   count: string;
@@ -33,14 +34,19 @@ interface IProductProvider {
   getVehicles: () => void;
   auctionVehicles: IVehicle[];
   carsVehicle: IVehicle[];
+  vehicles: IVehicle[];
   motorbikeVehicle: IVehicle[];
   createProduct: (data: IAnuncio) => void;
   oneVehicle: Partial<IVehicle>;
   setIdVehicle: (value: any) => void;
   idVehicle: string;
+  idVehicleEdit: string;
   setIdVehicleEdit: (value: string) => void;
   updateProduct: (data: IProductUpdate) => void;
   deleteAnuncio: () => void;
+  buyProduct: (idUserProduct: string) => void;
+  phoneOwnerProduct: string;
+  setphoneOwnerProduct: (value: string) => void;
 }
 
 export const ProductContext = createContext({} as IProductProvider);
@@ -57,6 +63,9 @@ const ProductProvider = ({ children }: IAuthProvider) => {
   const [oneVehicle, setOneVehicle] = useState({});
   const [idVehicle, setIdVehicle] = useState("");
   const [idVehicleEdit, setIdVehicleEdit] = useState<string>("");
+
+  const [phoneOwnerProduct, setphoneOwnerProduct] = useState("");
+
   const [vehicleUpdate, setVehicleUpdate] = useState("");
 
   const { token, setUserData, setIsLogged } = useSessionContext();
@@ -156,7 +165,16 @@ const ProductProvider = ({ children }: IAuthProvider) => {
       api
         .patch(`/products/${idVehicleEdit}`, data)
         .then((response: AxiosResponse) => {
-          console.log(response.data);
+          toast.success("Anuncio Atualizado!", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           setIsModalEditAnuncio(false);
           setVehicleUpdate(response.data);
         })
@@ -190,12 +208,24 @@ const ProductProvider = ({ children }: IAuthProvider) => {
     setIsModalExcluirAnuncio(false);
   };
 
+  const buyProduct = (idUserProduct: string) => {
+    api
+      .get(`/users/${idUserProduct}`)
+      .then((response: AxiosResponse) => {
+        setphoneOwnerProduct(response.data.phone);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (idVehicle) {
       api
         .get(`/products/${idVehicle}`)
         .then((response: AxiosResponse) => {
           setOneVehicle(response.data);
+          buyProduct(response.data.user.id);
         })
         .catch((err: AxiosError) => {
           console.log(err);
@@ -227,13 +257,18 @@ const ProductProvider = ({ children }: IAuthProvider) => {
         motorbikeVehicle,
         createProduct,
         setIdVehicle,
+        vehicles,
         idVehicle,
         oneVehicle,
+        idVehicleEdit,
         setIdVehicleEdit,
         updateProduct,
         isModalExcluirAnuncio,
         setIsModalExcluirAnuncio,
         deleteAnuncio,
+        buyProduct,
+        phoneOwnerProduct,
+        setphoneOwnerProduct,
       }}
     >
       {children}

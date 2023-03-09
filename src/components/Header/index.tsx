@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
-  Collapse,
-  Dropdown,
-  DropdownItem,
+  Collapse, DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
@@ -12,16 +10,15 @@ import {
   NavbarToggler,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
+  UncontrolledDropdown
 } from "reactstrap";
 import ShopBranco from "../../assets/Motors shop.png";
-import { IProps } from "../../interfaces";
-import { UserContainer } from "../CardAuction/styles";
-import SubHeader from "../SubHeader";
-import { DivHeader } from "./styles";
-import { CircleUser } from "../CircleUser";
 import { useProductContext } from "../../contexts/productContext";
 import { useSessionContext } from "../../contexts/sessionContext";
+import { IProps } from "../../interfaces";
+import { UserContainer } from "../CardAuction/styles";
+import { CircleUser } from "../CircleUser";
+import { DivHeader } from "./styles";
 
 const Header: React.FC<IProps> = ({ children }: IProps) => {
   const { isLogged, setIsLogged } = useSessionContext();
@@ -92,6 +89,19 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                       onClick={() => {
                         localStorage.clear();
                         setIsLogged(false);
+                        toast.success("Saindo...", {
+                          position: "top-right",
+                          autoClose: 1500,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                        setTimeout(() => {
+                          navigate("/");
+                        }, 2500);
                       }}
                     >
                       Sair
@@ -152,7 +162,11 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                         </UserContainer>
                       </DropdownToggle>
                       <DropdownMenu>
-                        <DropdownItem>Editar Perfil</DropdownItem>
+                        <DropdownItem
+                          onClick={() => setIsModalEditPerfil(true)}
+                        >
+                          Editar Perfil
+                        </DropdownItem>
 
                         <DropdownItem
                           onClick={() => setIsModalEditAddress(true)}
@@ -161,12 +175,32 @@ const Header: React.FC<IProps> = ({ children }: IProps) => {
                         </DropdownItem>
                         {userData.type_account === "Anunciante" && (
                           <DropdownItem
-                            onClick={() => navigate(`/users/${userData.id}`)}
+                            onClick={() => navigate(`/my_vehicles/`)}
                           >
                             Meus Anúncios
                           </DropdownItem>
                         )}
-                        <DropdownItem>Sair</DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            localStorage.clear();
+                            setIsLogged(false);
+                            toast.success("Saindo...", {
+                              position: "top-right",
+                              autoClose: 1500,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "light",
+                            });
+                            setTimeout(() => {
+                              navigate("/");
+                            }, 2500);
+                          }}
+                        >
+                          Sair
+                        </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </div>

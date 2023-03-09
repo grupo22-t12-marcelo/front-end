@@ -16,14 +16,27 @@ import { Button } from "reactstrap";
 import { useProductContext } from "../../contexts/productContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { IProductUpdate } from "../../interfaces";
+import { IProductUpdate, IVehicle } from "../../interfaces";
 import { schemaImagesUpdate } from "../../validators/schemas";
+import { useUserProductsContext } from "../../contexts/productsUser.context";
+import { useSessionContext } from "../../contexts/sessionContext";
 
 const EditarAnuncio = () => {
-  const { setIsModalEditAnuncio, updateProduct, setIsModalExcluirAnuncio } =
-    useProductContext();
+  const {
+    setIsModalEditAnuncio,
+    updateProduct,
+    setIsModalExcluirAnuncio,
+    idVehicleEdit,
+  } = useProductContext();
+  const { userData } = useSessionContext();
   const [tipo, setTipo] = useState("Venda");
   const [isMoreImages, setIsMoreImages] = useState(false);
+
+  console.log(userData);
+
+  const vehicle = userData.products?.find(
+    (vehicle) => vehicle.id === idVehicleEdit
+  );
 
   const {
     register,
@@ -64,6 +77,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Venda"
                   name="radio"
+                  defaultChecked={vehicle?.type_announcement === "Venda"}
                   onClick={(e) => {
                     unregister("type_announcement", {});
                     register("type_announcement", { value: "Venda" });
@@ -77,6 +91,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Leilão"
                   name="radio"
+                  defaultChecked={vehicle?.type_announcement === "Leilão"}
                   onClick={(e) => {
                     unregister("type_announcement", {});
                     register("type_announcement", { value: "Leilão" });
@@ -95,7 +110,7 @@ const EditarAnuncio = () => {
                 <span>Título</span>
                 <input
                   type="text"
-                  placeholder="Digitar título"
+                  placeholder={vehicle?.title}
                   {...register("title")}
                 />
               </label>
@@ -116,7 +131,7 @@ const EditarAnuncio = () => {
                               target: { value: yearCar.unmaskedValue },
                             })
                           }
-                          placeholder=""
+                          placeholder={String(vehicle?.year)}
                         />
                       )}
                       name="year"
@@ -127,7 +142,7 @@ const EditarAnuncio = () => {
                     <span>Quilometragem</span>
                     <input
                       type="text"
-                      placeholder="0"
+                      placeholder={String(vehicle?.kilometers)}
                       {...register("kilometers")}
                     />
                   </label>
@@ -146,7 +161,7 @@ const EditarAnuncio = () => {
                             target: { value: priceCar.unmaskedValue },
                           })
                         }
-                        placeholder=""
+                        placeholder={String(vehicle?.price)}
                       />
                     )}
                     name="price"
@@ -158,7 +173,7 @@ const EditarAnuncio = () => {
               <label>
                 <span>Descrição</span>
                 <textarea
-                  placeholder="Digitar descrição"
+                  placeholder={vehicle?.description}
                   {...register("description")}
                 ></textarea>
               </label>
@@ -174,6 +189,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Carro"
                   name="veiculo"
+                  defaultChecked={vehicle?.type_vehicle === "Carro"}
                   onClick={(e) => {
                     unregister("type_vehicle", {});
                     register("type_vehicle", { value: "Carro" });
@@ -187,6 +203,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Moto"
                   name="veiculo"
+                  defaultChecked={vehicle?.type_vehicle === "Moto"}
                   onClick={(e) => {
                     unregister("type_vehicle", {});
                     register("type_vehicle", { value: "Moto" });
@@ -206,6 +223,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Sim"
                   name="publicado"
+                  defaultChecked={vehicle?.is_published}
                   onClick={(e) => {
                     unregister("is_published", {});
                     register("is_published", { value: "true" });
@@ -219,6 +237,7 @@ const EditarAnuncio = () => {
                   type="radio"
                   value="Não"
                   name="publicado"
+                  defaultChecked={!vehicle?.is_published}
                   onClick={(e) => {
                     unregister("is_published", {});
                     register("is_published", { value: "false" });
@@ -234,7 +253,7 @@ const EditarAnuncio = () => {
               <span>Imagem capa</span>
               <input
                 type="text"
-                placeholder="https://image.com"
+                placeholder={vehicle?.image}
                 {...register("image")}
               />
             </label>

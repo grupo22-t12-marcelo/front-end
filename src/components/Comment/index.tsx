@@ -1,11 +1,11 @@
 import { AiOutlineEdit } from "react-icons/ai";
 import { Button } from "reactstrap";
 import { useCommentContext } from "../../contexts/commentsContext";
+import { useProductContext } from "../../contexts/productContext";
+import { useSessionContext } from "../../contexts/sessionContext";
 import { returnAbrevName } from "../../utils/abrevName";
 import { Circle } from "../CircleUser/style";
 import { CommentDiv } from "./style";
-
-
 
 const Comment = ({ nameUser, dateComment, commentText, id, userId, userCommentId }: any) => {
   const { comments, setOpenModalEditComments, openModalEditComments, setIdComment, setPlaceholderComment } = useCommentContext();

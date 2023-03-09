@@ -1,19 +1,36 @@
 import styled from "styled-components";
 import { Label } from "reactstrap";
 
-export const Background = styled.section`
+export const DivModal = styled.div`
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
 
   top: 0;
   left: 0;
+  overflow-y: scroll;
 
   position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   background: rgba(0, 0, 0, 0.5);
   z-index: 6;
+  padding: 50px 0;
+`;
+
+export const Background = styled.section`
+  /* width: 90%; */
+  height: max-content;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  margin: auto;
+
+  background-color: var(--white-fixed);
+
+  @media screen and (max-width: 650px) {
+    width: 90%;
+  }
 `;
 
 export const Body = styled.div`
@@ -26,6 +43,10 @@ export const Body = styled.div`
 
   @media screen and (min-width: 641px) {
     width: 520px;
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
   }
 
   .header {
