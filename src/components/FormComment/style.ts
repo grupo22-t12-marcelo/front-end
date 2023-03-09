@@ -28,6 +28,10 @@ const Form = styled.form`
       color: var(--grey1);
       font-size: 14px;
     }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+    }
   }
 
   .lance {
