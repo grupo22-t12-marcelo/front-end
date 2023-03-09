@@ -24,6 +24,8 @@ interface ISessionProvider {
   isModalExcluirPerfil: boolean;
   setIsModalExcluirPerfil: (value: boolean) => void;
   loading: boolean;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
 }
 
 export const SessionContext = createContext({} as ISessionProvider);
@@ -37,6 +39,7 @@ const SessionProvider = ({ children }: IAuthProvider) => {
   const [isModalEditAddress, setIsModalEditAddress] = useState(false);
   const [isModalExcluirPerfil, setIsModalExcluirPerfil] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const token = localStorage.getItem("@TOKEN");
 
@@ -139,6 +142,8 @@ const SessionProvider = ({ children }: IAuthProvider) => {
         isModalExcluirPerfil,
         setIsModalExcluirPerfil,
         loading,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

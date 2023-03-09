@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import Footer from "../../components/Footer";
 import { FormRegister } from "../../components/FormRegister";
@@ -8,6 +9,10 @@ import { Container } from "./styles";
 const Register = () => {
   return (
     <>
+      <HelmetProvider>
+        <Helmet title="Register" />
+      </HelmetProvider>
+
       <Header />
       <Container>
         <section>

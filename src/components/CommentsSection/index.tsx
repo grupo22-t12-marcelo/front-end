@@ -18,7 +18,10 @@ const CommentsSection = () => {
           <>
             <Comment
               abrevName={comment.user.name}
+              id={comment.id}
               key={comment.id}
+              userId={userData?.id}
+              userCommentId={comment.user.id}
               nameUser={comment.user.name}
               dateComment={dateHour(comment?.createdAt)}
               commentText={comment.comment}
